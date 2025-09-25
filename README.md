@@ -18,8 +18,3 @@ Collaboration project between exchange students from the Netherlands and Croatia
 </ul>
 
 
-<ul>
-  <li><code>npm install</code> <small>(to install react dependencies)</small></li>
- 
-</ul>
-
