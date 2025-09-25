@@ -6,18 +6,17 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('results', function (Blueprint $table) {
             $table->id();
-            $table->string('username')->unique();
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->enum('role', ['user', 'admin'])->default('user');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('quiz_id')->constrained('quizzes')->onDelete('cascade');
+            $table->integer('score');
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('results');
     }
 };
