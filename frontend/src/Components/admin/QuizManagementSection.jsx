@@ -1,4 +1,4 @@
-<TabsContent value="quizzes" className="space-y-6">
+
     <Card className="bg-card border-border">
         <CardHeader>
             <div className="flex items-center justify-between">
@@ -81,4 +81,3 @@
             </div>
         </CardContent>
     </Card>
-</TabsContent>
