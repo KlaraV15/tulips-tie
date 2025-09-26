@@ -13,16 +13,22 @@ class QuestionsSeeder extends Seeder
 {
     public function run(): void
     {
-        $quiz = Quiz::first();
-        $country = Country::first();
-        $category = Category::first();
-        $difficulty = Difficulty::first();
+        $quizzes = Quiz::all();
+        $country = Country::inRandomOrder()->first();
+        $category = Category::inRandomOrder()->first();
+        $difficulty = Difficulty::inRandomOrder()->first();
 
-        Question::factory(5)->create([
-            'quiz_id' => $quiz->id,
+        // Create 10 questions
+        $questions = Question::factory(10)->create([
             'country_id' => $country->id,
             'category_id' => $category->id,
             'difficulty_id' => $difficulty->id,
         ]);
+
+        // Attach each question to 1–2 random quizzes
+        foreach ($questions as $question) {
+            $quizIds = $quizzes->random(rand(1, 2))->pluck('id');
+            $question->quizzes()->attach($quizIds);
+        }
     }
 }

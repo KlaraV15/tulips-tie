@@ -11,13 +11,15 @@ class ResultsSeeder extends Seeder
 {
     public function run(): void
     {
-        $user = User::first();
-        $quiz = Quiz::first();
+        $users = User::all();
+        $quizzes = Quiz::all();
 
-        Result::create([
-            'user_id' => $user->id,
-            'quiz_id' => $quiz->id,
-            'score' => rand(0, 100),
-        ]);
+        foreach ($users as $user) {
+            $quiz = $quizzes->random();
+            Result::factory()->create([
+                'user_id' => $user->id,
+                'quiz_id' => $quiz->id,
+            ]);
+        }
     }
 }

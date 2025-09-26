@@ -11,6 +11,9 @@ class QuizzesSeeder extends Seeder
     public function run(): void
     {
         $user = User::first();
-        Quiz::factory(3)->create(['creator_id' => $user->id]);
+
+        Quiz::factory(3)->create([
+            'creator_id' => $user->id,
+        ]);
     }
 }
