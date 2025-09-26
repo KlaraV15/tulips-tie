@@ -1,59 +1,58 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\User;
-use App\Models\Quiz;
-use App\Models\Question;
-use App\Models\Result;
-use App\Models\Category;
-use App\Models\Country;
-use App\Models\Difficulty;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\QuizController;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\ResultController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CountryController;
+use App\Http\Controllers\DifficultyController;
 
 // ---------------------------
-// TEST ROUTES (No auth)
+// AUTH ROUTES (PUBLIC)
+// ---------------------------
+Route::post('register', [UserController::class, 'register']);
+Route::post('login', [UserController::class, 'login']);
+
+// ---------------------------
+// PROTECTED ROUTES (AUTH REQUIRED)
+// ---------------------------
+Route::middleware('auth:sanctum')->group(function () {
+
+    // User profile
+    Route::get('user', [UserController::class, 'profile']);
+    Route::post('logout', [UserController::class, 'logout']);
+
+    // Quiz CRUD
+    Route::post('quizzes', [QuizController::class, 'store']);
+    Route::put('quizzes/{quiz}', [QuizController::class, 'update']);
+    Route::delete('quizzes/{quiz}', [QuizController::class, 'destroy']);
+
+    // Question CRUD
+    Route::post('quizzes/{quiz}/questions', [QuestionController::class, 'store']);
+    Route::put('questions/{question}', [QuestionController::class, 'update']);
+    Route::delete('questions/{question}', [QuestionController::class, 'destroy']);
+
+    // Submit quiz result
+    Route::post('quizzes/{quiz}/results', [ResultController::class, 'store']);
+
+    // Fetch user results
+    Route::get('users/{user}/results', [ResultController::class, 'userResults']);
+});
+
+// ---------------------------
+// PUBLIC ROUTES
 // ---------------------------
 
-// Quick test JSON
-Route::get('test-json', function () {
-    return response()->json([
-        'message' => 'API is working!',
-        'time' => now()
-    ]);
-});
+// Fetch quizzes
+Route::get('quizzes', [QuizController::class, 'index']);
+Route::get('quizzes/{quiz}', [QuizController::class, 'show']);
 
-// Users
-Route::get('users', function () {
-    return response()->json(User::all());
-});
+// Fetch questions for a quiz
+Route::get('quizzes/{quiz}/questions', [QuestionController::class, 'index']);
 
-// Quizzes
-Route::get('quizzes', function () {
-    return response()->json(Quiz::with('creator', 'questions')->get());
-});
-Route::get('quizzes/{quiz}', function (Quiz $quiz) {
-    return response()->json($quiz->load('creator', 'questions'));
-});
-
-// Questions
-Route::get('questions', function () {
-    return response()->json(Question::with('quiz')->get());
-});
-Route::get('quizzes/{quiz}/questions', function (Quiz $quiz) {
-    return response()->json($quiz->questions);
-});
-
-// Results
-Route::get('results', function () {
-    return response()->json(Result::with('user', 'quiz')->get());
-});
-
-// Lookup tables
-Route::get('categories', function () {
-    return response()->json(Category::all());
-});
-Route::get('countries', function () {
-    return response()->json(Country::all());
-});
-Route::get('difficulties', function () {
-    return response()->json(Difficulty::all());
-});
+// Lookup tables (categories, countries, difficulties)
+Route::get('categories', [CategoryController::class, 'index']);
+Route::get('countries', [CountryController::class, 'index']);
+Route::get('difficulties', [DifficultyController::class, 'index']);
