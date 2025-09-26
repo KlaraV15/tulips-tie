@@ -13,7 +13,7 @@ export default function Login() {
       <nav className="border-b border-[#DCDCDC] bg-[#F3F2EC]/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Globe className="h-8 w-8 text-[#E62727]" />
+            <img src={logo} className="h-12 w-8 text-[#1E93AB]" />
             <span className="text-xl font-bold text-[#1E93AB]">Tulips & Ties</span>
           </div>
           <div className="flex items-center space-x-4">
@@ -44,7 +44,7 @@ export default function Login() {
           <Card className="bg-white border border-[#DCDCDC] hover:border-[#1E93AB]/50 transition-colors shadow-md">
             <CardHeader className="text-center">
               <div className="flex items-center justify-center mb-4">
-                <Globe className="h-8 w-8 text-[#E62727]" />
+                  <img src={logo} className="h-12 w-8 text-[#1E93AB]" />
               </div>
               <CardTitle className="text-2xl font-bold text-[#1E93AB]">Welcome Back</CardTitle>
               <CardDescription className="text-gray-600">
