@@ -92,13 +92,14 @@ const Leaderboard = [
 //this is a placeholder for players, they are sorted by their score, however they wont be when we add actual palyers in base
 
 const globalLeaderboard = Leaderboard.sort((a, b) => b.score - a.score);
-
+//this will make it so leaderboard is automaticaly sorted by scores, fist the biggest, and last the smallest
 
 const weeklyLeaderboard = globalLeaderboard.slice(0, 5).map((player, index) => ({
     ...player,
     rank: index + 1,
     score: Math.floor(player.score * 0.3),
 }))
+//!Needs change seince ranks are deleted and sholdn't exist!, everething after this should also be changed
 
 const monthlyLeaderboard = globalLeaderboard.slice(0, 8).map((player, index) => ({
     ...player,
@@ -118,11 +119,12 @@ function getRankIcon(rank) {
             return <span className="text-gray-500 font-bold">#{rank}</span>
     }
 }
+//??This will just be broken once we put site up
 
 function getCountryFlag(country) {
     return country === "Croatia" ? "🇭🇷" : "🇳🇱"
 }
-
+//May be changed since login doesn't require country?
 function LeaderboardTable({ data, title }) {
     return (
         <Card className="border-gray-200">
@@ -145,7 +147,7 @@ function LeaderboardTable({ data, title }) {
                         >
                             <div className="flex items-center space-x-4">
                                 <div className="flex items-center justify-center w-8">
-                                    {getRankIcon(player.rank)}
+                                    {getRankIcon(player.index)}
                                 </div>
                                 <Avatar
                                     src={player.avatar}
