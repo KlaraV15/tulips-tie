@@ -7,6 +7,23 @@ import { Globe, Mail, Lock, User, ArrowLeft } from "lucide-react"
 
 export default function Register() {
   return (
+    <>
+    <nav className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <Globe className="h-8 w-8 text-primary" />
+            <span className="text-xl font-bold gradient-text">Tulips & Ties</span>
+          </div>
+          <div className="flex items-center space-x-4">
+            <Link to="/login">
+              <Button variant="ghost">Login</Button>
+            </Link>
+            <Link to="/register">
+              <Button className="glow-effect">Get Started</Button>
+            </Link>
+          </div>
+        </div>
+      </nav>
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         {/* Back to Home */}
@@ -99,5 +116,6 @@ export default function Register() {
         </Card>
       </div>
     </div>
+    </>
   )
 }
