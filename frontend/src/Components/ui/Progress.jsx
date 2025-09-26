@@ -1,4 +1,4 @@
-import { cn } from "../../lib/utils"
+import { cn } from "../../Components/lib/utils"
 
 function Progress({ className, value = 0, ...props }) {
   return (
