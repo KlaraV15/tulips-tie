@@ -5,6 +5,7 @@ import QuizPage from "./Components/Quiz"
 import LoginPage from "./Components/Login"
 import RegisterPage from "./Components/Register"
 import LeaderboardPage from "./Components/Leaderboard"
+import AdminDashboardPage from "@/Components/admin/AdminDashboardPage.jsx";
 function App() {
 
   return (
@@ -16,7 +17,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/leaderboard" element={<LeaderboardPage/>} />
-          <Route path="/admin/dashboard" elem></Route>
+          <Route path="/admin/dashboard" element={<AdminDashboardPage/>}></Route>
       </Routes>
     </Router>
     </>
