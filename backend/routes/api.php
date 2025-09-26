@@ -19,7 +19,7 @@ Route::post('login', [AuthController::class, 'login']);
 // ---------------------------
 // PROTECTED ROUTES (AUTH REQUIRED)
 // ---------------------------
-Route::middleware('auth:sanctum')->group(function () {
+//Route::middleware('auth:sanctum')->group(function () {
 
     // User profile
     Route::get('user', [UserController::class, 'profile']);
@@ -40,7 +40,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Fetch user results
     Route::get('users/{user}/results', [ResultController::class, 'userResults']);
-});
+//});
 
 // ---------------------------
 // PUBLIC ROUTES
