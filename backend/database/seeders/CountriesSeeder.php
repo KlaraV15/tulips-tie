@@ -9,9 +9,10 @@ class CountriesSeeder extends Seeder
 {
     public function run(): void
     {
-        Country::insert([
-            ['name' => 'netherlands'],
-            ['name' => 'croatia'],
-        ]);
+        $countries = ['Netherlands', 'Croatia'];
+
+        foreach ($countries as $country) {
+            Country::firstOrCreate(['name' => $country]);
+        }
     }
 }
