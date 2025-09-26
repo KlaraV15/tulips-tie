@@ -3,7 +3,8 @@ import { Button } from "./Button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../Components/ui/Card"
 import { Input } from "../Components/ui/Input"
 import { Label } from "../Components/ui/Label"
-import { Globe, Mail, Lock, ArrowLeft } from "lucide-react"
+import { Mail, Lock, ArrowLeft } from "lucide-react"
+import logo from '../assets/logo-rose.png'
 
 export default function Login() {
   return (
@@ -21,7 +22,7 @@ export default function Login() {
         <Card className="bg-card border-border glow-effect">
           <CardHeader className="text-center">
             <div className="flex items-center justify-center mb-4">
-              <Globe className="h-8 w-8 text-primary" />
+               <img src={logo} className="h-12 w-8 text-[#1E93AB]" />
             </div>
             <CardTitle className="text-2xl font-bold">Welcome Back</CardTitle>
             <CardDescription>
