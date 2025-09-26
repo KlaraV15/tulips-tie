@@ -14,7 +14,6 @@ class AuthController extends Controller
             'username' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
-            'role' => 'required|integer',
         ]);
 
         // Create a new user
@@ -22,7 +21,6 @@ class AuthController extends Controller
             'username' => $validatedData['username'],
             'email' => $validatedData['email'],
             'password' => bcrypt($validatedData['password']),
-            'role' => $validatedData['role'],
         ]);
 
         return response()->json(['message' => 'User registered successfully', 'user' => $user], 201);
@@ -48,4 +46,5 @@ class AuthController extends Controller
 
        return response()->json(['message' => 'Login successful', 'access_token' => $token, 'token_type' => 'Bearer']);
    }
+   
 }
