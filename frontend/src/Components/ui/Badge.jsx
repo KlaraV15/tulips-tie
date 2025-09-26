@@ -1,4 +1,4 @@
-import { cn } from "../../lib/utils"
+import { cn } from "../../Components/lib/utils"
 
 const badgeVariants = {
   default: "bg-primary text-primary-foreground hover:bg-primary/80",

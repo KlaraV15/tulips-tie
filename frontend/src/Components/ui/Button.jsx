@@ -1,4 +1,4 @@
-import { cn } from "../../lib/utils"
+import { cn } from "../../Components/lib/utils"
 
 const buttonVariants = {
   default: "bg-primary text-primary-foreground shadow-xs hover:bg-primary/90",
