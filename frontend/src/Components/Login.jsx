@@ -3,7 +3,8 @@ import { Button } from "./Button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../Components/ui/Card"
 import { Input } from "../Components/ui/Input"
 import { Label } from "../Components/ui/Label"
-import { Globe, Mail, Lock, ArrowLeft } from "lucide-react"
+import { Mail, Lock, ArrowLeft } from "lucide-react"
+import logo from '../assets/logo-rose.png'
 
 export default function Login() {
   return (
