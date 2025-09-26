@@ -8,12 +8,13 @@ use App\Http\Controllers\ResultController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\DifficultyController;
+use App\Http\Controllers\AuthController;
 
 // ---------------------------
 // AUTH ROUTES (PUBLIC)
 // ---------------------------
-Route::post('register', [UserController::class, 'register']);
-Route::post('login', [UserController::class, 'login']);
+Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
 
 // ---------------------------
 // PROTECTED ROUTES (AUTH REQUIRED)
