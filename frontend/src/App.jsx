@@ -5,6 +5,9 @@ import QuizPage from "./Components/Quiz"
 import LoginPage from "./Components/Login"
 import RegisterPage from "./Components/Register"
 import LeaderboardPage from "./Components/Leaderboard"
+import Easy from './Components/Easy'
+import Medium from './Components/Medium'
+import Hard from './Components/Hard'
 function App() {
 
   return (
@@ -16,6 +19,9 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/leaderboard" element={<LeaderboardPage/>} />
+          <Route path="/easy" element={<Easy />} />
+          <Route path="/medium" element={<Medium />} />
+          <Route path="/hard" element={<Hard />} />
       </Routes>
     </Router>
     </>
