@@ -62,7 +62,7 @@ const mockQuestions = [
     id: 7,
     country: "Croatia",
     question: "Which sport is the most popular in Croatia?",
-    options: ["Handball", "Water polo", "Footbal", "Basketball"],
+    options: ["Handball", "Water polo", "Football", "Basketball"],
     correctAnswer: 2,
     difficulty: "Easy",
   },
@@ -105,7 +105,7 @@ export default function Quiz() {
   const [selectedAnswer, setSelectedAnswer] = useState(null)
   const [lives, setLives] = useState(3)
   const [score, setScore] = useState(0)
-  const [timeLeft, setTimeLeft] = useState(30)
+  const [timeLeft, setTimeLeft] = useState(20)
   const [quizStarted, setQuizStarted] = useState(false)
   const [showResult, setShowResult] = useState(false)
 
@@ -136,10 +136,23 @@ export default function Quiz() {
   }
 
   useEffect(() => {
-    if (!quizStarted) return; // odbrojavanje počinje tek kad kviz starta
+    if (!quizStarted || showResult) return;
+    setTimeLeft(20);
+  
+  }, [currentQuestion, quizStarted, showResult]);
+  
+  useEffect(() => {
+    if (!quizStarted || showResult) return;
   
     if (timeLeft === 0) {
-      setShowResult(true); // kad vrijeme istekne, pokaži rezultat
+      if (lives <= 1 || currentQuestion === mockQuestions.length - 1) {
+        setLives(prev => prev - 1);
+        setShowResult(true);
+      } else {
+        setLives(prev => prev - 1);
+        setCurrentQuestion(currentQuestion + 1);o
+        setTimeLeft(20);
+      }
       return;
     }
   
@@ -148,7 +161,17 @@ export default function Quiz() {
     }, 1000);
   
     return () => clearInterval(timer);
-  }, [timeLeft, quizStarted]);
+  }, [timeLeft, quizStarted, showResult, currentQuestion, lives]);
+  
+  
+
+  useEffect(() => {
+    if (lives <= 0) {
+      setShowResult(true);
+    }
+  }, [lives]);
+  
+  
   
 
   if (!quizStarted) {
@@ -206,7 +229,7 @@ export default function Quiz() {
                 </div>
                 <div className="text-center p-4 bg-chart-3/10 rounded-lg border border-chart-3/20">
                   <Clock className="h-8 w-8 text-chart-3 mx-auto mb-2" />
-                  <p className="font-semibold">30 Seconds</p>
+                  <p className="font-semibold">20 Seconds</p>
                   <p className="text-sm text-muted-foreground">Per question</p>
                 </div>
               </div>
