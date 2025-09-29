@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { Button } from "../components/ui/Button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/Card"
@@ -21,6 +21,78 @@ const mockQuestions = [
   {
     id: 2,
     country: "Netherlands",
+    question: "What is the capital city of Netherlands?",
+    options: ["Rotterdam", "The Hague", "Amsterdam", "Utrecht"],
+    correctAnswer: 2,
+    difficulty: "Easy",
+  },
+  {
+    id: 3,
+    country: "Croatia",
+    question: "Witch sea borders the Croatian coastline?",
+    options: ["Mediterranean Sea", "Adriatic Sea", "Baltic Sea", "Black Sea"],
+    correctAnswer: 1,
+    difficulty: "Easy",
+  },
+  {
+    id: 4,
+    country: "Netherlands",
+    question: "Which flower is a symbol of the Netherlands and is strongly associated with the country?",
+    options: ["Lily", "Rose", "Sunflower", "Tulip"],
+    correctAnswer: 3,
+    difficulty: "Easy",
+  },
+  {
+    id: 5,
+    country: "Croatia",
+    question: "Which currency has been used in Croatia since 2023?",
+    options: ["Dollar", "Kuna", "Euro", "Pound"],
+    correctAnswer: 2,
+    difficulty: "Easy",
+  },
+  {
+    id: 6,
+    country: "Netherlands",
+    question: "What is the name of the famous Dutch cheese that comes in round wheels, often covered in red wax?",
+    options: ["Edam", "Feta", "Brie", "Cheddar"],
+    correctAnswer: 0,
+    difficulty: "Easy",
+  },
+  {
+    id: 7,
+    country: "Croatia",
+    question: "Which sport is the most popular in Croatia?",
+    options: ["Handball", "Water polo", "Football", "Basketball"],
+    correctAnswer: 2,
+    difficulty: "Easy",
+  },
+  {
+    id: 8,
+    country: "Netherlands",
+    question: "What type of building is famous in the Netherlands and uses wind to generate power?",
+    options: ["Castle", "Windmill", "Tower", "Manor house"],
+    correctAnswer: 1,
+    difficulty: "Easy",
+  },
+  {
+    id: 9,
+    country: "Croatia",
+    question: "Which is the largest island in Croatia?",
+    options: ["Krk", "Hvar", "Pag", "Brač"],
+    correctAnswer: 0,
+    difficulty: "Easy",
+  },
+  {
+    id: 10,
+    country: "Netherlands",
+    question: "Which major river flows through the Netherlands and empties into the North Sea?",
+    options: ["Sava", "Volga", "Danube", "Rhine"],
+    correctAnswer: 3,
+    difficulty: "Easy",
+  },
+  {
+    id: 11,
+    country: "Netherlands",
     question: "Which Dutch city is famous for its canals and is often called the 'Venice of the North'?",
     options: ["Rotterdam", "The Hague", "Amsterdam", "Utrecht"],
     correctAnswer: 2,
@@ -33,7 +105,7 @@ export default function Quiz() {
   const [selectedAnswer, setSelectedAnswer] = useState(null)
   const [lives, setLives] = useState(3)
   const [score, setScore] = useState(0)
-  const [timeLeft, setTimeLeft] = useState(30)
+  const [timeLeft, setTimeLeft] = useState(20)
   const [quizStarted, setQuizStarted] = useState(false)
   const [showResult, setShowResult] = useState(false)
 
@@ -62,6 +134,45 @@ export default function Quiz() {
       setShowResult(true)
     }
   }
+
+  useEffect(() => {
+    if (!quizStarted || showResult) return;
+    setTimeLeft(20);
+  
+  }, [currentQuestion, quizStarted, showResult]);
+  
+  useEffect(() => {
+    if (!quizStarted || showResult) return;
+  
+    if (timeLeft === 0) {
+      if (lives <= 1 || currentQuestion === mockQuestions.length - 1) {
+        setLives(prev => prev - 1);
+        setShowResult(true);
+      } else {
+        setLives(prev => prev - 1);
+        setCurrentQuestion(currentQuestion + 1);
+        setTimeLeft(20);
+      }
+      return;
+    }
+  
+    const timer = setInterval(() => {
+      setTimeLeft(prev => prev - 1);
+    }, 1000);
+  
+    return () => clearInterval(timer);
+  }, [timeLeft, quizStarted, showResult, currentQuestion, lives]);
+  
+  
+
+  useEffect(() => {
+    if (lives <= 0) {
+      setShowResult(true);
+    }
+  }, [lives]);
+  
+  
+  
 
   if (!quizStarted) {
     return (
@@ -118,7 +229,7 @@ export default function Quiz() {
                 </div>
                 <div className="text-center p-4 bg-chart-3/10 rounded-lg border border-chart-3/20">
                   <Clock className="h-8 w-8 text-chart-3 mx-auto mb-2" />
-                  <p className="font-semibold">30 Seconds</p>
+                  <p className="font-semibold">20 Seconds</p>
                   <p className="text-sm text-muted-foreground">Per question</p>
                 </div>
               </div>
