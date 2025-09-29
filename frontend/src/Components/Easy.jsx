@@ -89,15 +89,7 @@ const mockQuestions = [
     options: ["Sava", "Volga", "Danube", "Rhine"],
     correctAnswer: 3,
     difficulty: "Easy",
-  },
-//   {
-//     id: 11,
-//     country: "Netherlands",
-//     question: "Which Dutch city is famous for its canals and is often called the 'Venice of the North'?",
-//     options: ["Rotterdam", "The Hague", "Amsterdam", "Utrecht"],
-//     correctAnswer: 2,
-//     difficulty: "Medium",
-//   },
+  }
 ]
 
 export default function Easy() {
