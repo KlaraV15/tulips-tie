@@ -89,10 +89,7 @@ const Leaderboard = [
 ]
 
 const globalLeaderboard = Leaderboard.sort((a, b) => b.score - a.score);
-<<<<<<< HEAD
 //this will make it so leaderboard is automaticaly sorted by scores, fist the biggest, and last the smallest
-=======
->>>>>>> 2d54d9fb23be1cb1d489e68639a6b14e338ddcf9
 
 const weeklyLeaderboard = globalLeaderboard.slice(0, 5).map((player, index) => ({
     ...player,
