@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { Button } from "../components/ui/Button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/Card"
@@ -134,6 +134,22 @@ export default function Quiz() {
       setShowResult(true)
     }
   }
+
+  useEffect(() => {
+    if (!quizStarted) return; // odbrojavanje počinje tek kad kviz starta
+  
+    if (timeLeft === 0) {
+      setShowResult(true); // kad vrijeme istekne, pokaži rezultat
+      return;
+    }
+  
+    const timer = setInterval(() => {
+      setTimeLeft(prev => prev - 1);
+    }, 1000);
+  
+    return () => clearInterval(timer);
+  }, [timeLeft, quizStarted]);
+  
 
   if (!quizStarted) {
     return (
