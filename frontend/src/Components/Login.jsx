@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { Button } from "./Button"
+import { Button } from "../Components/ui/Button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../Components/ui/Card"
 import { Input } from "../Components/ui/Input"
 import { Label } from "../Components/ui/Label"
@@ -8,21 +8,43 @@ import logo from '../assets/logo-rose.png'
 
 export default function Login() {
   return (
-    <>
+    <div className="min-h-screen bg-gradient-to-br from-cyan-300 via-red-300 to-red-300">
       {/* Navbar */}
-      <nav className="border-b border-[#DCDCDC] bg-[#F3F2EC]/80 backdrop-blur-sm sticky top-0 z-50">
+      <nav className="border-b border-red-200 bg-white/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <img src={logo} className="h-12 w-8 text-[#1E93AB]" />
-            <span className="text-xl font-bold text-[#1E93AB]">Tulips & Ties</span>
+          <div className="flex items-center space-x-3">
+            <div className="relative">
+              <img src={logo} className="h-12 w-8 text-red-600" />
+              <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+            </div>
+            <span className="text-2xl font-bold bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent">
+              Tulips & Ties
+            </span>
           </div>
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center gap-5">
             <Link to="/login">
-              <Button variant="ghost" className="text-[#1E93AB] hover:text-[#E62727]">Login</Button>
+              <Button
+                variant="outline"
+                className="px-7 py-3 text-lg text-red-600 border-2 border-red-400 
+                  hover:bg-red-50 hover:text-red-700 hover:border-red-500 
+                  font-semibold rounded-2xl transition-all duration-300 ease-out
+                  shadow-sm hover:shadow-md"
+              >
+                Login
+              </Button>
             </Link>
             <Link to="/register">
-              <Button className="bg-[#E62727] hover:bg-[#E62727]/90 text-white shadow-md">
-                Get Started
+              <Button
+                className="px-8 py-3 text-lg font-semibold text-white 
+                  bg-gradient-to-r from-rose-600 via-rose-500 to-rose-600
+                  hover:from-rose-700 hover:via-rose-600 hover:to-rose-700
+                  rounded-2xl shadow-xl hover:shadow-2xl
+                  border border-rose-500
+                  transition-all duration-300 ease-out
+                  transform hover:scale-110 hover:brightness-110
+                  focus:ring-4 focus:ring-rose-400"
+              >
+                🌸 Get Started
               </Button>
             </Link>
           </div>
@@ -30,54 +52,56 @@ export default function Login() {
       </nav>
 
       {/* Page content */}
-      <div className="min-h-screen bg-[#F3F2EC] flex items-center justify-center p-4">
-        <div className="w-full max-w-md">
+      <div className="flex items-center justify-center p-6">
+        <div className="w-full max-w-md mt-10">
           {/* Back to Home */}
           <Link
             to="/"
-            className="inline-flex items-center text-gray-600 hover:text-[#1E93AB] mb-8 transition-colors"
+            className="inline-flex items-center text-gray-700 hover:text-red-600 mb-8 transition-colors font-medium"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Home
           </Link>
 
-          <Card className="bg-white border border-[#DCDCDC] hover:border-[#1E93AB]/50 transition-colors shadow-md">
+          <Card className="bg-white border-2 border-red-200 hover:border-red-400 transition-all hover:shadow-2xl hover:scale-105 cursor-pointer shadow-lg rounded-2xl">
             <CardHeader className="text-center">
               <div className="flex items-center justify-center mb-4">
-                  <img src={logo} className="h-12 w-8 text-[#1E93AB]" />
+                <img src={logo} className="h-12 w-8 text-red-600" />
               </div>
-              <CardTitle className="text-2xl font-bold text-[#1E93AB]">Welcome Back</CardTitle>
-              <CardDescription className="text-gray-600">
-                Sign in to your Tulips & Ties account to continue your journey
+              <CardTitle className="text-3xl font-extrabold bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent">
+                Welcome Back
+              </CardTitle>
+              <CardDescription className="text-gray-600 mt-2 text-lg font-medium">
+                Sign in to continue your Tulips & Ties journey
               </CardDescription>
             </CardHeader>
 
-            <CardContent className="space-y-6">
-              <form className="space-y-4">
+            <CardContent className="space-y-6 p-6">
+              <form className="space-y-5">
                 {/* Email */}
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-[#1E93AB]">Email</Label>
+                  <Label htmlFor="email" className="text-red-600 font-semibold">Email</Label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-3 h-4 w-4 text-[#DCDCDC]" />
+                    <Mail className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
                     <Input
                       id="email"
                       type="email"
                       placeholder="Enter your email"
-                      className="pl-10 border-[#DCDCDC] focus:border-[#1E93AB]"
+                      className="pl-10 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:ring-2 focus:ring-red-300 transition-all"
                     />
                   </div>
                 </div>
 
                 {/* Password */}
                 <div className="space-y-2">
-                  <Label htmlFor="password" className="text-[#1E93AB]">Password</Label>
+                  <Label htmlFor="password" className="text-red-600 font-semibold">Password</Label>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-3 h-4 w-4 text-[#DCDCDC]" />
+                    <Lock className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
                     <Input
                       id="password"
                       type="password"
                       placeholder="Enter your password"
-                      className="pl-10 border-[#DCDCDC] focus:border-[#1E93AB]"
+                      className="pl-10 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:ring-2 focus:ring-red-300 transition-all"
                     />
                   </div>
                 </div>
@@ -85,12 +109,12 @@ export default function Login() {
                 {/* Remember me + Forgot password */}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
-                    <input type="checkbox" id="remember" className="rounded border-[#DCDCDC]" />
-                    <Label htmlFor="remember" className="text-sm text-[#1E93AB]">
+                    <input type="checkbox" id="remember" className="rounded border-gray-300 text-red-600 focus:ring-red-400" />
+                    <Label htmlFor="remember" className="text-sm text-gray-700">
                       Remember me
                     </Label>
                   </div>
-                  <Link to="/forgot-password" className="text-sm text-[#E62727] hover:underline">
+                  <Link to="/forgot-password" className="text-sm font-semibold text-red-600 hover:underline">
                     Forgot password?
                   </Link>
                 </div>
@@ -98,16 +122,23 @@ export default function Login() {
                 {/* Submit */}
                 <Button
                   type="submit"
-                  className="w-full bg-[#E62727] hover:bg-[#E62727]/90 text-white shadow-lg hover:shadow-xl transition-all"
+                  className="w-full py-3 text-lg font-semibold text-white 
+                    bg-gradient-to-r from-rose-600 via-rose-500 to-rose-600
+                    hover:from-rose-700 hover:via-rose-600 hover:to-rose-700
+                    rounded-2xl shadow-xl hover:shadow-2xl
+                    border border-rose-500
+                    transition-all duration-300 ease-out
+                    transform hover:scale-105 hover:brightness-110
+                    focus:ring-4 focus:ring-rose-400"
                 >
-                  Sign In
+                  🚀 Sign In
                 </Button>
               </form>
 
               <div className="text-center">
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-700">
                   Don&apos;t have an account?{" "}
-                  <Link to="/register" className="font-medium hover:underline text-[#1E93AB]">
+                  <Link to="/register" className="font-semibold hover:underline text-red-600">
                     Sign up
                   </Link>
                 </p>
@@ -116,6 +147,6 @@ export default function Login() {
           </Card>
         </div>
       </div>
-    </>
+    </div>
   )
 }
