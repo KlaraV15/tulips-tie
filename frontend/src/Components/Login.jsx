@@ -9,18 +9,18 @@ import logo from '../assets/logo-rose.png'
 export default function Login() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-300 via-red-300 to-red-300">
-      {/* Navbar */}
-      <nav className="border-b border-red-200 bg-white/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="relative">
-              <img src={logo} className="h-12 w-8 text-red-600" />
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
-            </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent">
-              Tulips & Ties
-            </span>
-          </div>
+            {/* Navbar */}
+            <nav className="border-b border-red-200 bg-white/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
+              <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+                <Link to="/" className="flex items-center space-x-3 group">
+                  <div className="relative">
+                    <img src={logo} className="h-12 w-8 text-red-600 transition-transform duration-300 group-hover:scale-110" />
+                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+                  </div>
+                  <span className="text-2xl font-bold bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent group-hover:brightness-110">
+                    Tulips & Ties
+                  </span>
+                </Link>
           <div className="flex items-center gap-5">
             <Link to="/login">
               <Button
