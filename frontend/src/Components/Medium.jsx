@@ -12,12 +12,84 @@ import { Heart, Clock, Trophy, ArrowLeft, Flag } from "lucide-react"
 const mockQuestions = [
   {
     id: 1,
+    country: "Croatia",
+    question: "Which Croatian city is known for its Roman amphitheater?",
+    options: ["Zagreb", "Split", "Dubrovnik", "Pula"],
+    correctAnswer: 3,
+    difficulty: "Medium",
+  },
+  {
+    id: 2,
     country: "Netherlands",
-    question: "Which Dutch city is famous for its canals and is often called the 'Venice of the North'?",
-    options: ["Rotterdam", "The Hague", "Amsterdam", "Utrecht"],
+    question: "Which Dutch city is home to the Rijksmuseum, a famous art museum?",
+    options: ["Amsterdam", "Rotterdam", "Utrecht", "The Hague"],
+    correctAnswer: 0,
+    difficulty: "Medium",
+  },
+  {
+    id: 3,
+    country: "Croatia",
+    question: "Which national park in Croatia is famous for its cascading lakes and waterfalls?",
+    options: ["Plitvice Lakes", "Krka", "Paklenica", "Mljet"],
+    correctAnswer: 0,
+    difficulty: "Medium",
+  },
+  {
+    id: 4,
+    country: "Netherlands",
+    question: "Which Dutch province is famous for its traditional windmills and the village of Kinderdijk?",
+    options: ["Zeeland", "Friesland", "South Holland", "Gelderland"],
     correctAnswer: 2,
     difficulty: "Medium",
   },
+  {
+    id: 5,
+    country: "Croatia",
+    question: "What is the highest mountain in Croatia?",
+    options: ["Velebit", "Medvednica", "Dinara", "Biokovo"],
+    correctAnswer: 2,
+    difficulty: "Medium",
+  },
+  {
+    id: 6,
+    country: "Netherlands",
+    question: "Which city in the Netherlands is the seat of the Dutch government, though not the capital?",
+    options: ["Amsterdam", "Rotterdam", "The Hague", "Utrecht"],
+    correctAnswer: 2,
+    difficulty: "Medium",
+  },
+  {
+    id: 7,
+    country: "Croatia",
+    question: "Which Croatian city hosts the famous summer film festival?",
+    options: ["Pula", "Zadar", "Rijeka", "Zadar"],
+    correctAnswer: 0,
+    difficulty: "Medium",
+  },
+  {
+    id: 8,
+    country: "Netherlands",
+    question: "What is the main flower celebrated during the annual “Keukenhof” festival in the Netherlands?",
+    options: ["Rose", "Tulip", "Lily", "Sunflower"],
+    correctAnswer: 1,
+    difficulty: "Medium",
+  },
+  {
+    id: 9,
+    country: "Croatia",
+    question: "Which Croatian island is known for its historical town of Hvar and lavender fields?",
+    options: ["Brač", "Hvar", "Korčula", "Pag"],
+    correctAnswer: 1,
+    difficulty: "Medium",
+  },
+  {
+    id: 10,
+    country: "Netherlands",
+    question: "Which Dutch painter is famous for “The Starry Night” and “Sunflowers”?",
+    options: ["Rembrandt", "Van Gogh", "Vermeer", "Mondrian"],
+    correctAnswer: 1,
+    difficulty: "Medium",
+  }
 ]
 
 export default function Medium() {
@@ -42,7 +114,7 @@ export default function Medium() {
 
   const handleNextQuestion = () => {
     if (selectedAnswer === question.correctAnswer) {
-      setScore(score + 10)
+      setScore(score + 15)
     } else {
       setLives(lives - 1)
     }

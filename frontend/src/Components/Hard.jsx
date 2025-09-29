@@ -42,7 +42,7 @@ export default function Hard() {
 
   const handleNextQuestion = () => {
     if (selectedAnswer === question.correctAnswer) {
-      setScore(score + 10)
+      setScore(score + 20)
     } else {
       setLives(lives - 1)
     }
