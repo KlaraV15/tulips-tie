@@ -150,7 +150,7 @@ export default function Quiz() {
         setShowResult(true);
       } else {
         setLives(prev => prev - 1);
-        setCurrentQuestion(currentQuestion + 1);o
+        setCurrentQuestion(currentQuestion + 1);
         setTimeLeft(20);
       }
       return;
