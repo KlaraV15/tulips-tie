@@ -98,7 +98,7 @@ export default function HomePage() {
               </div>
               <div className="flex items-center space-x-2 bg-white rounded-full px-4 py-2 shadow-md border">
                 <Zap className="h-5 w-5 text-red-500" />
-                <span className="font-bold text-gray-800">10s Per Question</span>
+                <span className="font-bold text-gray-800">20s Per Question</span>
               </div>
             </div>
 
