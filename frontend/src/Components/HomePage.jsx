@@ -106,10 +106,25 @@ export default function HomePage() {
               <Link to="/quiz">
                 <Button
                   size="lg"
-                  className="bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-white text-lg px-8 py-6 shadow-xl hover:shadow-2xl transition-all duration-200 transform hover:scale-105 font-bold rounded-2xl border-2 border-red-400"
+                  className="bg-gradient-to-r from-red-600 to-red-500 
+             text-white text-lg px-8 py-6 
+             shadow-xl border-2 border-red-400 rounded-2xl font-bold
+             transition-all duration-500 transform
+             animate-slowpulse"
                 >
                   🎮 Start Quiz Challenge
                 </Button>
+
+                <style jsx>{`
+                  @keyframes slowpulse {
+                    0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(220, 38, 38, 0.5); }
+                    50% { transform: scale(1.05); box-shadow: 0 0 35px rgba(220, 38, 38, 0.7); }
+                  }
+                  .animate-slowpulse {
+                  animation: slowpulse 4s ease-in-out infinite;
+                  }
+                `}</style>
+
               </Link>
               <Link to="/leaderboard">
                 <Button
