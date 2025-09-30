@@ -48,6 +48,7 @@ import {
   Calendar,
 } from 'lucide-react';
 import HttpClient from '../../../helpers/HttpClient.js';
+import QuestionsCard from "@/Components/admin/QuestionsCard.jsx";
 
 const client = new HttpClient();
 
@@ -87,6 +88,19 @@ export default function CreateQuizPopup(props) {
   const [countries, setCountries] = useState([]);
   const [difficulties, setDifficulties] = useState([]);
   const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    getCountries().then((response) => setCountries(response));
+  }, []);
+
+  useEffect(() => {
+    getCategories().then((response) => setCategories(response));
+  }, []);
+
+  useEffect(() => {
+    getDifficulties().then((response) => setDifficulties(response));
+  }, []);
+
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
 
   const form = useForm({
@@ -107,17 +121,7 @@ export default function CreateQuizPopup(props) {
     // TODO: Implement quiz creation logic
   }
 
-  useEffect(() => {
-    getCountries().then((response) => setCountries(response));
-  }, []);
 
-  useEffect(() => {
-    getCategories().then((response) => setCategories(response));
-  }, []);
-
-  useEffect(() => {
-    getDifficulties().then((response) => setDifficulties(response));
-  }, []);
 
   return (
     <Dialog
@@ -177,6 +181,8 @@ export default function CreateQuizPopup(props) {
                 </FormItem>
               )}
             />
+
+            <QuestionsCard></QuestionsCard>
 
             <div className="grid grid-cols-2 gap-4">
               <FormField
