@@ -30,8 +30,8 @@ const mockQuestions = [
     id: 3,
     country: "Croatia",
     question: "Which national park in Croatia is famous for its cascading lakes and waterfalls?",
-    options: ["Plitvice Lakes", "Krka", "Paklenica", "Mljet"],
-    correctAnswer: 0,
+    options: ["Krka", "Plitvice Lakes", "Paklenica", "Mljet"],
+    correctAnswer: 1,
     difficulty: "Medium",
   },
   {
@@ -54,16 +54,16 @@ const mockQuestions = [
     id: 6,
     country: "Netherlands",
     question: "Which city in the Netherlands is the seat of the Dutch government, though not the capital?",
-    options: ["Amsterdam", "Rotterdam", "The Hague", "Utrecht"],
-    correctAnswer: 2,
+    options: ["The Hague", "Amsterdam", "Rotterdam", "Utrecht"],
+    correctAnswer: 0,
     difficulty: "Medium",
   },
   {
     id: 7,
     country: "Croatia",
     question: "Which Croatian city hosts the famous summer film festival?",
-    options: ["Pula", "Zadar", "Rijeka", "Zadar"],
-    correctAnswer: 0,
+    options: ["Zadar", "Rijeka", "Zagreb", "Pula"],
+    correctAnswer: 3,
     difficulty: "Medium",
   },
   {
@@ -86,8 +86,8 @@ const mockQuestions = [
     id: 10,
     country: "Netherlands",
     question: "Which Dutch painter is famous for “The Starry Night” and “Sunflowers”?",
-    options: ["Rembrandt", "Van Gogh", "Vermeer", "Mondrian"],
-    correctAnswer: 1,
+    options: ["Rembrandt", "Vermeer","Van Gogh",  "Mondrian"],
+    correctAnswer: 2,
     difficulty: "Medium",
   }
 ]

@@ -13,11 +13,83 @@ const mockQuestions = [
   {
     id: 1,
     country: "Croatia",
-    question: "",
-    options: ["", "", "", ""],
+    question: "Croatia declared independence from Yugoslavia in 1991. In which year did the international community officially recognize Croatia as a sovereign state?",
+    options: ["1990", "19991", "1992", "1993"],
+    correctAnswer: 2,
+    difficulty: "Medium",
+  },
+  {
+    id: 2,
+    country: "Netherlands",
+    question: "The Eighty Years' War (1568–1648) led to Dutch independence from Spain. Which treaty officially recognized the sovereignty of the Dutch Republic?",
+    options: ["Treaty of Ghent", "Treaty of Westphalia", "Treaty of Nijmegen", "Treaty of Utrecht"],
+    correctAnswer: 1,
+    difficulty: "Medium",
+  },
+  {
+    id: 3,
+    country: "Croatia",
+    question: "Which medieval Croatian king is depicted on the 1,000 kuna banknote, which circulated until Croatia adopted the euro?",
+    options: ["Tomislav", "Dmitar Zvonimir", "Petar Krešimir IV", "Trpimir"],
     correctAnswer: 0,
     difficulty: "Medium",
   },
+  {
+    id: 4,
+    country: "Netherlands",
+    question: "The Netherlands is famous for its system of polders. What is the name of the largest polder in the country, created in the 20th century?",
+    options: ["Haarlemmermeer", "Zuiderzee", "Flevopolder", "Markerwaard"],
+    correctAnswer: 2,
+    difficulty: "Medium",
+  },
+  {
+    id: 5,
+    country: "Croatia",
+    question: "The Croatian Glagolitic alphabet is one of the oldest known Slavic scripts. In which century was it created?",
+    options: ["7th century", "8th century", "9th century", "10th century"],
+    correctAnswer: 2,
+    difficulty: "Medium",
+  },
+  {
+    id: 6,
+    country: "Netherlands",
+    question: "Which Dutch philosopher, excommunicated from the Jewish community of Amsterdam in 1656, is considered one of the most important figures of the Enlightenment?",
+    options: ["Baruch Spinoza", "Erasmus of Rotterdam", "René Descartes", "Hugo Grotius"],
+    correctAnswer: 0,
+    difficulty: "Medium",
+  },
+  {
+    id: 7,
+    country: "Croatia",
+    question: "Which Croatian-born inventor worked on wireless transmission of energy and is associated with the alternating current system, though he emigrated to the United States?",
+    options: ["Ruđer Bošković", "Andrija Mohorovičić", "Slavoljub Penkala", "Nikola Tesla"],
+    correctAnswer: 3,
+    difficulty: "Medium",
+  },
+  {
+    id: 8,
+    country: "Netherlands",
+    question: "The Netherlands was neutral during World War I but occupied during World War II. In which year did the German occupation of the Netherlands begin?",
+    options: ["1939", "1940", "1941", "1942"],
+    correctAnswer: 1,
+    difficulty: "Medium",
+  },
+  {
+    id: 9,
+    country: "Croatia",
+    question: "The city of Dubrovnik was once an independent republic. What was the official name of this state, and in which year did it lose its independence to Napoleon’s forces?",
+    options: ["The Kingdom of Dalmatia, 1810", "The Republic of Croatia, 1799", "The Dalmatian League, 1821", "The Republic of Ragusa, 1808"],
+    correctAnswer: 3,
+    difficulty: "Medium",
+  },
+  {
+    id: 10,
+    country: "Netherlands",
+    question: "Dutch is the official language of the Netherlands, but Frisian also has official status in one province. Which province is it, and what is its capital?",
+    options: ["Zeeland – Middelburg", "Friesland – Leeuwarden", "Limburg – Maastricht", "Groningen – Groningen"],
+    correctAnswer: 1,
+    difficulty: "Medium",
+  }
 ]
 
 export default function Hard() {
@@ -25,7 +97,7 @@ export default function Hard() {
   const [selectedAnswer, setSelectedAnswer] = useState(null)
   const [lives, setLives] = useState(3)
   const [score, setScore] = useState(0)
-  const [timeLeft, setTimeLeft] = useState(20)
+  const [timeLeft, setTimeLeft] = useState(30)
   const [quizStarted, setQuizStarted] = useState(false)
   const [showResult, setShowResult] = useState(false)
 
@@ -57,7 +129,7 @@ export default function Hard() {
 
   useEffect(() => {
     if (!quizStarted || showResult) return;
-    setTimeLeft(20);
+    setTimeLeft(30);
   
   }, [currentQuestion, quizStarted, showResult]);
   
@@ -71,7 +143,7 @@ export default function Hard() {
       } else {
         setLives(prev => prev - 1);
         setCurrentQuestion(currentQuestion + 1);
-        setTimeLeft(20);
+        setTimeLeft(30);
       }
       return;
     }
@@ -149,7 +221,7 @@ export default function Hard() {
                 </div>
                 <div className="text-center p-4 bg-chart-3/10 rounded-lg border border-chart-3/20">
                   <Clock className="h-8 w-8 text-chart-3 mx-auto mb-2" />
-                  <p className="font-semibold">20 Seconds</p>
+                  <p className="font-semibold">30 Seconds</p>
                   <p className="text-sm text-muted-foreground">Per question</p>
                 </div>
               </div>
