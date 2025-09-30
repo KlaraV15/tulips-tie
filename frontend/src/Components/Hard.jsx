@@ -97,7 +97,7 @@ export default function Hard() {
   const [selectedAnswer, setSelectedAnswer] = useState(null)
   const [lives, setLives] = useState(3)
   const [score, setScore] = useState(0)
-  const [timeLeft, setTimeLeft] = useState(20)
+  const [timeLeft, setTimeLeft] = useState(15)
   const [quizStarted, setQuizStarted] = useState(true) // Changed to true to start immediately
   const [showResult, setShowResult] = useState(false)
   const [isTransitioning, setIsTransitioning] = useState(true)
@@ -134,7 +134,7 @@ export default function Hard() {
 
   useEffect(() => {
     if (!quizStarted || showResult) return;
-    setTimeLeft(20);
+    setTimeLeft(15);
   }, [currentQuestion, quizStarted, showResult]);
   
   useEffect(() => {
@@ -147,7 +147,7 @@ export default function Hard() {
       } else {
         setLives(prev => prev - 1);
         setCurrentQuestion(currentQuestion + 1);
-        setTimeLeft(20);
+        setTimeLeft(15);
       }
       return;
     }

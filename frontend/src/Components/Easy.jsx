@@ -97,7 +97,6 @@ export default function Easy() {
   const [selectedAnswer, setSelectedAnswer] = useState(null)
   const [lives, setLives] = useState(3)
   const [score, setScore] = useState(0)
-  const [timeLeft, setTimeLeft] = useState(20)
   const [quizStarted, setQuizStarted] = useState(true) // Changed to true to start immediately
   const [showResult, setShowResult] = useState(false)
   const [isTransitioning, setIsTransitioning] = useState(true)
@@ -132,33 +131,6 @@ export default function Easy() {
     }
   }
 
-  useEffect(() => {
-    if (!quizStarted || showResult) return;
-    setTimeLeft(20);
-  }, [currentQuestion, quizStarted, showResult]);
-  
-  useEffect(() => {
-    if (!quizStarted || showResult) return;
-  
-    if (timeLeft === 0) {
-      if (lives <= 1 || currentQuestion === mockQuestions.length - 1) {
-        setLives(prev => prev - 1);
-        setShowResult(true);
-      } else {
-        setLives(prev => prev - 1);
-        setCurrentQuestion(currentQuestion + 1);
-        setTimeLeft(20);
-      }
-      return;
-    }
-  
-    const timer = setInterval(() => {
-      setTimeLeft(prev => prev - 1);
-    }, 1000);
-  
-    return () => clearInterval(timer);
-  }, [timeLeft, quizStarted, showResult, currentQuestion, lives]);
-  
   useEffect(() => {
     if (lives <= 0) {
       setShowResult(true);
@@ -274,7 +246,7 @@ export default function Easy() {
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
                 <Clock className="h-4 w-4 text-chart-3" />
-                <span className="font-mono text-lg font-bold text-chart-3">{timeLeft}s</span>
+                
               </div>
               <div className="flex items-center space-x-1">
                 {[...Array(3)].map((_, i) => (
