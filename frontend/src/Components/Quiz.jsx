@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { Link } from "react-router-dom"
 import { Button } from "../Components/ui/Button"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "../Components/ui/Card"
@@ -5,6 +6,9 @@ import { Trophy, Crown, Medal, Award, ArrowLeft, Star, Zap, Target } from "lucid
 import logo from "../assets/logo-rose.png"
 
 export default function Quiz() {
+  const [transitioning, setTransitioning] = useState(false)
+  const [selectedDifficulty, setSelectedDifficulty] = useState(null)
+
   const difficultyLevels = [
     {
       level: "easy",
@@ -15,7 +19,7 @@ export default function Quiz() {
       bg: "from-green-50 to-green-100",
       icon: <Medal className="h-8 w-8 text-green-500" />,
       points: "1x Points",
-      questions: "10 questions",
+      questions: "10 points",
       time: "Unlimited time"
     },
     {
@@ -27,7 +31,7 @@ export default function Quiz() {
       bg: "from-yellow-50 to-yellow-100",
       icon: <Target className="h-8 w-8 text-yellow-500" />,
       points: "2x Points",
-      questions: "15 questions",
+      questions: "15 points",
       time: "30s per question"
     },
     {
@@ -39,10 +43,44 @@ export default function Quiz() {
       bg: "from-red-50 to-red-100",
       icon: <Crown className="h-8 w-8 text-red-500" />,
       points: "3x Points",
-      questions: "20 questions",
+      questions: "20 points",
       time: "15s per question"
     }
   ]
+
+  const handleDifficultySelect = (difficulty) => {
+    setSelectedDifficulty(difficulty)
+    setTransitioning(true)
+    
+    // Navigate to the quiz page after a brief transition animation
+    setTimeout(() => {
+      window.location.href = `/${difficulty.level}`
+    }, 800) // Match this duration with CSS transition
+  }
+
+  if (transitioning) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-cyan-300 via-red-300 to-red-300 flex items-center justify-center">
+        {/* Transition Overlay */}
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-32 w-32 border-b-4 border-white mx-auto mb-8"></div>
+            <h2 className="text-4xl font-black text-white mb-4">
+              Starting {selectedDifficulty?.title}...
+            </h2>
+            <p className="text-xl text-white/80 font-bold">
+              Get ready for the challenge! 🚀
+            </p>
+          </div>
+        </div>
+
+        {/* Animated background elements during transition */}
+        <div className="fixed top-20 left-10 w-20 h-20 bg-yellow-300 rounded-full opacity-20 animate-ping"></div>
+        <div className="fixed bottom-32 right-20 w-16 h-16 bg-green-300 rounded-full opacity-20 animate-bounce"></div>
+        <div className="fixed top-40 right-32 w-12 h-12 bg-purple-300 rounded-full opacity-20 animate-pulse"></div>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-300 via-red-300 to-red-300">
@@ -103,6 +141,7 @@ export default function Quiz() {
           </p>
         </div>
 
+        
 
         {/* Difficulty Selection Cards */}
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -141,13 +180,12 @@ export default function Quiz() {
                     </div>
                   </div>
 
-                  <Link to={`/${difficulty.level}`} className="block mt-6">
-                    <Button 
-                      className={`w-full bg-gradient-to-r ${difficulty.color} hover:scale-105 text-white font-black text-lg py-4 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform border-2 border-white/50`}
-                    >
-                      🚀 Start {difficulty.level.charAt(0).toUpperCase() + difficulty.level.slice(1)} Quiz
-                    </Button>
-                  </Link>
+                  <Button 
+                    onClick={() => handleDifficultySelect(difficulty)}
+                    className={`w-full bg-gradient-to-r ${difficulty.color} hover:scale-105 text-white font-black text-lg py-4 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform border-2 border-white/50`}
+                  >
+                    🚀 Start {difficulty.level.charAt(0).toUpperCase() + difficulty.level.slice(1)} Quiz
+                  </Button>
                 </div>
               </CardContent>
             </Card>

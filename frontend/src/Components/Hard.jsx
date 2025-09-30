@@ -6,18 +6,90 @@ import { Button } from "../components/ui/Button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/Card"
 import { Progress } from "../components/ui/Progress"
 import { Badge } from "../components/ui/Badge"
-import { Heart, Clock, Trophy, ArrowLeft, Flag } from "lucide-react"
+import { Heart, Clock, Trophy, ArrowLeft, Flag, Zap } from "lucide-react"
 
 // Mock quiz data
 const mockQuestions = [
   {
     id: 1,
     country: "Croatia",
-    question: "",
-    options: ["", "", "", ""],
-    correctAnswer: 0,
-    difficulty: "Medium",
+    question: "Which Croatian king was known for creating one of the first legal codes in medieval Europe?",
+    options: ["King Tomislav", "King Petar Krešimir IV", "King Dmitar Zvonimir", "King Stephen Držislav"],
+    correctAnswer: 1,
+    difficulty: "Hard",
   },
+  {
+    id: 2,
+    country: "Netherlands",
+    question: "Which Dutch city was the European Capital of Culture in 2018?",
+    options: ["Leeuwarden", "Groningen", "Maastricht", "Eindhoven"],
+    correctAnswer: 0,
+    difficulty: "Hard",
+  },
+  {
+    id: 3,
+    country: "Croatia",
+    question: "What is the name of the traditional Croatian folk music that is protected by UNESCO?",
+    options: ["Klapa", "Tamburica", "Ganga", "Bećarac"],
+    correctAnswer: 0,
+    difficulty: "Hard",
+  },
+  {
+    id: 4,
+    country: "Netherlands",
+    question: "Which Dutch engineer is famous for the Delta Works, one of the Seven Wonders of the Modern World?",
+    options: ["Johan van Veen", "Cornelis Lely", "Andries Vierlingh", "Simon Stevin"],
+    correctAnswer: 1,
+    difficulty: "Hard",
+  },
+  {
+    id: 5,
+    country: "Croatia",
+    question: "Which Croatian island is known for its unique white wine called 'Vugava'?",
+    options: ["Vis", "Hvar", "Korčula", "Brač"],
+    correctAnswer: 0,
+    difficulty: "Hard",
+  },
+  {
+    id: 6,
+    country: "Netherlands",
+    question: "What was the original name of New York City when it was a Dutch colony?",
+    options: ["New Rotterdam", "New Utrecht", "New Amsterdam", "New Hague"],
+    correctAnswer: 2,
+    difficulty: "Hard",
+  },
+  {
+    id: 7,
+    country: "Croatia",
+    question: "Which Croatian scientist won the Nobel Prize in Chemistry in 1975?",
+    options: ["Vladimir Prelog", "Lavoslav Ružička", "Ivo Andrić", "Miroslav Radman"],
+    correctAnswer: 0,
+    difficulty: "Hard",
+  },
+  {
+    id: 8,
+    country: "Netherlands",
+    question: "Which Dutch company invented the CD, DVD, and Blu-ray technologies?",
+    options: ["ASML", "Philips", "Shell", "Unilever"],
+    correctAnswer: 1,
+    difficulty: "Hard",
+  },
+  {
+    id: 9,
+    country: "Croatia",
+    question: "What is the name of the ancient Roman palace in Split that was built for Emperor Diocletian?",
+    options: ["Diocletian's Palace", "Roman Forum", "Imperial Villa", "Caesar's Retreat"],
+    correctAnswer: 0,
+    difficulty: "Hard",
+  },
+  {
+    id: 10,
+    country: "Netherlands",
+    question: "Which Dutch painter created 'The Night Watch' and is considered one of the greatest painters in European history?",
+    options: ["Johannes Vermeer", "Rembrandt van Rijn", "Vincent van Gogh", "Frans Hals"],
+    correctAnswer: 1,
+    difficulty: "Hard",
+  }
 ]
 
 export default function Hard() {
@@ -26,15 +98,20 @@ export default function Hard() {
   const [lives, setLives] = useState(3)
   const [score, setScore] = useState(0)
   const [timeLeft, setTimeLeft] = useState(20)
-  const [quizStarted, setQuizStarted] = useState(false)
+  const [quizStarted, setQuizStarted] = useState(true) // Changed to true to start immediately
   const [showResult, setShowResult] = useState(false)
+  const [isTransitioning, setIsTransitioning] = useState(true)
 
   const question = mockQuestions[currentQuestion]
   const progress = ((currentQuestion + 1) / 10) * 100
 
-  const handleStartQuiz = () => {
-    setQuizStarted(true)
-  }
+  // Auto-start the quiz with a brief transition
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsTransitioning(false)
+    }, 500)
+    return () => clearTimeout(timer)
+  }, [])
 
   const handleAnswerSelect = (answerIndex) => {
     setSelectedAnswer(answerIndex)
@@ -58,7 +135,6 @@ export default function Hard() {
   useEffect(() => {
     if (!quizStarted || showResult) return;
     setTimeLeft(20);
-  
   }, [currentQuestion, quizStarted, showResult]);
   
   useEffect(() => {
@@ -83,82 +159,22 @@ export default function Hard() {
     return () => clearInterval(timer);
   }, [timeLeft, quizStarted, showResult, currentQuestion, lives]);
   
-  
-
   useEffect(() => {
     if (lives <= 0) {
       setShowResult(true);
     }
   }, [lives]);
-  
-  
-  
 
-  if (!quizStarted) {
+  // Show transition screen
+  if (isTransitioning) {
     return (
-      <div className="min-h-screen bg-background">
-        <nav className="border-b border-border bg-card/50 backdrop-blur-sm">
-          <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-            <Link
-              to="/"
-              className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Home
-            </Link>
-            <div className="flex items-center space-x-2">
-              <Flag className="h-6 w-6 text-primary" />
-              <span className="font-bold gradient-text">Tulips & Ties</span>
-            </div>
+      <div className="min-h-screen bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center">
+        <div className="text-center text-white">
+          <div className="animate-bounce mb-8">
+            <Zap className="h-24 w-24 mx-auto" />
           </div>
-        </nav>
-
-        <div className="container mx-auto px-4 py-20 flex items-center justify-center">
-          <Card className="max-w-2xl w-full bg-card border-border glow-effect">
-            <CardHeader className="text-center">
-              <div className="flex items-center justify-center mb-4">
-                <div className="flex space-x-2">
-                  <div className="w-8 h-5 bg-red-500 rounded-sm"></div>
-                  <div className="w-1 h-5 bg-white rounded-sm"></div>
-                  <div className="w-8 h-5 bg-blue-500 rounded-sm"></div>
-                </div>
-                <span className="mx-4 text-2xl">🇭🇷</span>
-                <div className="flex space-x-2">
-                  <div className="w-8 h-5 bg-red-500 rounded-sm"></div>
-                  <div className="w-8 h-5 bg-white rounded-sm"></div>
-                  <div className="w-8 h-5 bg-blue-500 rounded-sm"></div>
-                </div>
-                <span className="mx-4 text-2xl">🇳🇱</span>
-              </div>
-              <CardTitle className="text-3xl font-bold mb-4">Ready to Start?</CardTitle>
-              <CardDescription className="text-lg">
-                Test your knowledge about Croatia and the Netherlands with 10 challenging questions
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="grid md:grid-cols-3 gap-4">
-                <div className="text-center p-4 bg-primary/10 rounded-lg border border-primary/20">
-                  <Heart className="h-8 w-8 text-primary mx-auto mb-2" />
-                  <p className="font-semibold">3 Lives</p>
-                  <p className="text-sm text-muted-foreground">Lose one per wrong answer</p>
-                </div>
-                <div className="text-center p-4 bg-accent/10 rounded-lg border border-accent/20">
-                  <Trophy className="h-8 w-8 text-accent mx-auto mb-2" />
-                  <p className="font-semibold">20 Points</p>
-                  <p className="text-sm text-muted-foreground">Per correct answer</p>
-                </div>
-                <div className="text-center p-4 bg-chart-3/10 rounded-lg border border-chart-3/20">
-                  <Clock className="h-8 w-8 text-chart-3 mx-auto mb-2" />
-                  <p className="font-semibold">20 Seconds</p>
-                  <p className="text-sm text-muted-foreground">Per question</p>
-                </div>
-              </div>
-
-              <Button onClick={handleStartQuiz} className="w-full glow-effect text-lg py-6">
-                Start Quiz
-              </Button>
-            </CardContent>
-          </Card>
+          <h1 className="text-5xl font-black mb-4">Starting Hard Quiz!</h1>
+          <p className="text-xl font-bold">Brace yourself for the ultimate challenge! 🔥</p>
         </div>
       </div>
     )
@@ -199,7 +215,7 @@ export default function Hard() {
                   <p className="font-semibold">Total Score</p>
                 </div>
                 <div className="text-center p-6 bg-accent/10 rounded-lg border border-accent/20">
-                  <p className="text-3xl font-bold text-accent mb-2">{score / 10}</p>
+                  <p className="text-3xl font-bold text-accent mb-2">{Math.round(score / 20)}</p>
                   <p className="font-semibold">Correct Answers</p>
                 </div>
                 <div className="text-center p-6 bg-chart-3/10 rounded-lg border border-chart-3/20">
@@ -217,13 +233,13 @@ export default function Hard() {
 
               <div className="text-center space-y-4">
                 <p className="text-muted-foreground">
-                  {score >= 80
-                    ? "Excellent work! You're a geography expert!"
-                    : score >= 60
-                      ? "Good job! You know your countries well."
-                      : score >= 40
-                        ? "Not bad! Keep studying to improve."
-                        : "Keep practicing! You'll get better with time."}
+                  {score >= 160
+                    ? "Legendary! You're a Croatia-Netherlands expert!"
+                    : score >= 120
+                      ? "Incredible! You've mastered the hard questions!"
+                      : score >= 80
+                        ? "Impressive! You handled the challenge well!"
+                        : "Tough questions! Keep learning and try again!"}
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">

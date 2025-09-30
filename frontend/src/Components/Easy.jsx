@@ -6,7 +6,7 @@ import { Button } from "../components/ui/Button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/Card"
 import { Progress } from "../components/ui/Progress"
 import { Badge } from "../components/ui/Badge"
-import { Heart, Clock, Trophy, ArrowLeft, Flag } from "lucide-react"
+import { Heart, Clock, Trophy, ArrowLeft, Flag, Zap } from "lucide-react"
 
 // Mock quiz data
 const mockQuestions = [
@@ -98,15 +98,20 @@ export default function Easy() {
   const [lives, setLives] = useState(3)
   const [score, setScore] = useState(0)
   const [timeLeft, setTimeLeft] = useState(20)
-  const [quizStarted, setQuizStarted] = useState(false)
+  const [quizStarted, setQuizStarted] = useState(true) // Changed to true to start immediately
   const [showResult, setShowResult] = useState(false)
+  const [isTransitioning, setIsTransitioning] = useState(true)
 
   const question = mockQuestions[currentQuestion]
   const progress = ((currentQuestion + 1) / 10) * 100
 
-  const handleStartQuiz = () => {
-    setQuizStarted(true)
-  }
+  // Auto-start the quiz with a brief transition
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsTransitioning(false)
+    }, 500)
+    return () => clearTimeout(timer)
+  }, [])
 
   const handleAnswerSelect = (answerIndex) => {
     setSelectedAnswer(answerIndex)
@@ -130,7 +135,6 @@ export default function Easy() {
   useEffect(() => {
     if (!quizStarted || showResult) return;
     setTimeLeft(20);
-  
   }, [currentQuestion, quizStarted, showResult]);
   
   useEffect(() => {
@@ -155,82 +159,22 @@ export default function Easy() {
     return () => clearInterval(timer);
   }, [timeLeft, quizStarted, showResult, currentQuestion, lives]);
   
-  
-
   useEffect(() => {
     if (lives <= 0) {
       setShowResult(true);
     }
   }, [lives]);
-  
-  
-  
 
-  if (!quizStarted) {
+  // Show transition screen
+  if (isTransitioning) {
     return (
-      <div className="min-h-screen bg-background">
-        <nav className="border-b border-border bg-card/50 backdrop-blur-sm">
-          <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-            <Link
-              to="/"
-              className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Home
-            </Link>
-            <div className="flex items-center space-x-2">
-              <Flag className="h-6 w-6 text-primary" />
-              <span className="font-bold gradient-text">Tulips & Ties</span>
-            </div>
+      <div className="min-h-screen bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+        <div className="text-center text-white">
+          <div className="animate-bounce mb-8">
+            <Zap className="h-24 w-24 mx-auto" />
           </div>
-        </nav>
-
-        <div className="container mx-auto px-4 py-20 flex items-center justify-center">
-          <Card className="max-w-2xl w-full bg-card border-border glow-effect">
-            <CardHeader className="text-center">
-              <div className="flex items-center justify-center mb-4">
-                <div className="flex space-x-2">
-                  <div className="w-8 h-5 bg-red-500 rounded-sm"></div>
-                  <div className="w-1 h-5 bg-white rounded-sm"></div>
-                  <div className="w-8 h-5 bg-blue-500 rounded-sm"></div>
-                </div>
-                <span className="mx-4 text-2xl">🇭🇷</span>
-                <div className="flex space-x-2">
-                  <div className="w-8 h-5 bg-red-500 rounded-sm"></div>
-                  <div className="w-8 h-5 bg-white rounded-sm"></div>
-                  <div className="w-8 h-5 bg-blue-500 rounded-sm"></div>
-                </div>
-                <span className="mx-4 text-2xl">🇳🇱</span>
-              </div>
-              <CardTitle className="text-3xl font-bold mb-4">Ready to Start?</CardTitle>
-              <CardDescription className="text-lg">
-                Test your knowledge about Croatia and the Netherlands with 10 challenging questions
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="grid md:grid-cols-3 gap-4">
-                <div className="text-center p-4 bg-primary/10 rounded-lg border border-primary/20">
-                  <Heart className="h-8 w-8 text-primary mx-auto mb-2" />
-                  <p className="font-semibold">3 Lives</p>
-                  <p className="text-sm text-muted-foreground">Lose one per wrong answer</p>
-                </div>
-                <div className="text-center p-4 bg-accent/10 rounded-lg border border-accent/20">
-                  <Trophy className="h-8 w-8 text-accent mx-auto mb-2" />
-                  <p className="font-semibold">10 Points</p>
-                  <p className="text-sm text-muted-foreground">Per correct answer</p>
-                </div>
-                <div className="text-center p-4 bg-chart-3/10 rounded-lg border border-chart-3/20">
-                  <Clock className="h-8 w-8 text-chart-3 mx-auto mb-2" />
-                  <p className="font-semibold">20 Seconds</p>
-                  <p className="text-sm text-muted-foreground">Per question</p>
-                </div>
-              </div>
-
-              <Button onClick={handleStartQuiz} className="w-full glow-effect text-lg py-6">
-                Start Quiz
-              </Button>
-            </CardContent>
-          </Card>
+          <h1 className="text-5xl font-black mb-4">Starting Easy Quiz!</h1>
+          <p className="text-xl font-bold">Get ready to test your knowledge! 🌱</p>
         </div>
       </div>
     )
