@@ -97,8 +97,7 @@ export default function Easy() {
   const [selectedAnswer, setSelectedAnswer] = useState(null)
   const [lives, setLives] = useState(3)
   const [score, setScore] = useState(0)
-  const [timeLeft, setTimeLeft] = useState(20)
-  const [quizStarted, setQuizStarted] = useState(true) // Changed to true to start immediately
+  const [quizStarted, setQuizStarted] = useState(false)
   const [showResult, setShowResult] = useState(false)
   const [isTransitioning, setIsTransitioning] = useState(true)
 
@@ -131,33 +130,6 @@ export default function Easy() {
       setShowResult(true)
     }
   }
-
-  useEffect(() => {
-    if (!quizStarted || showResult) return;
-    setTimeLeft(20);
-  }, [currentQuestion, quizStarted, showResult]);
-  
-  useEffect(() => {
-    if (!quizStarted || showResult) return;
-  
-    if (timeLeft === 0) {
-      if (lives <= 1 || currentQuestion === mockQuestions.length - 1) {
-        setLives(prev => prev - 1);
-        setShowResult(true);
-      } else {
-        setLives(prev => prev - 1);
-        setCurrentQuestion(currentQuestion + 1);
-        setTimeLeft(20);
-      }
-      return;
-    }
-  
-    const timer = setInterval(() => {
-      setTimeLeft(prev => prev - 1);
-    }, 1000);
-  
-    return () => clearInterval(timer);
-  }, [timeLeft, quizStarted, showResult, currentQuestion, lives]);
   
   useEffect(() => {
     if (lives <= 0) {
@@ -173,8 +145,54 @@ export default function Easy() {
           <div className="animate-bounce mb-8">
             <Zap className="h-24 w-24 mx-auto" />
           </div>
-          <h1 className="text-5xl font-black mb-4">Starting Easy Quiz!</h1>
-          <p className="text-xl font-bold">Get ready to test your knowledge! 🌱</p>
+        </div>
+
+        <div className="container mx-auto px-4 py-20 flex items-center justify-center">
+          <Card className="max-w-2xl w-full bg-card border-border glow-effect">
+            <CardHeader className="text-center">
+              <div className="flex items-center justify-center mb-4">
+                <div className="flex space-x-2">
+                  <div className="w-8 h-5 bg-red-500 rounded-sm"></div>
+                  <div className="w-1 h-5 bg-white rounded-sm"></div>
+                  <div className="w-8 h-5 bg-blue-500 rounded-sm"></div>
+                </div>
+                <span className="mx-4 text-2xl">🇭🇷</span>
+                <div className="flex space-x-2">
+                  <div className="w-8 h-5 bg-red-500 rounded-sm"></div>
+                  <div className="w-8 h-5 bg-white rounded-sm"></div>
+                  <div className="w-8 h-5 bg-blue-500 rounded-sm"></div>
+                </div>
+                <span className="mx-4 text-2xl">🇳🇱</span>
+              </div>
+              <CardTitle className="text-3xl font-bold mb-4">Ready to Start?</CardTitle>
+              <CardDescription className="text-lg">
+                Test your knowledge about Croatia and the Netherlands with 10 challenging questions
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="grid md:grid-cols-3 gap-4">
+                <div className="text-center p-4 bg-primary/10 rounded-lg border border-primary/20">
+                  <Heart className="h-8 w-8 text-primary mx-auto mb-2" />
+                  <p className="font-semibold">3 Lives</p>
+                  <p className="text-sm text-muted-foreground">Lose one per wrong answer</p>
+                </div>
+                <div className="text-center p-4 bg-accent/10 rounded-lg border border-accent/20">
+                  <Trophy className="h-8 w-8 text-accent mx-auto mb-2" />
+                  <p className="font-semibold">10 Points</p>
+                  <p className="text-sm text-muted-foreground">Per correct answer</p>
+                </div>
+                <div className="text-center p-4 bg-chart-3/10 rounded-lg border border-chart-3/20">
+                  <Clock className="h-8 w-8 text-chart-3 mx-auto mb-2" />
+                  <p className="font-semibold">20 Seconds</p>
+                  <p className="text-sm text-muted-foreground">Per question</p>
+                </div>
+              </div>
+
+              <Button onClick={handleStartQuiz} className="w-full glow-effect text-lg py-6">
+                Start Quiz
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </div>
     )
@@ -272,10 +290,6 @@ export default function Easy() {
               Exit Quiz
             </Link>
             <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <Clock className="h-4 w-4 text-chart-3" />
-                <span className="font-mono text-lg font-bold text-chart-3">{timeLeft}s</span>
-              </div>
               <div className="flex items-center space-x-1">
                 {[...Array(3)].map((_, i) => (
                   <Heart
