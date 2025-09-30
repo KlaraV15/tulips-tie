@@ -137,7 +137,7 @@ export default function Register() {
 
                 {/* Terms */}
                 <div className="flex items-center space-x-2">
-                  <input type="checkbox" id="terms" className="rounded border-gray-300 text-red-600 focus:ring-red-400" />
+                  <input type="checkbox" id="terms" className="w-5 h-5 rounded border-gray-300 text-red-600 focus:ring-red-400"  required  />
                   <Label htmlFor="terms" className="text-sm text-gray-700">
                     I agree to the{" "}
                     <Link to="/terms" className="text-red-600 font-semibold hover:underline">
