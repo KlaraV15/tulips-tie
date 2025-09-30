@@ -109,7 +109,7 @@ export default function Login() {
                 {/* Remember me + Forgot password */}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
-                    <input type="checkbox" id="remember" className="rounded border-gray-300 text-red-600 focus:ring-red-400" />
+                    <input type="checkbox" id="remember" className=" w-5 h-5 rounded border-gray-300 text-red-600 focus:ring-red-400" />
                     <Label htmlFor="remember" className="text-sm text-gray-700">
                       Remember me
                     </Label>
