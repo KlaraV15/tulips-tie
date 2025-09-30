@@ -97,7 +97,7 @@ export default function Hard() {
   const [selectedAnswer, setSelectedAnswer] = useState(null)
   const [lives, setLives] = useState(3)
   const [score, setScore] = useState(0)
-  const [timeLeft, setTimeLeft] = useState(30)
+  const [timeLeft, setTimeLeft] = useState(15)
   const [quizStarted, setQuizStarted] = useState(false)
   const [showResult, setShowResult] = useState(false)
 
@@ -129,7 +129,7 @@ export default function Hard() {
 
   useEffect(() => {
     if (!quizStarted || showResult) return;
-    setTimeLeft(30);
+    setTimeLeft(15);
   
   }, [currentQuestion, quizStarted, showResult]);
   
@@ -143,7 +143,7 @@ export default function Hard() {
       } else {
         setLives(prev => prev - 1);
         setCurrentQuestion(currentQuestion + 1);
-        setTimeLeft(30);
+        setTimeLeft(15);
       }
       return;
     }
@@ -221,7 +221,7 @@ export default function Hard() {
                 </div>
                 <div className="text-center p-4 bg-chart-3/10 rounded-lg border border-chart-3/20">
                   <Clock className="h-8 w-8 text-chart-3 mx-auto mb-2" />
-                  <p className="font-semibold">30 Seconds</p>
+                  <p className="font-semibold">15 Seconds</p>
                   <p className="text-sm text-muted-foreground">Per question</p>
                 </div>
               </div>
