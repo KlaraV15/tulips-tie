@@ -19,7 +19,6 @@ import {
     ArrowLeft,
 } from "lucide-react"
 import QuizManagementSection from "@/Components/admin/QuizManagementSection.jsx";
-import QuestionsCard from "@/Components/admin/QuestionsCard.jsx";
 
 function AdminPanel() {
     const adminStats = {
@@ -199,63 +198,61 @@ function AdminPanel() {
 
                 {/*Questions*/}
                 <TabsContent value="questions" className="space-y-6">
-                    {/*<Card className="bg-card border-border">*/}
-                    {/*    <CardHeader>*/}
-                    {/*        <div className="flex items-center justify-between">*/}
-                    {/*            <div>*/}
-                    {/*                <CardTitle>Question Management</CardTitle>*/}
-                    {/*                <CardDescription>Review and manage quiz questions</CardDescription>*/}
-                    {/*            </div>*/}
-                    {/*            <button href="/admin/questions">*/}
-                    {/*                <Button className="glow-effect">*/}
-                    {/*                    <Plus className="h-4 w-4 mr-2" />*/}
-                    {/*                    Add Question*/}
-                    {/*                </Button>*/}
-                    {/*            </button>*/}
-                    {/*        </div>*/}
-                    {/*    </CardHeader>*/}
-                    {/*    <CardContent>*/}
-                    {/*        <div className="space-y-4">*/}
-                    {/*            {recentQuestions.map((question) => (*/}
-                    {/*                <div*/}
-                    {/*                    key={question.id}*/}
-                    {/*                    className="flex items-center justify-between p-4 border border-border rounded-lg hover:border-primary/30 transition-colors"*/}
-                    {/*                >*/}
-                    {/*                    <div className="flex items-center space-x-4">*/}
-                    {/*                        <span className="text-2xl">{getCountryFlag(question.country)}</span>*/}
-                    {/*                        <div className="flex-1">*/}
-                    {/*                            <p className="font-semibold">{question.question}</p>*/}
-                    {/*                            <div className="flex items-center space-x-2 mt-1">*/}
-                    {/*                                <Badge variant="outline" className="text-xs">*/}
-                    {/*                                    {question.difficulty}*/}
-                    {/*                                </Badge>*/}
-                    {/*                                <span className="text-sm text-muted-foreground">*/}
-                    {/*                                    by {question.createdBy} • {question.createdDate}*/}
-                    {/*                                </span>*/}
-                    {/*                            </div>*/}
-                    {/*                        </div>*/}
-                    {/*                    </div>*/}
-                    {/*                    <div className="flex items-center space-x-4">*/}
-                    {/*                        {getStatusBadge(question.status)}*/}
-                    {/*                        <div className="flex space-x-2">*/}
-                    {/*                            <Button variant="outline" size="sm">*/}
-                    {/*                                <Eye className="h-4 w-4" />*/}
-                    {/*                            </Button>*/}
-                    {/*                            <Button variant="outline" size="sm">*/}
-                    {/*                                <Edit className="h-4 w-4" />*/}
-                    {/*                            </Button>*/}
-                    {/*                            <Button variant="outline" size="sm">*/}
-                    {/*                                <Trash2 className="h-4 w-4" />*/}
-                    {/*                            </Button>*/}
-                    {/*                        </div>*/}
-                    {/*                    </div>*/}
-                    {/*                </div>*/}
-                    {/*            ))}*/}
-                    {/*        </div>*/}
-                    {/*    </CardContent>*/}
-                    {/*</Card>*/}
-
-                    <QuestionsCard></QuestionsCard>
+                    <Card className="bg-card border-border">
+                        <CardHeader>
+                            <div className="flex items-center justify-between">
+                                <div>
+                                    <CardTitle>Question Management</CardTitle>
+                                    <CardDescription>Review and manage quiz questions</CardDescription>
+                                </div>
+                                <button href="/admin/questions">
+                                    <Button className="glow-effect">
+                                        <Plus className="h-4 w-4 mr-2" />
+                                        Add Question
+                                    </Button>
+                                </button>
+                            </div>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="space-y-4">
+                                {recentQuestions.map((question) => (
+                                    <div
+                                        key={question.id}
+                                        className="flex items-center justify-between p-4 border border-border rounded-lg hover:border-primary/30 transition-colors"
+                                    >
+                                        <div className="flex items-center space-x-4">
+                                            <span className="text-2xl">{getCountryFlag(question.country)}</span>
+                                            <div className="flex-1">
+                                                <p className="font-semibold">{question.question}</p>
+                                                <div className="flex items-center space-x-2 mt-1">
+                                                    <Badge variant="outline" className="text-xs">
+                                                        {question.difficulty}
+                                                    </Badge>
+                                                    <span className="text-sm text-muted-foreground">
+                                                        by {question.createdBy} • {question.createdDate}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center space-x-4">
+                                            {getStatusBadge(question.status)}
+                                            <div className="flex space-x-2">
+                                                <Button variant="outline" size="sm">
+                                                    <Eye className="h-4 w-4" />
+                                                </Button>
+                                                <Button variant="outline" size="sm">
+                                                    <Edit className="h-4 w-4" />
+                                                </Button>
+                                                <Button variant="outline" size="sm">
+                                                    <Trash2 className="h-4 w-4" />
+                                                </Button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </CardContent>
+                    </Card>
                 </TabsContent>
             </Tabs>
         </section>

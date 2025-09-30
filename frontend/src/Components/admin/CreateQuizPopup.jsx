@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -47,10 +47,7 @@ import {
   Users,
   Calendar,
 } from 'lucide-react';
-import HttpClient from '../../../helpers/HttpClient.js';
-import QuestionsCard from "@/Components/admin/QuestionsCard.jsx";
-
-const client = new HttpClient();
+import QuestionsCard from '@/Components/admin/QuestionsCard.jsx';
 
 // Form validation schema
 const formSchema = z.object({
@@ -64,42 +61,8 @@ const formSchema = z.object({
   category_id: z.string().min(1, 'Please select a category'),
 });
 
-async function getCountries() {
-  const response = await client.newRequest('/countries');
-  console.log('countries', response.data);
-  return response?.data ?? [];
-}
-
-async function getDifficulties() {
-  const response = await client.newRequest('/difficulties');
-
-  console.log('difficulties', response.data);
-  return response?.data ?? [];
-}
-
-async function getCategories() {
-  const response = await client.newRequest('/categories');
-
-  console.log('categories', response.data);
-  return response?.data ?? [];
-}
-
-export default function CreateQuizPopup(props) {
-  const [countries, setCountries] = useState([]);
-  const [difficulties, setDifficulties] = useState([]);
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    getCountries().then((response) => setCountries(response));
-  }, []);
-
-  useEffect(() => {
-    getCategories().then((response) => setCategories(response));
-  }, []);
-
-  useEffect(() => {
-    getDifficulties().then((response) => setDifficulties(response));
-  }, []);
+export default function CreateQuizPopup() {
+  const [showQuestionsSection, setShowQuestionsSection] = useState(false);
 
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
 
@@ -120,8 +83,6 @@ export default function CreateQuizPopup(props) {
     console.log('Form state:', form.formState);
     // TODO: Implement quiz creation logic
   }
-
-
 
   return (
     <Dialog
@@ -182,99 +143,20 @@ export default function CreateQuizPopup(props) {
               )}
             />
 
-            <QuestionsCard></QuestionsCard>
-
-            <div className="grid grid-cols-2 gap-4">
-              <FormField
-                control={form.control}
-                name="country_id"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Country</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      value={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select country" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {countries &&
-                          countries.map((country) => (
-                            <SelectItem
-                              key={country.id}
-                              value={String(country.id)}>
-                              {country.name}
-                            </SelectItem>
-                          ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="difficulty_id"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Difficulty</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      value={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select difficulty" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {difficulties &&
-                          difficulties.map((difficulty) => (
-                            <SelectItem
-                              key={difficulty.id}
-                              value={String(difficulty.id)}>
-                              {difficulty.level}
-                            </SelectItem>
-                          ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            <div>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setShowQuestionsSection(true)}>
+                Add questions
+              </Button>
             </div>
 
-            <FormField
-              control={form.control}
-              name="category_id"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Category</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    value={field.value}>
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select category" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {categories &&
-                        categories.map((category) => (
-                          <SelectItem
-                            key={category.id}
-                            value={String(category.id)}>
-                            {category.name}
-                          </SelectItem>
-                        ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            {showQuestionsSection && (
+              <div className="mt-4">
+                <QuestionsCard />
+              </div>
+            )}
 
             <div className="flex justify-end space-x-2 pt-4">
               <Button
