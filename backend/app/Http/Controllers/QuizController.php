@@ -54,4 +54,10 @@ class QuizController extends Controller
         $quiz->delete();
         return response()->json(['message' => 'Quiz deleted']);
     }
+
+    // List all questions for a quiz
+    public function getQuizQuestions(Quiz $quiz)
+    {
+        return response()->json($quiz->questions);
+    }
 }
