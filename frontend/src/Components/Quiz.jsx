@@ -51,7 +51,7 @@ export default function Quiz() {
   const handleDifficultySelect = (difficulty) => {
     setSelectedDifficulty(difficulty)
     setTransitioning(true)
-    
+
     // Navigate to the quiz page after a brief transition animation
     setTimeout(() => {
       window.location.href = `/${difficulty.level}`
@@ -144,7 +144,7 @@ export default function Quiz() {
         {/* Difficulty Selection Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-6xl mx-auto">
           {difficultyLevels.map((difficulty) => (
-            <Card 
+            <Card
               key={difficulty.level}
               className={`bg-white py-0 border-2 sm:border-4 ${difficulty.border} shadow-xl sm:shadow-2xl hover:shadow-2xl sm:hover:shadow-3xl transition-all duration-300 hover:scale-105 card-3d cursor-pointer group`}
             >
@@ -166,7 +166,7 @@ export default function Quiz() {
                   <p className="text-gray-700 font-bold text-sm sm:text-lg leading-relaxed">
                     {difficulty.description}
                   </p>
-                  
+
                   <div className="space-y-2 sm:space-y-3 mt-4 sm:mt-6">
                     <div className="flex items-center justify-center space-x-2 sm:space-x-3 bg-white/80 px-3 sm:px-4 py-1 sm:py-2 rounded-lg sm:rounded-xl border-2 border-white">
                       <Star className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-500" />
@@ -178,7 +178,7 @@ export default function Quiz() {
                     </div>
                   </div>
 
-                  <Button 
+                  <Button
                     onClick={() => handleDifficultySelect(difficulty)}
                     className={`w-full bg-gradient-to-r ${difficulty.color} hover:scale-105 text-white font-black text-sm sm:text-lg py-2 sm:py-4 rounded-lg sm:rounded-xl shadow-lg sm:shadow-xl hover:shadow-xl sm:hover:shadow-2xl transition-all duration-300 transform border-2 border-white/50`}
                   >
@@ -227,16 +227,11 @@ export default function Quiz() {
           </Card>
         </div>
       </section>
-      
+
       <footer className="mt-6 sm:mt-8 border-t border-red-200 bg-white/80 backdrop-blur-sm">
         <div className="container mx-auto px-3 sm:px-4 py-6 sm:py-8">
           <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="flex items-center space-x-2 sm:space-x-3 mb-3 md:mb-0">
-              <img src={logo} className="h-6 w-4 sm:h-8 sm:w-6" />
-              <span className="text-sm sm:text-xl font-bold bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent">
-                Tulips & Ties
-              </span>
-            </div>
+
             <p className="text-gray-600 text-xs sm:text-sm font-medium text-center md:text-right">
               © 2025 Tulips & Ties • The Ultimate Croatia vs Netherlands Quiz Battle!
             </p>
