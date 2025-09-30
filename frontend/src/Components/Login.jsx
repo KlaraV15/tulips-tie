@@ -28,7 +28,7 @@ export default function Login() {
                 className="px-7 py-3 text-lg text-red-600 border-2 border-red-400 
                   hover:bg-red-50 hover:text-red-700 hover:border-red-500 
                   font-semibold rounded-2xl transition-all duration-300 ease-out
-                  shadow-sm hover:shadow-md"
+                  shadow-sm hover:shadow-md cursor-pointer"
               >
                 Login
               </Button>
@@ -42,7 +42,7 @@ export default function Login() {
                   border border-rose-500
                   transition-all duration-300 ease-out
                   transform hover:scale-110 hover:brightness-110
-                  focus:ring-4 focus:ring-rose-400"
+                  focus:ring-4 focus:ring-rose-400 cursor-pointer"
               >
                 🌸 Get Started
               </Button>
