@@ -189,7 +189,7 @@ export default function HomePage() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Life System */}
-          <Card className="bg-white border-2 border-red-200 hover:border-red-400 transition-all hover:shadow-2xl hover:scale-105 cursor-pointer">
+          <Card className="bg-white border-2 border-red-200 hover:border-red-400 transition-all hover:shadow-2xl hover:scale-105 ">
             <CardHeader className="text-center">
               <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mb-4 mx-auto">
                 <Heart className="h-8 w-8 text-red-600" />
@@ -202,7 +202,7 @@ export default function HomePage() {
           </Card>
 
           {/* Points System */}
-          <Card className="bg-white border-2 border-yellow-200 hover:border-yellow-400 transition-all hover:shadow-2xl hover:scale-105 cursor-pointer">
+          <Card className="bg-white border-2 border-yellow-200 hover:border-yellow-400 transition-all hover:shadow-2xl hover:scale-105 ">
             <CardHeader className="text-center">
               <div className="w-16 h-16 bg-yellow-100 rounded-2xl flex items-center justify-center mb-4 mx-auto">
                 <Star className="h-8 w-8 text-yellow-600" />
@@ -215,7 +215,7 @@ export default function HomePage() {
           </Card>
 
           {/* Leaderboard */}
-          <Card className="bg-white border-2 border-purple-200 hover:border-purple-400 transition-all hover:shadow-2xl hover:scale-105 cursor-pointer">
+          <Card className="bg-white border-2 border-purple-200 hover:border-purple-400 transition-all hover:shadow-2xl hover:scale-105 ">
             <CardHeader className="text-center">
               <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-4 mx-auto">
                 <Trophy className="h-8 w-8 text-purple-600" />
@@ -228,7 +228,7 @@ export default function HomePage() {
           </Card>
 
           {/* Questions */}
-          <Card className="bg-white border-2 border-blue-200 hover:border-blue-400 transition-all hover:shadow-2xl hover:scale-105 cursor-pointer">
+          <Card className="bg-white border-2 border-blue-200 hover:border-blue-400 transition-all hover:shadow-2xl hover:scale-105 ">
             <CardHeader className="text-center">
               <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-4 mx-auto">
                 <Brain className="h-8 w-8 text-blue-600" />
@@ -241,7 +241,7 @@ export default function HomePage() {
           </Card>
 
           {/* Profiles */}
-          <Card className="bg-white border-2 border-green-200 hover:border-green-400 transition-all hover:shadow-2xl hover:scale-105 cursor-pointer">
+          <Card className="bg-white border-2 border-green-200 hover:border-green-400 transition-all hover:shadow-2xl hover:scale-105">
             <CardHeader className="text-center">
               <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mb-4 mx-auto">
                 <Users className="h-8 w-8 text-green-600" />
@@ -254,7 +254,7 @@ export default function HomePage() {
           </Card>
 
           {/* Timer */}
-          <Card className="bg-white border-2 border-orange-200 hover:border-orange-400 transition-all hover:shadow-2xl hover:scale-105 cursor-pointer">
+          <Card className="bg-white border-2 border-orange-200 hover:border-orange-400 transition-all hover:shadow-2xl hover:scale-105 ">
             <CardHeader className="text-center">
               <div className="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mb-4 mx-auto">
                 <Zap className="h-8 w-8 text-orange-600" />
