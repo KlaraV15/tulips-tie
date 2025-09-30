@@ -29,7 +29,7 @@ export default function Register() {
                 className="px-7 py-3 text-lg text-red-600 border-2 border-red-400 
                   hover:bg-red-50 hover:text-red-700 hover:border-red-500 
                   font-semibold rounded-2xl transition-all duration-300 ease-out
-                  shadow-sm hover:shadow-md"
+                  shadow-sm hover:shadow-md cursor-pointer"
               >
                 Login
               </Button>
@@ -43,7 +43,7 @@ export default function Register() {
                   border border-rose-500
                   transition-all duration-300 ease-out
                   transform hover:scale-110 hover:brightness-110
-                  focus:ring-4 focus:ring-rose-400"
+                  focus:ring-4 focus:ring-rose-400 cursor-pointer"
               >
                 🌸 Get Started
               </Button>
@@ -137,7 +137,7 @@ export default function Register() {
 
                 {/* Terms */}
                 <div className="flex items-center space-x-2">
-                  <input type="checkbox" id="terms" className="rounded border-gray-300 text-red-600 focus:ring-red-400" />
+                  <input type="checkbox" id="terms" className="w-5 h-5 rounded border-gray-300 text-red-600 focus:ring-red-400"  required  />
                   <Label htmlFor="terms" className="text-sm text-gray-700">
                     I agree to the{" "}
                     <Link to="/terms" className="text-red-600 font-semibold hover:underline">

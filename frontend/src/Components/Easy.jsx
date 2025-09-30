@@ -6,7 +6,7 @@ import { Button } from "../components/ui/Button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/Card"
 import { Progress } from "../components/ui/Progress"
 import { Badge } from "../components/ui/Badge"
-import { Heart, Clock, Trophy, ArrowLeft, Flag, Zap } from "lucide-react"
+import { Heart, Clock, Trophy, ArrowLeft, Flag, Zap, Check, X } from "lucide-react"
 
 // Mock quiz data
 const mockQuestions = [
@@ -97,9 +97,11 @@ export default function Easy() {
   const [selectedAnswer, setSelectedAnswer] = useState(null)
   const [lives, setLives] = useState(3)
   const [score, setScore] = useState(0)
-  const [quizStarted, setQuizStarted] = useState(true) // Changed to true to start immediately
+  const [quizStarted, setQuizStarted] = useState(true)
   const [showResult, setShowResult] = useState(false)
   const [isTransitioning, setIsTransitioning] = useState(true)
+  const [showAnswerFeedback, setShowAnswerFeedback] = useState(false)
+  const [isCorrect, setIsCorrect] = useState(false)
 
   const question = mockQuestions[currentQuestion]
   const progress = ((currentQuestion + 1) / 10) * 100
@@ -113,17 +115,24 @@ export default function Easy() {
   }, [])
 
   const handleAnswerSelect = (answerIndex) => {
+    if (showAnswerFeedback) return; // Prevent multiple selections
+    
     setSelectedAnswer(answerIndex)
-  }
+    const correct = answerIndex === question.correctAnswer
+    setIsCorrect(correct)
+    setShowAnswerFeedback(true)
 
-  const handleNextQuestion = () => {
-    if (selectedAnswer === question.correctAnswer) {
+    if (correct) {
       setScore(score + 10)
     } else {
       setLives(lives - 1)
     }
+  }
 
+  const handleNextQuestion = () => {
     setSelectedAnswer(null)
+    setShowAnswerFeedback(false)
+    
     if (currentQuestion < 9) {
       setCurrentQuestion(currentQuestion + 1)
     } else {
@@ -244,10 +253,6 @@ export default function Easy() {
               Exit Quiz
             </Link>
             <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <Clock className="h-4 w-4 text-chart-3" />
-                
-              </div>
               <div className="flex items-center space-x-1">
                 {[...Array(3)].map((_, i) => (
                   <Heart
@@ -300,34 +305,94 @@ export default function Easy() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid gap-3">
-                {question.options.map((option, index) => (
-                  <Button
-                    key={index}
-                    variant={selectedAnswer === index ? "default" : "outline"}
-                    className={`
-                      h-auto p-4 text-left justify-start text-wrap
-                      ${selectedAnswer === index ? "glow-effect" : "hover:border-primary/50"}
-                    `}
-                    onClick={() => handleAnswerSelect(index)}
-                  >
-                    <div className="flex items-center space-x-3">
-                      <div
-                        className={`
-                        w-8 h-8 rounded-full border-2 flex items-center justify-center font-bold
-                        ${selectedAnswer === index ? "bg-primary-foreground text-primary border-primary" : "border-muted-foreground"}
+                {question.options.map((option, index) => {
+                  const isSelected = selectedAnswer === index
+                  const isCorrectAnswer = index === question.correctAnswer
+                  const showCorrect = showAnswerFeedback && isCorrectAnswer
+                  const showIncorrect = showAnswerFeedback && isSelected && !isCorrectAnswer
+                  
+                  return (
+                    <Button
+                      key={index}
+                      variant={isSelected ? "default" : "outline"}
+                      className={`
+                        h-auto p-4 text-left justify-start text-wrap relative transition-all duration-300
+                        ${showCorrect 
+                          ? "bg-green-500 hover:bg-green-500 text-white border-green-600 glow-effect" 
+                          : showIncorrect
+                            ? "bg-red-500 hover:bg-red-500 text-white border-red-600"
+                            : isSelected
+                              ? "glow-effect"
+                              : "hover:border-primary/50"
+                        }
                       `}
-                      >
-                        {String.fromCharCode(65 + index)}
+                      onClick={() => handleAnswerSelect(index)}
+                      disabled={showAnswerFeedback}
+                    >
+                      <div className="flex items-center space-x-3">
+                        <div
+                          className={`
+                            w-8 h-8 rounded-full border-2 flex items-center justify-center font-bold transition-all duration-300
+                            ${showCorrect 
+                              ? "bg-white text-green-600 border-white" 
+                              : showIncorrect
+                                ? "bg-white text-red-600 border-white"
+                                : isSelected 
+                                  ? "bg-primary-foreground text-primary border-primary"
+                                  : "border-muted-foreground"
+                            }
+                          `}
+                        >
+                          {showCorrect ? (
+                            <Check className="h-4 w-4" />
+                          ) : showIncorrect ? (
+                            <X className="h-4 w-4" />
+                          ) : (
+                            String.fromCharCode(65 + index)
+                          )}
+                        </div>
+                        <span className="text-base">{option}</span>
                       </div>
-                      <span className="text-base">{option}</span>
-                    </div>
-                  </Button>
-                ))}
+                    </Button>
+                  )
+                })}
               </div>
 
+              {/* Feedback Message */}
+              {showAnswerFeedback && (
+                <div className={`p-4 rounded-lg border-2 text-center font-bold text-lg transition-all duration-300 ${
+                  isCorrect 
+                    ? "bg-green-100 border-green-400 text-green-800" 
+                    : "bg-red-100 border-red-400 text-red-800"
+                }`}>
+                  {isCorrect ? (
+                    <div className="flex items-center justify-center space-x-2">
+                      <Check className="h-5 w-5" />
+                      <span>Correct! +10 points 🎉</span>
+                    </div>
+                  ) : (
+                    <div className="flex items-center justify-center space-x-2">
+                      <X className="h-5 w-5" />
+                      <span>Incorrect! -1 life 💔</span>
+                    </div>
+                  )}
+                </div>
+              )}
+
               <div className="flex justify-between items-center pt-6">
-                <p className="text-sm text-muted-foreground">Select an answer to continue</p>
-                <Button onClick={handleNextQuestion} disabled={selectedAnswer === null} className="glow-effect">
+                <p className="text-sm text-muted-foreground">
+                  {showAnswerFeedback 
+                    ? (isCorrect ? "Great job! Continue to next question" : "Don't worry! Keep going") 
+                    : "Select an answer to continue"
+                  }
+                </p>
+                <Button 
+                  onClick={handleNextQuestion} 
+                  disabled={!showAnswerFeedback} 
+                  className={`glow-effect transition-all duration-300 ${
+                    isCorrect ? "bg-green-600 hover:bg-green-700" : "bg-red-600 hover:bg-red-700"
+                  }`}
+                >
                   {currentQuestion === 9 ? "Finish Quiz" : "Next Question"}
                 </Button>
               </div>
