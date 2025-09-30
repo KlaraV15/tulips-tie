@@ -46,7 +46,7 @@ export default function HomePage() {
                 className="px-2 sm:px-7 py-1 sm:py-4 text-xs sm:text-lg text-red-600 border-2 border-red-400 
                  hover:bg-red-50 hover:text-red-700 hover:border-red-500 
                  font-semibold rounded-lg sm:rounded-2xl transition-all duration-300 ease-out
-                 shadow-sm hover:shadow-md whitespace-nowrap"
+                 shadow-sm hover:shadow-md whitespace-nowrap cursor-pointer"
               >
                 Login
               </Button>
@@ -59,8 +59,8 @@ export default function HomePage() {
              rounded-lg sm:rounded-2xl shadow-sm sm:shadow-xl hover:shadow-2xl
              border border-rose-500
              transition-all duration-300 ease-out
-             transform hover:scale-110 hover:brightness-110
-             focus:ring-2 sm:focus:ring-4 focus:ring-rose-400 whitespace-nowrap"
+             transform  hover:brightness-110
+             focus:ring-2 sm:focus:ring-4 focus:ring-rose-400 whitespace-nowrap cursor-pointer"
               >
                 <span className="sm:hidden">🌸</span>
                 <span className="hidden sm:inline">🌸 Play Now!</span>
@@ -105,7 +105,7 @@ export default function HomePage() {
                    text-white text-sm sm:text-lg px-4 sm:px-8 py-3 sm:py-6 
                    shadow-xl border-2 border-red-400 rounded-xl sm:rounded-2xl font-bold
                    transition-all duration-500 transform
-                   animate-slowpulse"
+                   animate-slowpulse cursor-pointer"
                 >
                   🎮 Start Quiz Challenge
                 </Button>
@@ -114,7 +114,7 @@ export default function HomePage() {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="w-full sm:w-auto text-red-600 border-red-300 hover:bg-red-50 hover:text-red-700 hover:border-red-400 text-sm sm:text-lg px-4 sm:px-8 py-3 sm:py-6 font-bold rounded-xl sm:rounded-2xl transition-all duration-200 shadow-md"
+                  className="w-full sm:w-auto text-red-600 border-red-300 hover:bg-red-50 hover:text-red-700 hover:border-red-400 text-sm sm:text-lg px-4 sm:px-8 py-3 sm:py-6 font-bold rounded-xl sm:rounded-2xl transition-all duration-200 shadow-md cursor-pointer"
                 >
                   🏆 View Champions
                 </Button>
@@ -180,7 +180,7 @@ export default function HomePage() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {/* Life System */}
-          <Card className="bg-white border-2 border-red-200 hover:border-red-400 transition-all hover:shadow-xl sm:hover:shadow-2xl hover:scale-105 cursor-pointer">
+          <Card className="bg-white border-2 border-red-200 hover:border-red-400 transition-all hover:shadow-xl sm:hover:shadow-2xl hover:scale-105">
             <CardHeader className="text-center p-4 sm:p-6">
               <div className="w-12 h-12 sm:w-16 sm:h-16 bg-red-100 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 mx-auto">
                 <Heart className="h-6 w-6 sm:h-8 sm:w-8 text-red-600" />
@@ -193,7 +193,7 @@ export default function HomePage() {
           </Card>
 
           {/* Points System */}
-          <Card className="bg-white border-2 border-yellow-200 hover:border-yellow-400 transition-all hover:shadow-xl sm:hover:shadow-2xl hover:scale-105 cursor-pointer">
+          <Card className="bg-white border-2 border-yellow-200 hover:border-yellow-400 transition-all hover:shadow-xl sm:hover:shadow-2xl hover:scale-105">
             <CardHeader className="text-center p-4 sm:p-6">
               <div className="w-12 h-12 sm:w-16 sm:h-16 bg-yellow-100 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 mx-auto">
                 <Star className="h-6 w-6 sm:h-8 sm:w-8 text-yellow-600" />
@@ -206,7 +206,7 @@ export default function HomePage() {
           </Card>
 
           {/* Leaderboard */}
-          <Card className="bg-white border-2 border-purple-200 hover:border-purple-400 transition-all hover:shadow-xl sm:hover:shadow-2xl hover:scale-105 cursor-pointer">
+          <Card className="bg-white border-2 border-purple-200 hover:border-purple-400 transition-all hover:shadow-xl sm:hover:shadow-2xl hover:scale-105">
             <CardHeader className="text-center p-4 sm:p-6">
               <div className="w-12 h-12 sm:w-16 sm:h-16 bg-purple-100 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 mx-auto">
                 <Trophy className="h-6 w-6 sm:h-8 sm:w-8 text-purple-600" />
@@ -219,7 +219,7 @@ export default function HomePage() {
           </Card>
 
           {/* Questions */}
-          <Card className="bg-white border-2 border-blue-200 hover:border-blue-400 transition-all hover:shadow-xl sm:hover:shadow-2xl hover:scale-105 cursor-pointer">
+          <Card className="bg-white border-2 border-blue-200 hover:border-blue-400 transition-all hover:shadow-xl sm:hover:shadow-2xl hover:scale-105">
             <CardHeader className="text-center p-4 sm:p-6">
               <div className="w-12 h-12 sm:w-16 sm:h-16 bg-blue-100 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 mx-auto">
                 <Brain className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />
@@ -232,7 +232,7 @@ export default function HomePage() {
           </Card>
 
           {/* Profiles */}
-          <Card className="bg-white border-2 border-green-200 hover:border-green-400 transition-all hover:shadow-xl sm:hover:shadow-2xl hover:scale-105 cursor-pointer">
+          <Card className="bg-white border-2 border-green-200 hover:border-green-400 transition-all hover:shadow-xl sm:hover:shadow-2xl hover:scale-105">
             <CardHeader className="text-center p-4 sm:p-6">
               <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-100 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 mx-auto">
                 <Users className="h-6 w-6 sm:h-8 sm:w-8 text-green-600" />
@@ -245,7 +245,7 @@ export default function HomePage() {
           </Card>
 
           {/* Timer */}
-          <Card className="bg-white border-2 border-orange-200 hover:border-orange-400 transition-all hover:shadow-xl sm:hover:shadow-2xl hover:scale-105 cursor-pointer">
+          <Card className="bg-white border-2 border-orange-200 hover:border-orange-400 transition-all hover:shadow-xl sm:hover:shadow-2xl hover:scale-105">
             <CardHeader className="text-center p-4 sm:p-6">
               <div className="w-12 h-12 sm:w-16 sm:h-16 bg-orange-100 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 mx-auto">
                 <Zap className="h-6 w-6 sm:h-8 sm:w-8 text-orange-600" />
