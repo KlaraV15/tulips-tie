@@ -28,7 +28,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-300 via-red-300 to-red-300">
       {/* Navigation */}
-      <nav className="border-b border-red-200 bg-white/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
+      <nav className="border-b-4 border-red-200 bg-white/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <div className="relative">
@@ -277,7 +277,7 @@ export default function HomePage() {
 
         <div className="max-w-4xl mx-auto relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black mb-4 bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl font-black mb-4  px-1 py-2 bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent">
               How To Play
             </h2>
             <p className="text-gray-700 text-lg font-medium">Simple rules, maximum excitement!</p>
