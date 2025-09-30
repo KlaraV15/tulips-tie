@@ -9,6 +9,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\DifficultyController;
 use App\Http\Controllers\AuthController;
+use \App\Http\Controllers\QuestionsController;
 
 // ---------------------------
 // AUTH ROUTES (PUBLIC)
@@ -19,7 +20,7 @@ Route::post('login', [AuthController::class, 'login']);
 // ---------------------------
 // PROTECTED ROUTES (AUTH REQUIRED)
 // ---------------------------
-Route::middleware('auth:sanctum')->group(function () {
+//Route::middleware('auth:sanctum')->group(function () {
 
     // User profile
     Route::get('user', [UserController::class, 'profile']);
@@ -40,7 +41,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Fetch user results
     Route::get('users/{user}/results', [ResultController::class, 'userResults']);
-});
+//});
 
 // ---------------------------
 // PUBLIC ROUTES
@@ -57,3 +58,6 @@ Route::get('quizzes/{quiz}/questions', [QuestionController::class, 'index']);
 Route::get('categories', [CategoryController::class, 'index']);
 Route::get('countries', [CountryController::class, 'index']);
 Route::get('difficulties', [DifficultyController::class, 'index']);
+
+
+Route::get('questions', [QuestionsController::class, 'index']);
