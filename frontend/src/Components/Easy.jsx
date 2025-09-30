@@ -97,7 +97,6 @@ export default function Easy() {
   const [selectedAnswer, setSelectedAnswer] = useState(null)
   const [lives, setLives] = useState(3)
   const [score, setScore] = useState(0)
-  const [timeLeft, setTimeLeft] = useState(20)
   const [quizStarted, setQuizStarted] = useState(false)
   const [showResult, setShowResult] = useState(false)
 
@@ -126,37 +125,7 @@ export default function Easy() {
       setShowResult(true)
     }
   }
-
-  useEffect(() => {
-    if (!quizStarted || showResult) return;
-    setTimeLeft(20);
   
-  }, [currentQuestion, quizStarted, showResult]);
-  
-  useEffect(() => {
-    if (!quizStarted || showResult) return;
-  
-    if (timeLeft === 0) {
-      if (lives <= 1 || currentQuestion === mockQuestions.length - 1) {
-        setLives(prev => prev - 1);
-        setShowResult(true);
-      } else {
-        setLives(prev => prev - 1);
-        setCurrentQuestion(currentQuestion + 1);
-        setTimeLeft(20);
-      }
-      return;
-    }
-  
-    const timer = setInterval(() => {
-      setTimeLeft(prev => prev - 1);
-    }, 1000);
-  
-    return () => clearInterval(timer);
-  }, [timeLeft, quizStarted, showResult, currentQuestion, lives]);
-  
-  
-
   useEffect(() => {
     if (lives <= 0) {
       setShowResult(true);
@@ -221,8 +190,7 @@ export default function Easy() {
                 </div>
                 <div className="text-center p-4 bg-chart-3/10 rounded-lg border border-chart-3/20">
                   <Clock className="h-8 w-8 text-chart-3 mx-auto mb-2" />
-                  <p className="font-semibold">20 Seconds</p>
-                  <p className="text-sm text-muted-foreground">Per question</p>
+                  <p className="font-semibold">Unlimited time</p>
                 </div>
               </div>
 
@@ -328,10 +296,6 @@ export default function Easy() {
               Exit Quiz
             </Link>
             <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <Clock className="h-4 w-4 text-chart-3" />
-                <span className="font-mono text-lg font-bold text-chart-3">{timeLeft}s</span>
-              </div>
               <div className="flex items-center space-x-1">
                 {[...Array(3)].map((_, i) => (
                   <Heart
