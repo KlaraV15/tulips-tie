@@ -147,8 +147,8 @@ function LeaderboardTable({ data, title }) {
                         <div
                             key={player.username}
                             className={`flex items-center justify-between p-6 rounded-2xl border-2 transition-all duration-300 hover:scale-105 hover:shadow-xl ${index < 3
-                                    ? "bg-gradient-to-r from-yellow-100 to-orange-100 border-yellow-400 shadow-lg animate-glow"
-                                    : "bg-white border-purple-300 hover:border-purple-500 hover:bg-purple-50"
+                                ? "bg-gradient-to-r from-yellow-100 to-orange-100 border-yellow-400 shadow-lg animate-glow"
+                                : "bg-white border-purple-300 hover:border-purple-500 hover:bg-purple-50"
                                 }`}
                         >
                             <div className="flex items-center space-x-6">
@@ -360,7 +360,7 @@ export default function LeaderboardPage() {
                     <div className="grid md:grid-cols-2 gap-8">
                         <Card className="bg-white border-4 border-red-300 shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 card-3d">
                             <CardHeader className="bg-gradient-to-r from-red-500 to-red-600 text-white rounded-t-lg">
-                                <CardTitle className="flex items-center justify-center space-x-3 text-2xl font-black">
+                                <CardTitle id="Cro" className="flex items-center justify-center space-x-3 text-2xl font-black">
                                     <span className="text-3xl animate-bounce">🇭🇷</span>
                                     <span>Croatia Champions</span>
                                 </CardTitle>
