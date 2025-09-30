@@ -221,7 +221,7 @@ export default function Medium() {
                 </div>
                 <div className="text-center p-4 bg-chart-3/10 rounded-lg border border-chart-3/20">
                   <Clock className="h-8 w-8 text-chart-3 mx-auto mb-2" />
-                  <p className="font-semibold">20 Seconds</p>
+                  <p className="font-semibold">30 Seconds</p>
                   <p className="text-sm text-muted-foreground">Per question</p>
                 </div>
               </div>
