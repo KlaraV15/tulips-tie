@@ -30,8 +30,8 @@ const mockQuestions = [
     id: 3,
     country: "Croatia",
     question: "Which national park in Croatia is famous for its cascading lakes and waterfalls?",
-    options: ["Krka", "Plitvice Lakes", "Paklenica", "Mljet"],
-    correctAnswer: 1,
+    options: ["Plitvice Lakes", "Krka", "Paklenica", "Mljet"],
+    correctAnswer: 0,
     difficulty: "Medium",
   },
   {
@@ -54,22 +54,22 @@ const mockQuestions = [
     id: 6,
     country: "Netherlands",
     question: "Which city in the Netherlands is the seat of the Dutch government, though not the capital?",
-    options: ["The Hague", "Amsterdam", "Rotterdam", "Utrecht"],
-    correctAnswer: 0,
+    options: ["Amsterdam", "Rotterdam", "The Hague", "Utrecht"],
+    correctAnswer: 2,
     difficulty: "Medium",
   },
   {
     id: 7,
     country: "Croatia",
     question: "Which Croatian city hosts the famous summer film festival?",
-    options: ["Zadar", "Rijeka", "Zagreb", "Pula"],
-    correctAnswer: 3,
+    options: ["Pula", "Zadar", "Rijeka", "Zadar"],
+    correctAnswer: 0,
     difficulty: "Medium",
   },
   {
     id: 8,
     country: "Netherlands",
-    question: "What is the main flower celebrated during the annual Keukenhof  festival in the Netherlands?",
+    question: "What is the main flower celebrated during the annual Keukenhof festival in the Netherlands?",
     options: ["Rose", "Tulip", "Lily", "Sunflower"],
     correctAnswer: 1,
     difficulty: "Medium",
@@ -85,7 +85,7 @@ const mockQuestions = [
   {
     id: 10,
     country: "Netherlands",
-    question: "Which Dutch painter is famous for “The Starry Night” and “Sunflowers”?",
+    question: "Which Dutch painter is famous for The Starry Night and Sunflowers?",
     options: ["Rembrandt", "Van Gogh", "Vermeer", "Mondrian"],
     correctAnswer: 1,
     difficulty: "Medium",
@@ -97,8 +97,8 @@ export default function Medium() {
   const [selectedAnswer, setSelectedAnswer] = useState(null)
   const [lives, setLives] = useState(3)
   const [score, setScore] = useState(0)
-  const [timeLeft, setTimeLeft] = useState(30)
-  const [quizStarted, setQuizStarted] = useState(false)
+  const [timeLeft, setTimeLeft] = useState(20)
+  const [quizStarted, setQuizStarted] = useState(true) // Changed to true to start immediately
   const [showResult, setShowResult] = useState(false)
   const [isTransitioning, setIsTransitioning] = useState(true)
 
@@ -134,8 +134,7 @@ export default function Medium() {
 
   useEffect(() => {
     if (!quizStarted || showResult) return;
-    setTimeLeft(30);
-  
+    setTimeLeft(20);
   }, [currentQuestion, quizStarted, showResult]);
   
   useEffect(() => {
@@ -148,7 +147,7 @@ export default function Medium() {
       } else {
         setLives(prev => prev - 1);
         setCurrentQuestion(currentQuestion + 1);
-        setTimeLeft(30);
+        setTimeLeft(20);
       }
       return;
     }
@@ -174,54 +173,8 @@ export default function Medium() {
           <div className="animate-bounce mb-8">
             <Zap className="h-24 w-24 mx-auto" />
           </div>
-        </div>
-
-        <div className="container mx-auto px-4 py-20 flex items-center justify-center">
-          <Card className="max-w-2xl w-full bg-card border-border glow-effect">
-            <CardHeader className="text-center">
-              <div className="flex items-center justify-center mb-4">
-                <div className="flex space-x-2">
-                  <div className="w-8 h-5 bg-red-500 rounded-sm"></div>
-                  <div className="w-1 h-5 bg-white rounded-sm"></div>
-                  <div className="w-8 h-5 bg-blue-500 rounded-sm"></div>
-                </div>
-                <span className="mx-4 text-2xl">🇭🇷</span>
-                <div className="flex space-x-2">
-                  <div className="w-8 h-5 bg-red-500 rounded-sm"></div>
-                  <div className="w-8 h-5 bg-white rounded-sm"></div>
-                  <div className="w-8 h-5 bg-blue-500 rounded-sm"></div>
-                </div>
-                <span className="mx-4 text-2xl">🇳🇱</span>
-              </div>
-              <CardTitle className="text-3xl font-bold mb-4">Ready to Start?</CardTitle>
-              <CardDescription className="text-lg">
-                Test your knowledge about Croatia and the Netherlands with 10 challenging questions
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="grid md:grid-cols-3 gap-4">
-                <div className="text-center p-4 bg-primary/10 rounded-lg border border-primary/20">
-                  <Heart className="h-8 w-8 text-primary mx-auto mb-2" />
-                  <p className="font-semibold">3 Lives</p>
-                  <p className="text-sm text-muted-foreground">Lose one per wrong answer</p>
-                </div>
-                <div className="text-center p-4 bg-accent/10 rounded-lg border border-accent/20">
-                  <Trophy className="h-8 w-8 text-accent mx-auto mb-2" />
-                  <p className="font-semibold">15 Points</p>
-                  <p className="text-sm text-muted-foreground">Per correct answer</p>
-                </div>
-                <div className="text-center p-4 bg-chart-3/10 rounded-lg border border-chart-3/20">
-                  <Clock className="h-8 w-8 text-chart-3 mx-auto mb-2" />
-                  <p className="font-semibold">20 Seconds</p>
-                  <p className="text-sm text-muted-foreground">Per question</p>
-                </div>
-              </div>
-
-              <Button onClick={handleStartQuiz} className="w-full glow-effect text-lg py-6">
-                Start Quiz
-              </Button>
-            </CardContent>
-          </Card>
+          <h1 className="text-5xl font-black mb-4">Starting Medium Quiz!</h1>
+          <p className="text-xl font-bold">Get ready for a real challenge! ⚡</p>
         </div>
       </div>
     )

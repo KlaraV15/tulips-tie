@@ -97,8 +97,8 @@ export default function Hard() {
   const [selectedAnswer, setSelectedAnswer] = useState(null)
   const [lives, setLives] = useState(3)
   const [score, setScore] = useState(0)
-  const [timeLeft, setTimeLeft] = useState(15)
-  const [quizStarted, setQuizStarted] = useState(false)
+  const [timeLeft, setTimeLeft] = useState(20)
+  const [quizStarted, setQuizStarted] = useState(true) // Changed to true to start immediately
   const [showResult, setShowResult] = useState(false)
   const [isTransitioning, setIsTransitioning] = useState(true)
 
