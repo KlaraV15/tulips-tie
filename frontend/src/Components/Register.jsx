@@ -1,12 +1,15 @@
+import { useState } from "react"
 import { Link } from "react-router-dom"
 import { Button } from "../Components/ui/Button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../Components/ui/Card"
 import { Input } from "../Components/ui/Input"
 import { Label } from "../Components/ui/Label"
-import { Mail, Lock, User, ArrowLeft } from "lucide-react"
+import { Mail, Lock, User, ArrowLeft, Menu, X } from "lucide-react"
 import logo from '../assets/logo-rose.png'
 
 export default function Register() {
+  const [menuOpen, setMenuOpen] = useState(false)
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-300 via-red-300 to-red-300">
       {/* Navbar */}
@@ -22,14 +25,15 @@ export default function Register() {
             </span>
           </Link>
 
-          <div className="flex items-center gap-5">
+          {/* Desktop buttons */}
+          <div className="hidden md:flex items-center gap-5">
             <Link to="/login">
               <Button
                 variant="outline"
                 className="px-7 py-3 text-lg text-red-600 border-2 border-red-400 
                   hover:bg-red-50 hover:text-red-700 hover:border-red-500 
                   font-semibold rounded-2xl transition-all duration-300 ease-out
-                  shadow-sm hover:shadow-md"
+                  shadow-sm hover:shadow-md cursor-pointer"
               >
                 Login
               </Button>
@@ -43,12 +47,49 @@ export default function Register() {
                   border border-rose-500
                   transition-all duration-300 ease-out
                   transform hover:scale-110 hover:brightness-110
-                  focus:ring-4 focus:ring-rose-400"
+                  focus:ring-4 focus:ring-rose-400 cursor-pointer"
               >
                 🌸 Get Started
               </Button>
             </Link>
           </div>
+
+          {/* Mobile hamburger */}
+          <button
+            className="md:hidden text-red-600 focus:outline-none"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
+
+        {/* Mobile dropdown */}
+        <div
+          className={`md:hidden flex flex-col gap-4 px-4 pb-4 bg-white/90 border-t border-red-200 overflow-hidden transition-all duration-500 ease-in-out 
+            ${menuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}
+        >
+          <Link to="/login" onClick={() => setMenuOpen(false)}>
+            <Button
+              variant="outline"
+              className="w-full py-3 text-red-600 border-2 border-red-400 
+                hover:bg-red-50 hover:text-red-700 hover:border-red-500 
+                font-semibold rounded-xl transition-all"
+            >
+              Login
+            </Button>
+          </Link>
+          <Link to="/register" onClick={() => setMenuOpen(false)}>
+            <Button
+              className="w-full py-3 font-semibold text-white 
+                bg-gradient-to-r from-rose-600 via-rose-500 to-rose-600
+                hover:from-rose-700 hover:via-rose-600 hover:to-rose-700
+                rounded-xl shadow-lg hover:shadow-xl
+                border border-rose-500
+                transition-all"
+            >
+              🌸 Get Started
+            </Button>
+          </Link>
         </div>
       </nav>
 
@@ -137,7 +178,7 @@ export default function Register() {
 
                 {/* Terms */}
                 <div className="flex items-center space-x-2">
-                  <input type="checkbox" id="terms" className="w-5 h-5 rounded border-gray-300 text-red-600 focus:ring-red-400"  required  />
+                  <input type="checkbox" id="terms" className="w-5 h-5 rounded border-gray-300 text-red-600 focus:ring-red-400" required />
                   <Label htmlFor="terms" className="text-sm text-gray-700">
                     I agree to the{" "}
                     <Link to="/terms" className="text-red-600 font-semibold hover:underline">

@@ -1,52 +1,27 @@
-import { useState } from "react"
+import { useState, createContext, useContext } from "react"
+
+const TabsContext = createContext()
 
 export function Tabs({ defaultValue, children }) {
     const [activeTab, setActiveTab] = useState(defaultValue)
 
-    const childrenWithProps = Array.isArray(children)
-        ? children.map(child => {
-            if (child && child.props) {
-                return {
-                    ...child,
-                    props: {
-                        ...child.props,
-                        activeTab,
-                        setActiveTab
-                    }
-                }
-            }
-            return child
-        })
-        : children
-
-    return <div>{childrenWithProps}</div>
+    return (
+        <TabsContext.Provider value={{ activeTab, setActiveTab }}>
+            <div>{children}</div>
+        </TabsContext.Provider>
+    )
 }
 
-export function TabsList({ children, activeTab, setActiveTab, className = "" }) {
-    const childrenWithProps = Array.isArray(children)
-        ? children.map(child => {
-            if (child && child.props) {
-                return {
-                    ...child,
-                    props: {
-                        ...child.props,
-                        activeTab,
-                        setActiveTab
-                    }
-                }
-            }
-            return child
-        })
-        : children
-
+export function TabsList({ children, className = "" }) {
     return (
         <div className={`flex space-x-1 rounded-lg bg-gray-100 p-1 ${className}`}>
-            {childrenWithProps}
+            {children}
         </div>
     )
 }
 
-export function TabsTrigger({ value, children, activeTab, setActiveTab, className = "" }) {
+export function TabsTrigger({ value, children, className = "" }) {
+    const { activeTab, setActiveTab } = useContext(TabsContext)
     const isActive = activeTab === value
 
     return (
@@ -60,7 +35,9 @@ export function TabsTrigger({ value, children, activeTab, setActiveTab, classNam
     )
 }
 
-export function TabsContent({ value, children, activeTab, className = "" }) {
+export function TabsContent({ value, children, className = "" }) {
+    const { activeTab } = useContext(TabsContext)
+
     if (activeTab !== value) return null
 
     return <div className={className}>{children}</div>
