@@ -25,6 +25,7 @@ Route::post('login', [AuthController::class, 'login']);
     // User profile
     Route::get('user', [UserController::class, 'profile']);
     Route::post('logout', [UserController::class, 'logout']);
+    Route::post('resetpassword', [AuthController::class, 'resetPassword']);
 
     // Quiz CRUD
     Route::post('quizzes', [QuizController::class, 'store']);
