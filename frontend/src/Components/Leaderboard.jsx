@@ -163,10 +163,10 @@ function LeaderboardTable({ data, title }) {
                                 />
                                 <div className="min-w-0 flex-1">
                                     <div className="flex items-center space-x-2 sm:space-x-3 flex-wrap">
+                                        <span className="text-lg sm:text-xl lg:text-2xl animate-bounce flex-shrink-0">{getCountryFlag(player.country)}</span>
                                         <p className="font-black text-sm sm:text-base lg:text-xl bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent truncate">
                                             {player.username}
                                         </p>
-                                        <span className="text-lg sm:text-xl lg:text-2xl animate-bounce flex-shrink-0">{getCountryFlag(player.country)}</span>
                                         {index < 3 && (
                                             <Badge className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white font-bold animate-pulse text-xs sm:text-sm">
                                                 🌟 TOP 3
@@ -354,7 +354,7 @@ export default function LeaderboardPage() {
 
                 {/* Country Breakdown */}
                 <div className="mt-12 sm:mt-20">
-                    <h2 className="text-xl sm:text-3xl lg:text-4xl font-black text-center mb-8 sm:mb-12 bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent">
+                    <h2 className="text-xl sm:text-3xl lg:text-4xl font-black text-center mb-8  py-3 sm:mb-12 bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent">
                         🌍 Country Performance Battle
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
@@ -454,7 +454,7 @@ export default function LeaderboardPage() {
                             <div className="flex justify-center mb-4 sm:mb-6">
                                 <Trophy className="h-12 w-12 sm:h-20 sm:w-20 text-yellow-500 animate-spin" />
                             </div>
-                            <h3 className="text-xl sm:text-3xl lg:text-4xl font-black mb-4 sm:mb-6 bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent">
+                            <h3 className="text-xl sm:text-3xl lg:text-4xl font-black mb-4 sm:mb-6  py-3  bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent">
                                 🚀 Ready to Climb the Ranks?
                             </h3>
                             <p className="text-sm sm:text-xl font-bold text-gray-700 mb-6 sm:mb-8 max-w-2xl mx-auto px-2">
