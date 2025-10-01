@@ -3,10 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Question;
-use App\Models\Quiz;
-use App\Models\Country;
-use App\Models\Category;
-use App\Models\Difficulty;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class QuestionFactory extends Factory
@@ -16,11 +12,10 @@ class QuestionFactory extends Factory
     public function definition(): array
     {
         return [
-            'quiz_id' => Quiz::factory(),
-            'text' => $this->faker->sentence(),
-            'country_id' => Country::factory(),
-            'category_id' => Category::factory(),
-            'difficulty_id' => Difficulty::factory(),
+            'text' => $this->faker->sentence(10), // or ->sentence(10)
+            'country_id' => 1,   // will be overridden in seeder
+            'category_id' => 1,  // will be overridden in seeder
+            'difficulty_id' => 1, // will be overridden in seeder
         ];
     }
 }

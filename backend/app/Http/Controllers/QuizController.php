@@ -10,7 +10,7 @@ class QuizController extends Controller
     // List all quizzes
     public function index()
     {
-        return response()->json(Quiz::with('creator')->get());
+        return response()->json(Quiz::with('creator')->withCount('questions')->get());
     }
 
     // Show single quiz

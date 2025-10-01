@@ -9,10 +9,10 @@ class DifficultiesSeeder extends Seeder
 {
     public function run(): void
     {
-        Difficulty::insert([
-            ['level' => 'easy'],
-            ['level' => 'medium'],
-            ['level' => 'hard'],
-        ]);
+        $levels = ['Easy', 'Medium', 'Hard'];
+
+        foreach ($levels as $level) {
+            Difficulty::firstOrCreate(['level' => $level]);
+        }
     }
 }
