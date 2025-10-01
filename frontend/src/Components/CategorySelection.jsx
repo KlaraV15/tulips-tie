@@ -143,7 +143,7 @@ export default function CategorySelection({ onSelectCategory, onBack }) {
                     <div className="flex items-center justify-center mb-4 sm:mb-6">
                         <div className="relative">
                             <Trophy className="h-12 w-12 sm:h-20 sm:w-20 text-yellow-500 animate-bounce" />
-                            <div className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 w-4 h-4 sm:w-6 sm:h-6 bg-red-500 rounded-full animate-ping"></div>
+                            {/* <div className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 w-4 h-4 sm:w-6 sm:h-6 bg-red-500 rounded-full animate-ping"></div> */}
                         </div>
                     </div>
                     <div className="bg-gradient-to-r from-red-500 to-blue-500 text-white border-0 text-sm sm:text-lg font-bold py-2 sm:py-3 px-4 sm:px-6 rounded-full inline-block mb-4 sm:mb-6 animate-bounce shadow-xl whitespace-nowrap overflow-hidden">
