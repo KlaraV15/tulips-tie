@@ -130,7 +130,7 @@ export default function CategorySelection({ onSelectCategory, onBack }) {
                     <div className="flex items-center space-x-2">
                         <Link to="/leaderboard">
                             <Button className="bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-bold px-3 sm:px-6 py-1 sm:py-3 rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-2 border-blue-400 text-xs sm:text-base whitespace-nowrap cursor-pointer">
-                                🏆 Leaders
+                                🏆 <div className="hidden-mobile">Leaders</div>
                             </Button>
                         </Link>
                     </div>
