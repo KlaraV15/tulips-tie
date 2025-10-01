@@ -104,15 +104,13 @@ const QuestionsCard = memo(function QuestionsCard() {
   }
 
   const filteredQuestions = questions.filter((q) => {
-    const matchesSearch =
-      searchTerm === '' || q.text.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCountry = filterCountry === 'all' || q.country === filterCountry;
-    const matchesDifficulty = filterDifficulty === 'all' || q.difficulty === filterDifficulty;
-    const matchesCategory = filterCategory === 'all' || q.category === filterCategory;
-    return matchesSearch && matchesCountry && matchesDifficulty;
-  });
+    const matchesSearch = searchTerm === '' || q.text.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCountry = filterCountry === 'all' || String(q.country?.id) === String(filterCountry);
+    const matchesDifficulty = filterDifficulty === 'all' || String(q.difficulty?.id) === String(filterDifficulty);
+    const matchesCategory = filterCategory === 'all' || String(q.category?.id) === String(filterCategory);
 
-  console.log('filteredQuestions: ', filteredQuestions)
+    return matchesSearch && matchesCountry && matchesDifficulty && matchesCategory;
+  });
 
   return (
     <>
@@ -220,7 +218,7 @@ const QuestionsCard = memo(function QuestionsCard() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div>
+          <div className="flex flex-col gap-3.5">
             {filteredQuestions.map((question) => (
               <div
                 key={question.id}
