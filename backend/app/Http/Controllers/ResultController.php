@@ -8,6 +8,21 @@ use App\Models\Quiz;
 
 class ResultController extends Controller
 {
+
+    public function index() {
+       // 'results?user=12'
+
+
+
+    }
+
+    public function show() {
+
+    }
+
+
+
+
     // Submit a result for a quiz
     public function store(Request $request, Quiz $quiz)
     {
@@ -23,6 +38,7 @@ class ResultController extends Controller
 
         return response()->json($result, 201);
     }
+
 
     // Get results for a user
     public function userResults($userId)
