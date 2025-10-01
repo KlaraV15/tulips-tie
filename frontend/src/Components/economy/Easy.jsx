@@ -10,7 +10,7 @@ import { Heart, Clock, Trophy, ArrowLeft, Flag, Zap } from "lucide-react"
 
 // Mock quiz data
 const mockQuestions = [
-  {
+    {
     id: 1,
     country: "Croatia",
     question: "Which currency has Croatia used since 2023?",
@@ -29,56 +29,56 @@ const mockQuestions = [
   {
     id: 3,
     country: "Croatia",
-    question: "Which sector is important for the Croatian economy?",
-    options: ["Tourism", "Car industry", "Electronics", "Aviation"],
+    question: "Which sector is most important for Croatia’s economy?",
+    options: ["Tourism", "Car industry", "Electronics", "Mining"],
     correctAnswer: 0,
     difficulty: "Easy",
   },
   {
     id: 4,
     country: "Netherlands",
-    question: "Which export product is the Netherlands famous for worldwide?",
-    options: ["Tulips", "Cars", "Olive oil", "Coffee"],
+    question: "The Netherlands is one of the largest exporters of which product?",
+    options: ["Tulips", "Coffee", "Tea", "Cocoa"],
     correctAnswer: 0,
     difficulty: "Easy",
   },
   {
     id: 5,
     country: "Croatia",
-    question: "What is an important export product of Croatia?",
-    options: ["Wine", "Cheese", "Bananas", "Coffee"],
+    question: "Which product is a key export of Croatia?",
+    options: ["Wine", "Bananas", "Rice", "Electronics"],
     correctAnswer: 0,
     difficulty: "Easy",
   },
   {
     id: 6,
     country: "Netherlands",
-    question: "What is the Amsterdam Stock Exchange known for worldwide?",
-    options: ["First stock exchange", "Largest oil market", "Coffee trade", "Crypto market"],
+    question: "Which city hosts the world’s first stock exchange?",
+    options: ["Amsterdam", "London", "Paris", "Berlin"],
     correctAnswer: 0,
     difficulty: "Easy",
   },
   {
     id: 7,
     country: "Croatia",
-    question: "Which sea plays a major role in Croatia's trade?",
-    options: ["Adriatic Sea", "North Sea", "Mediterranean Sea", "Baltic Sea"],
+    question: "Which sea is vital for Croatia’s economy?",
+    options: ["Adriatic Sea", "North Sea", "Baltic Sea", "Black Sea"],
     correctAnswer: 0,
     difficulty: "Easy",
   },
   {
     id: 8,
     country: "Netherlands",
-    question: "Which sector contributes strongly to Dutch exports?",
-    options: ["Agriculture", "Space industry", "Mining", "Car industry"],
+    question: "Which sector is crucial for Dutch exports?",
+    options: ["Agriculture", "Fishing", "Mining", "Cars"],
     correctAnswer: 0,
     difficulty: "Easy",
   },
   {
     id: 9,
     country: "Croatia",
-    question: "Which city is an important economic center in Croatia?",
-    options: ["Zagreb", "Dubrovnik", "Split", "Rijeka"],
+    question: "Which city is Croatia’s main financial center?",
+    options: ["Zagreb", "Split", "Dubrovnik", "Rijeka"],
     correctAnswer: 0,
     difficulty: "Easy",
   },
@@ -86,10 +86,10 @@ const mockQuestions = [
     id: 10,
     country: "Netherlands",
     question: "Which port is the largest in Europe?",
-    options: ["Rotterdam", "Amsterdam", "Antwerp", "Hamburg"],
+    options: ["Rotterdam", "Antwerp", "Hamburg", "Amsterdam"],
     correctAnswer: 0,
     difficulty: "Easy",
-  }
+  },
 ]
 
 

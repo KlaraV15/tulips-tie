@@ -102,7 +102,7 @@ export default function CategorySelection({ onSelectCategory, onBack }) {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-cyan-300 via-red-300 to-red-300 overflow-x-hidden">
+        <div className="min-h-screen bg-gradient-to-br from-cyan-300 via-red-300 to-red-300">
             {/* Floating decorative elements */}
             <div className="fixed top-10 sm:top-20 left-4 sm:left-10 w-10 h-10 sm:w-20 sm:h-20 bg-yellow-300 rounded-full opacity-20 animate-float"></div>
             <div className="fixed bottom-16 sm:bottom-32 right-8 sm:right-20 w-8 h-8 sm:w-16 sm:h-16 bg-green-300 rounded-full opacity-20 animate-pulse"></div>
@@ -130,7 +130,7 @@ export default function CategorySelection({ onSelectCategory, onBack }) {
                     <div className="flex items-center space-x-2">
                         <Link to="/leaderboard">
                             <Button className="bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-bold px-3 sm:px-6 py-1 sm:py-3 rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-2 border-blue-400 text-xs sm:text-base whitespace-nowrap cursor-pointer">
-                                🏆 Leaders
+                                🏆 <div className="hidden-mobile">Leaders</div>
                             </Button>
                         </Link>
                     </div>
@@ -143,7 +143,7 @@ export default function CategorySelection({ onSelectCategory, onBack }) {
                     <div className="flex items-center justify-center mb-4 sm:mb-6">
                         <div className="relative">
                             <Trophy className="h-12 w-12 sm:h-20 sm:w-20 text-yellow-500 animate-bounce" />
-                            <div className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 w-4 h-4 sm:w-6 sm:h-6 bg-red-500 rounded-full animate-ping"></div>
+                            {/* <div className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 w-4 h-4 sm:w-6 sm:h-6 bg-red-500 rounded-full animate-ping"></div> */}
                         </div>
                     </div>
                     <div className="bg-gradient-to-r from-red-500 to-blue-500 text-white border-0 text-sm sm:text-lg font-bold py-2 sm:py-3 px-4 sm:px-6 rounded-full inline-block mb-4 sm:mb-6 animate-bounce shadow-xl whitespace-nowrap overflow-hidden">
