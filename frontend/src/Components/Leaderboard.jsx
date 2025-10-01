@@ -6,6 +6,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "../Components/Tabs"
 import { Badge } from "../Components/ui/Badge"
 import { Trophy, Medal, Award, Crown, ArrowLeft, Calendar, TrendingUp } from "lucide-react"
 import logo from "../assets/logo-rose.png"
+import { date } from "zod"
 
 const Leaderboard = [
     {
@@ -15,6 +16,7 @@ const Leaderboard = [
         avatar: "/abstract-geometric-shapes.png",
         gamesPlayed: 245,
         accuracy: 98,
+        date: "2025-09-30"
     },
     {
         username: "QuizChampion",
@@ -23,6 +25,7 @@ const Leaderboard = [
         avatar: "/abstract-geometric-shapes.png",
         gamesPlayed: 238,
         accuracy: 95,
+        date: "2025-09-29"
     },
     {
         username: "KnowledgeSeeker",
@@ -31,6 +34,7 @@ const Leaderboard = [
         avatar: "/diverse-group-collaborating.png",
         gamesPlayed: 229,
         accuracy: 92,
+        date: "2025-09-28"
     },
     {
         username: "EuroExpert",
@@ -39,6 +43,7 @@ const Leaderboard = [
         avatar: "/abstract-geometric-shapes.png",
         gamesPlayed: 218,
         accuracy: 89,
+        date: "2025-09-27"
     },
     {
         username: "BalkanBrain",
@@ -47,6 +52,7 @@ const Leaderboard = [
         avatar: "/abstract-geometric-shapes.png",
         gamesPlayed: 205,
         accuracy: 87,
+        date: "2025-09-26"
     },
     {
         username: "DutchDynamo",
@@ -55,6 +61,7 @@ const Leaderboard = [
         avatar: "/abstract-geometric-shapes.png",
         gamesPlayed: 198,
         accuracy: 85,
+        date: "2025-09-25"
     },
     {
         username: "AdriaSage",
@@ -63,6 +70,7 @@ const Leaderboard = [
         avatar: "/abstract-geometric-shapes.png",
         gamesPlayed: 189,
         accuracy: 83,
+        date: "2025-09-24"
     },
     {
         username: "TulipTrivia",
@@ -71,6 +79,7 @@ const Leaderboard = [
         avatar: "/abstract-geometric-shapes.png",
         gamesPlayed: 182,
         accuracy: 81,
+        date: "2025-09-23"
     },
     {
         username: "ZagrebZealot",
@@ -79,6 +88,7 @@ const Leaderboard = [
         avatar: "/abstract-geometric-shapes.png",
         gamesPlayed: 175,
         accuracy: 79,
+        date: "2025-09-22"
     },
     {
         username: "AmsterdamAce",
@@ -87,23 +97,26 @@ const Leaderboard = [
         avatar: "/abstract-geometric-shapes.png",
         gamesPlayed: 168,
         accuracy: 77,
+        date: "2025-09-21"
     },
-]
+];
 
-const globalLeaderboard = Leaderboard.sort((a, b) => b.score - a.score)
 
-const weeklyLeaderboard = globalLeaderboard.slice(0, 5).map((player, index) => ({
-    ...player,
-    rank: index + 1,
-    score: Math.floor(player.score * 0.3),
-}))
 
-const monthlyLeaderboard = globalLeaderboard.slice(0, 8).map((player, index) => ({
-    ...player,
-    rank: index + 1,
-    score: Math.floor(player.score * 0.7),
-}))
 
+// const weeklyLeaderboard = globalLeaderboard.slice(0, 5).map((player, index) => ({
+//     ...player,
+//     rank: index + 1,
+//     score: Math.floor(player.score * 0.3),
+// }))
+
+// const monthlyLeaderboard = globalLeaderboard.slice(0, 8).map((player, index) => ({
+//     ...player,
+//     rank: index + 1,
+//     score: Math.floor(player.score * 0.7),
+// }))
+
+const globalLeaderboard = Leaderboard;
 function getRankIcon(rank) {
     switch (rank) {
         case 1:
@@ -121,10 +134,58 @@ function getRankIcon(rank) {
     }
 }
 
+function isThisWeek(dateStr) {
+    const now = new Date();
+    const inputDate = new Date(dateStr);
+
+    const firstDayOfWeek = new Date(now);
+    firstDayOfWeek.setDate(now.getDate() - now.getDay()); // Sunday
+
+    const lastDayOfWeek = new Date(firstDayOfWeek);
+    lastDayOfWeek.setDate(firstDayOfWeek.getDate() + 6); // Saturday
+
+    return inputDate >= firstDayOfWeek && inputDate <= lastDayOfWeek;
+}
+
+// Utility to check if a date is in the current month
+function isThisMonth(dateStr) {
+    const now = new Date();
+    const inputDate = new Date(dateStr);
+    return (
+        inputDate.getFullYear() === now.getFullYear() &&
+        inputDate.getMonth() === now.getMonth()
+    );
+}
+
+// Filter and sort the weekly leaderboard
+const weeklyLeaderboard = globalLeaderboard
+    .filter(player => isThisWeek(player.date))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 5)
+    .map((player, index) => ({
+        ...player,
+        rank: index + 1
+    }));
+
+// Filter and sort the monthly leaderboard
+const monthlyLeaderboard = globalLeaderboard
+    .filter(player => isThisMonth(player.date))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 8)
+    .map((player, index) => ({
+        ...player,
+        rank: index + 1
+    }));
+
+console.log("Weekly Leaderboard:", weeklyLeaderboard);
+console.log("Monthly Leaderboard:", monthlyLeaderboard);
+
 function getCountryFlag(country) {
     return country === "Croatia" ? "🇭🇷" : "🇳🇱"
 }
+function WeeklyLead() {
 
+}
 function LeaderboardTable({ data, title }) {
     return (
         <Card className="bg-white border-2 sm:border-4 border-gradient-to-r from-red-300 to-blue-300 shadow-xl sm:shadow-2xl hover:shadow-2xl sm:hover:shadow-3xl transition-all duration-300 hover:scale-105 card-3d py-0">
@@ -321,13 +382,13 @@ export default function LeaderboardPage() {
                             <TabsTrigger
                                 value="weekly"
                                 className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-red-500 data-[state=active]:to-red-600 data-[state=active]:text-white text-gray-700 font-bold text-xs sm:text-base lg:text-lg py-2 sm:py-3 rounded-lg sm:rounded-xl transition-all duration-300 hover:scale-105"
-                            >
+                                onclick="WeeklyLead">
                                 📅 Weekly
                             </TabsTrigger>
                             <TabsTrigger
                                 value="monthly"
                                 className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-red-500 data-[state=active]:to-red-600 data-[state=active]:text-white text-gray-700 font-bold text-xs sm:text-base lg:text-lg py-2 sm:py-3 rounded-lg sm:rounded-xl transition-all duration-300 hover:scale-105"
-                            >
+                                onclick="MonthlyLead">
                                 🗓️ Monthly
                             </TabsTrigger>
                             <TabsTrigger
@@ -341,6 +402,7 @@ export default function LeaderboardPage() {
 
                     <TabsContent value="weekly">
                         <LeaderboardTable data={weeklyLeaderboard} title="🔥 Weekly Champions" />
+
                     </TabsContent>
 
                     <TabsContent value="monthly">

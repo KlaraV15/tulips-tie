@@ -4,25 +4,25 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../Co
 import { Badge } from "../Components/ui/Badge"
 import { Trophy, Users, Brain, Shield, Globe, Star, Zap, Heart, Award } from "lucide-react"
 import logo from '../assets/logo-rose.png'
-import nl1 from '../assets/n1.png'
-import nl2 from '../assets/n2.png'
-import nl3 from '../assets/n3.png'
-import nl4 from '../assets/n4.png'
-import cro1 from '../assets/h1.png'
-import cro2 from '../assets/h2.jpeg'
-import cro3 from '../assets/h3.jpeg'
-import cro4 from '../assets/h4.jpg'
+import illustration1 from '../assets/illustration1.png'
+import illustration3 from '../assets/illustration3.png'
+import illustration4 from '../assets/illustration4.png'
+import illustration5 from '../assets/illustration5.png'
+import illustration6 from '../assets/illustration6.png'
+import illustration7 from '../assets/illustration7.png'
+import illustration8 from '../assets/illustration8.png'
+import illustration9 from '../assets/illustration9.png'
 
 export default function HomePage() {
-  const images = [
-    { src: nl1, country: 'nl', alt: 'Amsterdam Canals' },
-    { src: cro1, country: 'cro', alt: 'Dubrovnik Old Town' },
-    { src: nl2, country: 'nl', alt: 'Tulip Fields' },
-    { src: cro2, country: 'cro', alt: 'Plitvice Lakes' },
-    { src: nl3, country: 'nl', alt: 'Dutch Windmills' },
-    { src: cro3, country: 'cro', alt: 'Hvar Island' },
-    { src: nl4, country: 'nl', alt: 'Rotterdam Architecture' },
-    { src: cro4, country: 'cro', alt: 'Rovinj Colorful Houses' }
+  const illustrations = [
+    { src: illustration1, alt: 'Quiz Challenge Illustration 1' },
+    { src: illustration3, alt: 'Quiz Challenge Illustration 3' },
+    { src: illustration4, alt: 'Quiz Challenge Illustration 4' },
+    { src: illustration5, alt: 'Quiz Challenge Illustration 5' },
+    { src: illustration6, alt: 'Quiz Challenge Illustration 6' },
+    { src: illustration7, alt: 'Quiz Challenge Illustration 7' },
+    { src: illustration8, alt: 'Quiz Challenge Illustration 8' },
+    { src: illustration9, alt: 'Quiz Challenge Illustration 9' }
   ]
 
   return (
@@ -122,40 +122,48 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Image Transition Gallery */}
+          {/* Illustration Gallery - Fixed Animation */}
           <div className="relative h-64 sm:h-80 md:h-96 lg:h-[500px] rounded-xl sm:rounded-3xl overflow-hidden shadow-xl sm:shadow-2xl border-2 sm:border-4 border-white mt-8 lg:mt-0">
-            {images.map((image, index) => (
+            {illustrations.map((illustration, index) => (
               <div
                 key={index}
-                className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === 0 ? 'opacity-100' : 'opacity-0'
-                  }`}
+                className="absolute inset-0"
                 style={{
-                  animation: `slideInOut 8s infinite ${index * 2}s`
+                  animation: `imageCycle ${illustrations.length * 3}s infinite ${index * 3}s`
                 }}
               >
                 <img
-                  src={image.src}
-                  alt={image.alt}
-                  className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
+                  src={illustration.src}
+                  alt={illustration.alt}
+                  className="w-full h-full object-cover"
                 />
-                <div className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4">
-                  <Badge className={
-                    image.country === 'nl'
-                      ? 'bg-gradient-to-r from-red-600 to-orange-500 text-white shadow-lg font-bold text-xs sm:text-sm'
-                      : 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg font-bold text-xs sm:text-sm'
-                  }>
-                    {image.country === 'nl' ? '🇳🇱 Netherlands' : '🇭🇷 Croatia'}
-                  </Badge>
-                </div>
               </div>
             ))}
           </div>
         </div>
 
         <style jsx>{`
-          @keyframes slideInOut {
-            0%, 100% { opacity: 0; transform: scale(1.1); }
-            10%, 90% { opacity: 1; transform: scale(1); }
+          @keyframes imageCycle {
+            0% {
+              opacity: 0;
+              transform: scale(1.1);
+            }
+            5% {
+              opacity: 1;
+              transform: scale(1);
+            }
+            15% {
+              opacity: 1;
+              transform: scale(1);
+            }
+            20% {
+              opacity: 0;
+              transform: scale(1.1);
+            }
+            100% {
+              opacity: 0;
+              transform: scale(1.1);
+            }
           }
           @keyframes slowpulse {
             0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(220, 38, 38, 0.5); }
@@ -167,6 +175,7 @@ export default function HomePage() {
         `}</style>
       </section>
 
+      {/* Rest of your component remains the same */}
       {/* Features Grid - Fixed container */}
       <section className="container mx-auto px-3 sm:px-4 py-12 sm:py-20">
         <div className="text-center mb-12 sm:mb-16">
