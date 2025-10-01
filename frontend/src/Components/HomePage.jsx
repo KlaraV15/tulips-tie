@@ -4,30 +4,25 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../Co
 import { Badge } from "../Components/ui/Badge"
 import { Trophy, Users, Brain, Shield, Globe, Star, Zap, Heart, Award } from "lucide-react"
 import logo from '../assets/logo-rose.png'
-import illustration1 from '../assets/illustration1.png'
-
-import illustration3 from '../assets/illustration3.png'
-import illustration4 from '../assets/illustration4.png'
-import illustration5 from '../assets/illustration5.png'
-import illustration6 from '../assets/illustration6.png'
-import illustration7 from '../assets/illustration7.png'
-import illustration8 from '../assets/illustration8.png'
-import illustration9 from '../assets/illustration9.png'
-import illustration10 from '../assets/illustration10.png'
-
+import nl1 from '../assets/n1.png'
+import nl2 from '../assets/n2.png'
+import nl3 from '../assets/n3.png'
+import nl4 from '../assets/n4.png'
+import cro1 from '../assets/h1.png'
+import cro2 from '../assets/h2.jpeg'
+import cro3 from '../assets/h3.jpeg'
+import cro4 from '../assets/h4.jpg'
 
 export default function HomePage() {
-  const illustrations = [
-    { src: illustration1, alt: 'Quiz Challenge Illustration 1' },
-
-    { src: illustration3, alt: 'Quiz Challenge Illustration 3' },
-    { src: illustration4, alt: 'Quiz Challenge Illustration 4' },
-    { src: illustration5, alt: 'Quiz Challenge Illustration 5' },
-    { src: illustration6, alt: 'Quiz Challenge Illustration 6' },
-    { src: illustration7, alt: 'Quiz Challenge Illustration 7' },
-    { src: illustration8, alt: 'Quiz Challenge Illustration 8' },
-    { src: illustration9, alt: 'Quiz Challenge Illustration 9' },
-    { src: illustration10, alt: 'Quiz Challenge Illustration 10' }
+  const images = [
+    { src: nl1, country: 'nl', alt: 'Amsterdam Canals' },
+    { src: cro1, country: 'cro', alt: 'Dubrovnik Old Town' },
+    { src: nl2, country: 'nl', alt: 'Tulip Fields' },
+    { src: cro2, country: 'cro', alt: 'Plitvice Lakes' },
+    { src: nl3, country: 'nl', alt: 'Dutch Windmills' },
+    { src: cro3, country: 'cro', alt: 'Hvar Island' },
+    { src: nl4, country: 'nl', alt: 'Rotterdam Architecture' },
+    { src: cro4, country: 'cro', alt: 'Rovinj Colorful Houses' }
   ]
 
   return (
@@ -127,10 +122,9 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Illustration Gallery */}
-          <div className="relative h-96 sm:h-[500px] md:h-[600px] lg:h-[600px] rounded-xl sm:rounded-3xl overflow-hidden shadow-xl sm:shadow-2xl border-2 sm:border-4 border-white mt-8 lg:mt-0">
-
-            {illustrations.map((illustration, index) => (
+          {/* Image Transition Gallery */}
+          <div className="relative h-64 sm:h-80 md:h-96 lg:h-[500px] rounded-xl sm:rounded-3xl overflow-hidden shadow-xl sm:shadow-2xl border-2 sm:border-4 border-white mt-8 lg:mt-0">
+            {images.map((image, index) => (
               <div
                 key={index}
                 className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === 0 ? 'opacity-100' : 'opacity-0'
@@ -140,10 +134,19 @@ export default function HomePage() {
                 }}
               >
                 <img
-                  src={illustration.src}
-                  alt={illustration.alt}
+                  src={image.src}
+                  alt={image.alt}
                   className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
                 />
+                <div className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4">
+                  <Badge className={
+                    image.country === 'nl'
+                      ? 'bg-gradient-to-r from-red-600 to-orange-500 text-white shadow-lg font-bold text-xs sm:text-sm'
+                      : 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg font-bold text-xs sm:text-sm'
+                  }>
+                    {image.country === 'nl' ? '🇳🇱 Netherlands' : '🇭🇷 Croatia'}
+                  </Badge>
+                </div>
               </div>
             ))}
           </div>
@@ -164,7 +167,6 @@ export default function HomePage() {
         `}</style>
       </section>
 
-      {/* Rest of your component remains the same */}
       {/* Features Grid - Fixed container */}
       <section className="container mx-auto px-3 sm:px-4 py-12 sm:py-20">
         <div className="text-center mb-12 sm:mb-16">
@@ -401,7 +403,12 @@ export default function HomePage() {
       <footer className="mt-6 sm:mt-8 border-t border-red-200 bg-white/80 backdrop-blur-sm">
         <div className="container mx-auto px-3 sm:px-4 py-6 sm:py-8">
           <div className="flex flex-col md:flex-row items-center justify-between">
-
+            <div className="flex items-center space-x-2 sm:space-x-3 mb-3 md:mb-0">
+              <img src={logo} className="h-6 w-4 sm:h-8 sm:w-6" />
+              <span className="text-sm sm:text-xl font-bold bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent">
+                Tulips & Ties
+              </span>
+            </div>
             <p className="text-gray-600 text-xs sm:text-sm font-medium text-center md:text-right">
               © 2025 Tulips & Ties • The Ultimate Croatia vs Netherlands Quiz Battle!
             </p>
