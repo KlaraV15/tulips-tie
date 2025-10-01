@@ -6,6 +6,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "../Components/Tabs"
 import { Badge } from "../Components/ui/Badge"
 import { Trophy, Medal, Award, Crown, ArrowLeft, Calendar, TrendingUp } from "lucide-react"
 import logo from "../assets/logo-rose.png"
+import { date } from "zod"
 
 const Leaderboard = [
     {
@@ -15,6 +16,7 @@ const Leaderboard = [
         avatar: "/abstract-geometric-shapes.png",
         gamesPlayed: 245,
         accuracy: 98,
+        date: "2025-09-30"
     },
     {
         username: "QuizChampion",
@@ -23,6 +25,7 @@ const Leaderboard = [
         avatar: "/abstract-geometric-shapes.png",
         gamesPlayed: 238,
         accuracy: 95,
+        date: "2025-09-29"
     },
     {
         username: "KnowledgeSeeker",
@@ -31,6 +34,7 @@ const Leaderboard = [
         avatar: "/diverse-group-collaborating.png",
         gamesPlayed: 229,
         accuracy: 92,
+        date: "2025-09-28"
     },
     {
         username: "EuroExpert",
@@ -39,6 +43,7 @@ const Leaderboard = [
         avatar: "/abstract-geometric-shapes.png",
         gamesPlayed: 218,
         accuracy: 89,
+        date: "2025-09-27"
     },
     {
         username: "BalkanBrain",
@@ -47,6 +52,7 @@ const Leaderboard = [
         avatar: "/abstract-geometric-shapes.png",
         gamesPlayed: 205,
         accuracy: 87,
+        date: "2025-09-26"
     },
     {
         username: "DutchDynamo",
@@ -55,6 +61,7 @@ const Leaderboard = [
         avatar: "/abstract-geometric-shapes.png",
         gamesPlayed: 198,
         accuracy: 85,
+        date: "2025-09-25"
     },
     {
         username: "AdriaSage",
@@ -63,6 +70,7 @@ const Leaderboard = [
         avatar: "/abstract-geometric-shapes.png",
         gamesPlayed: 189,
         accuracy: 83,
+        date: "2025-09-24"
     },
     {
         username: "TulipTrivia",
@@ -71,6 +79,7 @@ const Leaderboard = [
         avatar: "/abstract-geometric-shapes.png",
         gamesPlayed: 182,
         accuracy: 81,
+        date: "2025-09-23"
     },
     {
         username: "ZagrebZealot",
@@ -79,6 +88,7 @@ const Leaderboard = [
         avatar: "/abstract-geometric-shapes.png",
         gamesPlayed: 175,
         accuracy: 79,
+        date: "2025-09-22"
     },
     {
         username: "AmsterdamAce",
@@ -87,23 +97,69 @@ const Leaderboard = [
         avatar: "/abstract-geometric-shapes.png",
         gamesPlayed: 168,
         accuracy: 77,
+        date: "2025-09-21"
     },
-]
+];
 
-const globalLeaderboard = Leaderboard.sort((a, b) => b.score - a.score)
 
-const weeklyLeaderboard = globalLeaderboard.slice(0, 5).map((player, index) => ({
-    ...player,
-    rank: index + 1,
-    score: Math.floor(player.score * 0.3),
-}))
 
-const monthlyLeaderboard = globalLeaderboard.slice(0, 8).map((player, index) => ({
-    ...player,
-    rank: index + 1,
-    score: Math.floor(player.score * 0.7),
-}))
+getWeeklyEntries(Leaderboard); // ➡️ only this week's entries
+getMonthlyEntries(Leaderboard); // ➡️ only this month's entries
 
+// Parse a "YYYY-MM-DD" string into a Date object
+function parseDate(dateStr) {
+    return new Date(dateStr + "T00:00:00");
+}
+
+// Return all entries for the current week (Sunday to Saturday)
+function getWeeklyEntries(data) {
+    const today = new Date();
+    const startOfWeek = new Date(today);
+    startOfWeek.setDate(today.getDate() - today.getDay()); // Sunday
+    startOfWeek.setHours(0, 0, 0, 0);
+
+    const endOfWeek = new Date(startOfWeek);
+    endOfWeek.setDate(startOfWeek.getDate() + 6);
+    endOfWeek.setHours(23, 59, 59, 999);
+
+    return data.filter(entry => {
+        const entryDate = parseDate(entry.date);
+        return entryDate >= startOfWeek && entryDate <= endOfWeek;
+    });
+}
+
+// Return all entries for the current month
+function getMonthlyEntries(data) {
+    const today = new Date();
+    const currentMonth = today.getMonth();
+    const currentYear = today.getFullYear();
+
+    return data.filter(entry => {
+        const entryDate = parseDate(entry.date);
+        return (
+            entryDate.getMonth() === currentMonth &&
+            entryDate.getFullYear() === currentYear
+        );
+    });
+}
+
+
+
+// const weeklyLeaderboard = globalLeaderboard.slice(0, 5).map((player, index) => ({
+//     ...player,
+//     rank: index + 1,
+//     score: Math.floor(player.score * 0.3),
+// }))
+
+// const monthlyLeaderboard = globalLeaderboard.slice(0, 8).map((player, index) => ({
+//     ...player,
+//     rank: index + 1,
+//     score: Math.floor(player.score * 0.7),
+// }))
+
+const weeklyLeaderboard = getWeeklyEntries(Leaderboard).sort((a, b) => b.score - a.score);
+const monthlyLeaderboard = getMonthlyEntries(Leaderboard).sort((a, b) => b.score - a.score);
+const globalLeaderboard = Leaderboard;
 function getRankIcon(rank) {
     switch (rank) {
         case 1:
@@ -120,6 +176,7 @@ function getRankIcon(rank) {
             )
     }
 }
+
 
 function getCountryFlag(country) {
     return country === "Croatia" ? "🇭🇷" : "🇳🇱"
@@ -341,6 +398,7 @@ export default function LeaderboardPage() {
 
                     <TabsContent value="weekly">
                         <LeaderboardTable data={weeklyLeaderboard} title="🔥 Weekly Champions" />
+
                     </TabsContent>
 
                     <TabsContent value="monthly">
@@ -360,7 +418,7 @@ export default function LeaderboardPage() {
                     <div className="grid md:grid-cols-2 gap-8">
                         <Card className="bg-white border-4 border-red-300 shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 card-3d">
                             <CardHeader className="bg-gradient-to-r from-red-500 to-red-600 text-white rounded-t-lg">
-                                <CardTitle id="Cro" className="flex items-center justify-center space-x-3 text-2xl font-black">
+                                <CardTitle className="flex items-center justify-center space-x-3 text-2xl font-black">
                                     <span className="text-3xl animate-bounce">🇭🇷</span>
                                     <span>Croatia Champions</span>
                                 </CardTitle>
