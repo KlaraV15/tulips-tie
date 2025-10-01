@@ -102,7 +102,7 @@ export default function CategorySelection({ onSelectCategory, onBack }) {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-cyan-300 via-red-300 to-red-300 overflow-x-hidden">
+        <div className="min-h-screen bg-gradient-to-br from-cyan-300 via-red-300 to-red-300">
             {/* Floating decorative elements */}
             <div className="fixed top-10 sm:top-20 left-4 sm:left-10 w-10 h-10 sm:w-20 sm:h-20 bg-yellow-300 rounded-full opacity-20 animate-float"></div>
             <div className="fixed bottom-16 sm:bottom-32 right-8 sm:right-20 w-8 h-8 sm:w-16 sm:h-16 bg-green-300 rounded-full opacity-20 animate-pulse"></div>
