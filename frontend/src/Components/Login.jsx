@@ -1,27 +1,36 @@
+import { useState } from "react"
 import { Link } from "react-router-dom"
 import { Button } from "../Components/ui/Button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../Components/ui/Card"
 import { Input } from "../Components/ui/Input"
 import { Label } from "../Components/ui/Label"
-import { Mail, Lock, ArrowLeft } from "lucide-react"
+import { Mail, Lock, ArrowLeft, Menu, X } from "lucide-react"
 import logo from '../assets/logo-rose.png'
 
 export default function Login() {
+  const [menuOpen, setMenuOpen] = useState(false)
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-300 via-red-300 to-red-300">
       {/* Navbar */}
       <nav className="border-b border-red-200 bg-white/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+          {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
             <div className="relative">
-              <img src={logo} className="h-12 w-8 text-red-600 transition-transform duration-300 group-hover:scale-110" />
+              <img
+                src={logo}
+                className="h-12 w-8 text-red-600 transition-transform duration-300 group-hover:scale-110"
+              />
               <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
             </div>
             <span className="text-2xl font-bold bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent group-hover:brightness-110">
               Tulips & Ties
             </span>
           </Link>
-          <div className="flex items-center gap-5">
+
+          {/* Desktop links */}
+          <div className="hidden md:flex items-center gap-5">
             <Link to="/login">
               <Button
                 variant="outline"
@@ -48,6 +57,43 @@ export default function Login() {
               </Button>
             </Link>
           </div>
+
+          {/* Mobile menu button */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="md:hidden p-2 rounded-lg hover:bg-red-100 transition"
+          >
+            {menuOpen ? <X className="h-6 w-6 text-red-600" /> : <Menu className="h-6 w-6 text-red-600" />}
+          </button>
+        </div>
+
+        {/* Mobile dropdown with animation */}
+        <div
+          className={`md:hidden flex flex-col gap-4 px-4 pb-4 bg-white/90 border-t border-red-200 overflow-hidden transition-all duration-500 ease-in-out 
+            ${menuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}
+        >
+          <Link to="/login" onClick={() => setMenuOpen(false)}>
+            <Button
+              variant="outline"
+              className="w-full py-3 text-red-600 border-2 border-red-400 
+                hover:bg-red-50 hover:text-red-700 hover:border-red-500 
+                font-semibold rounded-xl transition-all"
+            >
+              Login
+            </Button>
+          </Link>
+          <Link to="/register" onClick={() => setMenuOpen(false)}>
+            <Button
+              className="w-full py-3 font-semibold text-white 
+                bg-gradient-to-r from-rose-600 via-rose-500 to-rose-600
+                hover:from-rose-700 hover:via-rose-600 hover:to-rose-700
+                rounded-xl shadow-lg hover:shadow-xl
+                border border-rose-500
+                transition-all"
+            >
+              🌸 Get Started
+            </Button>
+          </Link>
         </div>
       </nav>
 
