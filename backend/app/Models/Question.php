@@ -17,10 +17,11 @@ class Question extends Model
         'difficulty_id',
     ];
 
-    public function quiz()
+    public function quizzes()
     {
-        return $this->belongsTo(Quiz::class);
+        return $this->belongsToMany(Quiz::class)->withTimestamps();
     }
+
 
     public function country()
     {
