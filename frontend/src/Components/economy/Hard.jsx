@@ -10,86 +10,86 @@ import { Heart, Clock, Trophy, ArrowLeft, Flag, Zap } from "lucide-react"
 
 // Mock quiz data
 const mockQuestions = [
-  {
+{
     id: 1,
-    country: "Croatia",
-    question: "Which Croatian city is home to the oldest public university in Southeast Europe, founded in 1669?",
-    options: ["Zagreb", "Split", "Rijeka", "Osijek"],
-    correctAnswer: 1, // Zagreb
+    country: "Netherlands",
+    question: "Which economic organization was founded in The Hague in 1961?",
+    options: ["OECD", "NATO", "IMF", "EU"],
+    correctAnswer: 0,
     difficulty: "Hard",
   },
   {
     id: 2,
-    country: "Netherlands",
-    question: "Which Dutch philosopher is known for his work 'Ethics' and is considered one of the great rationalists?",
-    options: ["René Descartes", "Baruch Spinoza", "Hugo Grotius", "Erasmus of Rotterdam"],
-    correctAnswer: 2, // Spinoza
+    country: "Croatia",
+    question: "Before adopting the Euro, what was the exchange rate of 1 Euro to the Croatian Kuna (approx.)?",
+    options: ["7.5", "2.5", "15", "5"],
+    correctAnswer: 0,
     difficulty: "Hard",
   },
   {
     id: 3,
-    country: "Croatia",
-    question: "The necktie (cravat) originated from Croatian soldiers. In which century did it become popular in Europe?",
-    options: ["15th century", "16th century", "17th century", "18th century"],
-    correctAnswer: 3, // 17th century
+    country: "Netherlands",
+    question: "Which Dutch bank collapsed during the 2008 financial crisis and was later nationalized?",
+    options: ["ABN AMRO", "ING", "Fortis", "Rabobank"],
+    correctAnswer: 2,
     difficulty: "Hard",
   },
   {
     id: 4,
-    country: "Netherlands",
-    question: "The Netherlands is famous for its painters. Which Dutch artist is known as the 'Prince of Painters' during the Golden Age?",
-    options: ["Rembrandt van Rijn", "Frans Hals", "Johannes Vermeer", "Peter Paul Rubens"],
-    correctAnswer: 2, // Frans Hals
+    country: "Croatia",
+    question: "In which year did Croatia join the European Union?",
+    options: ["2013", "2009", "2015", "2010"],
+    correctAnswer: 0,
     difficulty: "Hard",
   },
   {
     id: 5,
-    country: "Croatia",
-    question: "Which Croatian physicist and inventor developed the first functional parachute in the 17th century?",
-    options: ["Ruđer Bošković", "Faust Vrančić", "Nikola Tesla", "Ivan Lupis"],
-    correctAnswer: 2, // Faust Vrančić
+    country: "Netherlands",
+    question: "Which Dutch city is known as Europe’s ‘Gateway to the World’ due to its port?",
+    options: ["Rotterdam", "Amsterdam", "Eindhoven", "Utrecht"],
+    correctAnswer: 0,
     difficulty: "Hard",
   },
   {
     id: 6,
-    country: "Netherlands",
-    question: "Which Dutch jurist is often called the 'Father of International Law'?",
-    options: ["Hugo Grotius", "Cornelis van Bynkershoek", "Erasmus of Rotterdam", "Dirk Graswinckel"],
-    correctAnswer: 1, // Hugo Grotius
+    country: "Croatia",
+    question: "Which international financial institution supported Croatia during its independence in the 1990s?",
+    options: ["IMF", "World Bank", "ECB", "WTO"],
+    correctAnswer: 0,
     difficulty: "Hard",
   },
   {
     id: 7,
-    country: "Croatia",
-    question: "Which Croatian-born scientist is considered a pioneer of alternating current electricity?",
-    options: ["Nikola Tesla", "Marin Getaldić", "Vladimir Prelog", "Ruđer Bošković"],
-    correctAnswer: 1, // Nikola Tesla
+    country: "Netherlands",
+    question: "Which Dutch region is known for its high-tech economy and companies like ASML?",
+    options: ["Eindhoven/Brainport", "Rotterdam Port", "Amsterdam Zuidas", "The Hague"],
+    correctAnswer: 0,
     difficulty: "Hard",
   },
   {
     id: 8,
-    country: "Netherlands",
-    question: "What is the name of the massive North Sea flood in 1953 that led to the construction of the Delta Works?",
-    options: ["Watersnoodramp", "Zuiderzee Flood", "Scheldt Flood", "Holland Storm"],
-    correctAnswer: 1, // Watersnoodramp
+    country: "Croatia",
+    question: "Which year did Croatia officially apply to join the EU?",
+    options: ["2003", "2007", "2010", "2001"],
+    correctAnswer: 0,
     difficulty: "Hard",
   },
   {
     id: 9,
-    country: "Croatia",
-    question: "Which Croatian island is known as the birthplace of Marco Polo, according to local tradition?",
-    options: ["Hvar", "Vis", "Korčula", "Brač"],
-    correctAnswer: 3, // Korčula
+    country: "Netherlands",
+    question: "Which multinational Dutch company is one of the largest beer producers in the world?",
+    options: ["Heineken", "Amstel", "Bavaria", "Grolsch"],
+    correctAnswer: 0,
     difficulty: "Hard",
   },
   {
     id: 10,
-    country: "Netherlands",
-    question: "Which Dutch city is home to the International Court of Justice?",
-    options: ["Amsterdam", "Rotterdam", "The Hague", "Utrecht"],
-    correctAnswer: 3, // The Hague
+    country: "Croatia",
+    question: "Which famous Croatian company produces electric hypercars?",
+    options: ["Rimac Automobili", "Bugatti", "Zagreb Motors", "CroCar"],
+    correctAnswer: 0,
     difficulty: "Hard",
-  }
+  },
 ]
 
 
