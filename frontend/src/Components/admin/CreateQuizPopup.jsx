@@ -56,9 +56,7 @@ const formSchema = z.object({
     .string()
     .min(1, 'Description is required')
     .min(10, 'Description must be at least 10 characters'),
-  country_id: z.string().min(1, 'Please select a country'),
-  difficulty_id: z.string().min(1, 'Please select a difficulty level'),
-  category_id: z.string().min(1, 'Please select a category'),
+
 });
 
 export default function CreateQuizPopup() {

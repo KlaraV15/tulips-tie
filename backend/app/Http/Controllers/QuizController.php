@@ -30,7 +30,7 @@ class QuizController extends Controller
         $quiz = Quiz::create([
             'title' => $request->title,
             'description' => $request->description,
-            'creator_id' => $request->user()->id,
+          //`  'creator_id' => $request->user()->id,
         ]);
 
         return response()->json($quiz, 201);
