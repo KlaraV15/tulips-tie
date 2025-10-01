@@ -48,6 +48,7 @@ import {
   Calendar,
 } from 'lucide-react';
 import QuestionsCard from '@/Components/admin/QuestionsCard.jsx';
+import HttpClient from "../../../helpers/HttpClient.js";
 
 // Form validation schema
 const formSchema = z.object({
@@ -59,6 +60,8 @@ const formSchema = z.object({
 
 });
 
+const client = new HttpClient();
+
 export default function CreateQuizPopup() {
   const [showQuestionsSection, setShowQuestionsSection] = useState(false);
 
@@ -69,9 +72,7 @@ export default function CreateQuizPopup() {
     defaultValues: {
       title: '',
       description: '',
-      country_id: '',
-      difficulty_id: '',
-      category_id: '',
+
     },
   });
 
@@ -80,6 +81,14 @@ export default function CreateQuizPopup() {
     console.log('Form values:', form.getValues());
     console.log('Form state:', form.formState);
     // TODO: Implement quiz creation logic
+
+    try {
+      const response = await client.newPostRequest('/quizzes', data);
+      console.log('Response:', response);
+    }catch(e) {
+      console.log('error',e);
+    }
+
   }
 
   return (
@@ -141,17 +150,17 @@ export default function CreateQuizPopup() {
               )}
             />
 
-            <div>
+            {!showQuestionsSection &&(<div>
               <Button
                 type="button"
                 variant="outline"
                 onClick={() => setShowQuestionsSection(true)}>
                 Add questions
               </Button>
-            </div>
+            </div>)}
 
             {showQuestionsSection && (
-              <div className="mt-4">
+              <div className="mt-4 max-h-50 overflow-auto">
                 <QuestionsCard />
               </div>
             )}
