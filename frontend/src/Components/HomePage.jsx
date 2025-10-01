@@ -403,12 +403,7 @@ export default function HomePage() {
       <footer className="mt-6 sm:mt-8 border-t border-red-200 bg-white/80 backdrop-blur-sm">
         <div className="container mx-auto px-3 sm:px-4 py-6 sm:py-8">
           <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="flex items-center space-x-2 sm:space-x-3 mb-3 md:mb-0">
-              <img src={logo} className="h-6 w-4 sm:h-8 sm:w-6" />
-              <span className="text-sm sm:text-xl font-bold bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent">
-                Tulips & Ties
-              </span>
-            </div>
+
             <p className="text-gray-600 text-xs sm:text-sm font-medium text-center md:text-right">
               © 2025 Tulips & Ties • The Ultimate Croatia vs Netherlands Quiz Battle!
             </p>
