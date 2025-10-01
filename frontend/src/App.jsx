@@ -8,6 +8,7 @@ import LeaderboardPage from "./Components/Leaderboard"
 import Easy from './Components/Easy'
 import Medium from './Components/Medium'
 import Hard from './Components/Hard'
+import ForgotPassword from "./Components/ForgotPassword"
 function App() {
 
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/easy" element={<Easy />} />
           <Route path="/medium" element={<Medium />} />
           <Route path="/hard" element={<Hard />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
       </Routes>
     </Router>
     </>
