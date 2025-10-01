@@ -330,9 +330,9 @@ export default function Easy() {
                       variant={isSelected ? "default" : "outline"}
                       className={`
                         h-auto p-6 text-left justify-start text-wrap relative transition-all duration-300
-                        rounded-2xl border-2 font-medium text-lg
+                        rounded-2xl border-2 font-medium text-lg 
                         ${showCorrect
-                          ? "bg-gradient-to-r from-green-500 to-green-600 text-white border-green-600 shadow-lg"
+                          ? "bg-gradient-to-r from-green-500 to-green-600 text-white border-green-600 shadow-lg "
                           : showIncorrect
                             ? "bg-gradient-to-r from-red-500 to-red-600 text-white border-red-600 shadow-lg"
                             : isSelected
