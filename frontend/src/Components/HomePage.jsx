@@ -5,7 +5,6 @@ import { Badge } from "../Components/ui/Badge"
 import { Trophy, Users, Brain, Shield, Globe, Star, Zap, Heart, Award } from "lucide-react"
 import logo from '../assets/logo-rose.png'
 import illustration1 from '../assets/illustration1.png'
-
 import illustration3 from '../assets/illustration3.png'
 import illustration4 from '../assets/illustration4.png'
 import illustration5 from '../assets/illustration5.png'
@@ -19,7 +18,6 @@ import illustration10 from '../assets/illustration10.png'
 export default function HomePage() {
   const illustrations = [
     { src: illustration1, alt: 'Quiz Challenge Illustration 1' },
-
     { src: illustration3, alt: 'Quiz Challenge Illustration 3' },
     { src: illustration4, alt: 'Quiz Challenge Illustration 4' },
     { src: illustration5, alt: 'Quiz Challenge Illustration 5' },
