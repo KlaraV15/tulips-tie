@@ -27,10 +27,11 @@ class QuizController extends Controller
             'description' => 'nullable|string',
         ]);
 
+        //@TODO - use actual user id for creator_id instead of dummy
         $quiz = Quiz::create([
             'title' => $request->title,
             'description' => $request->description,
-            'creator_id' => $request->user()->id,
+           'creator_id' =>1,// $request->user()->id,
         ]);
 
         return response()->json($quiz, 201);
@@ -53,5 +54,11 @@ class QuizController extends Controller
     {
         $quiz->delete();
         return response()->json(['message' => 'Quiz deleted']);
+    }
+
+    // List all questions for a quiz
+    public function getQuizQuestions(Quiz $quiz)
+    {
+        return response()->json($quiz->questions);
     }
 }
