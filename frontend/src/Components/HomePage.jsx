@@ -12,8 +12,6 @@ import illustration6 from '../assets/illustration6.png'
 import illustration7 from '../assets/illustration7.png'
 import illustration8 from '../assets/illustration8.png'
 import illustration9 from '../assets/illustration9.png'
-import illustration10 from '../assets/illustration10.png'
-
 
 export default function HomePage() {
   const illustrations = [
@@ -24,8 +22,7 @@ export default function HomePage() {
     { src: illustration6, alt: 'Quiz Challenge Illustration 6' },
     { src: illustration7, alt: 'Quiz Challenge Illustration 7' },
     { src: illustration8, alt: 'Quiz Challenge Illustration 8' },
-    { src: illustration9, alt: 'Quiz Challenge Illustration 9' },
-    { src: illustration10, alt: 'Quiz Challenge Illustration 10' }
+    { src: illustration9, alt: 'Quiz Challenge Illustration 9' }
   ]
 
   return (
@@ -125,22 +122,20 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Illustration Gallery */}
-          <div className="relative h-96 sm:h-[500px] md:h-[600px] lg:h-[600px] rounded-xl sm:rounded-3xl overflow-hidden shadow-xl sm:shadow-2xl border-2 sm:border-4 border-white mt-8 lg:mt-0">
-
+          {/* Illustration Gallery - Fixed Animation */}
+          <div className="relative h-64 sm:h-80 md:h-96 lg:h-[500px] rounded-xl sm:rounded-3xl overflow-hidden shadow-xl sm:shadow-2xl border-2 sm:border-4 border-white mt-8 lg:mt-0">
             {illustrations.map((illustration, index) => (
               <div
                 key={index}
-                className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === 0 ? 'opacity-100' : 'opacity-0'
-                  }`}
+                className="absolute inset-0"
                 style={{
-                  animation: `slideInOut 8s infinite ${index * 2}s`
+                  animation: `imageCycle ${illustrations.length * 3}s infinite ${index * 3}s`
                 }}
               >
                 <img
                   src={illustration.src}
                   alt={illustration.alt}
-                  className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
+                  className="w-full h-full object-cover"
                 />
               </div>
             ))}
@@ -148,9 +143,27 @@ export default function HomePage() {
         </div>
 
         <style jsx>{`
-          @keyframes slideInOut {
-            0%, 100% { opacity: 0; transform: scale(1.1); }
-            10%, 90% { opacity: 1; transform: scale(1); }
+          @keyframes imageCycle {
+            0% {
+              opacity: 0;
+              transform: scale(1.1);
+            }
+            5% {
+              opacity: 1;
+              transform: scale(1);
+            }
+            15% {
+              opacity: 1;
+              transform: scale(1);
+            }
+            20% {
+              opacity: 0;
+              transform: scale(1.1);
+            }
+            100% {
+              opacity: 0;
+              transform: scale(1.1);
+            }
           }
           @keyframes slowpulse {
             0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(220, 38, 38, 0.5); }
