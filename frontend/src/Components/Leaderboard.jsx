@@ -34,7 +34,7 @@ const Leaderboard = [
         avatar: "/diverse-group-collaborating.png",
         gamesPlayed: 229,
         accuracy: 92,
-        date: "2025-09-28"
+        date: "2025-10-28"
     },
     {
         username: "EuroExpert",
@@ -61,7 +61,7 @@ const Leaderboard = [
         avatar: "/abstract-geometric-shapes.png",
         gamesPlayed: 198,
         accuracy: 85,
-        date: "2025-09-25"
+        date: "2025-10-25"
     },
     {
         username: "AdriaSage",
@@ -88,7 +88,7 @@ const Leaderboard = [
         avatar: "/abstract-geometric-shapes.png",
         gamesPlayed: 175,
         accuracy: 79,
-        date: "2025-09-22"
+        date: "2025-10-22"
     },
     {
         username: "AmsterdamAce",
@@ -177,8 +177,7 @@ const monthlyLeaderboard = globalLeaderboard
         rank: index + 1
     }));
 
-console.log("Weekly Leaderboard:", weeklyLeaderboard);
-console.log("Monthly Leaderboard:", monthlyLeaderboard);
+
 
 function getCountryFlag(country) {
     return country === "Croatia" ? "🇭🇷" : "🇳🇱"
