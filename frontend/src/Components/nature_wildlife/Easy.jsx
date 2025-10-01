@@ -89,7 +89,7 @@ const mockQuestions = [
     options: ["Beech and oak", "Rainforest", "Desert shrubs", "Pine savanna"],
     correctAnswer: 0,
     difficulty: "Easy",
-  }
+  },
 ]
 
 

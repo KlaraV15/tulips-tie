@@ -13,9 +13,9 @@ const mockQuestions = [
   {
     id: 1,
     country: "Croatia",
-    question: "Which sport is Croatia especially famous for after winning silver at the 2018 World Cup?",
+    question: "Which sport is Croatia especially famous for after reaching the 2018 World Cup final?",
     options: ["Football", "Basketball", "Tennis", "Handball"],
-    correctAnswer: 1, // Football
+    correctAnswer: 0,
     difficulty: "Easy",
   },
   {
@@ -23,7 +23,7 @@ const mockQuestions = [
     country: "Netherlands",
     question: "Which sport is the Netherlands especially known for on ice?",
     options: ["Ice skating", "Ice hockey", "Snowboarding", "Curling"],
-    correctAnswer: 1, // Ice skating
+    correctAnswer: 0,
     difficulty: "Easy",
   },
   {
@@ -31,7 +31,7 @@ const mockQuestions = [
     country: "Croatia",
     question: "Which Croatian tennis player won the US Open in 2014?",
     options: ["Marin Čilić", "Goran Ivanišević", "Ivan Ljubičić", "Borna Ćorić"],
-    correctAnswer: 1, // Marin Čilić
+    correctAnswer: 0,
     difficulty: "Easy",
   },
   {
@@ -39,7 +39,7 @@ const mockQuestions = [
     country: "Netherlands",
     question: "Which Dutch city is home to the football club Ajax?",
     options: ["Amsterdam", "Rotterdam", "Eindhoven", "Utrecht"],
-    correctAnswer: 1, // Amsterdam
+    correctAnswer: 0,
     difficulty: "Easy",
   },
   {
@@ -47,7 +47,7 @@ const mockQuestions = [
     country: "Croatia",
     question: "Which sport did Goran Ivanišević play?",
     options: ["Tennis", "Basketball", "Football", "Water polo"],
-    correctAnswer: 1, // Tennis
+    correctAnswer: 0,
     difficulty: "Easy",
   },
   {
@@ -55,7 +55,7 @@ const mockQuestions = [
     country: "Netherlands",
     question: "Which Dutch footballer is famous for the 'Cruyff Turn'?",
     options: ["Johan Cruyff", "Ruud Gullit", "Robin van Persie", "Arjen Robben"],
-    correctAnswer: 1, // Johan Cruyff
+    correctAnswer: 0,
     difficulty: "Easy",
   },
   {
@@ -63,7 +63,7 @@ const mockQuestions = [
     country: "Croatia",
     question: "Which Croatian player won the Ballon d'Or in 2018?",
     options: ["Luka Modrić", "Mario Mandžukić", "Ivan Rakitić", "Mateo Kovačić"],
-    correctAnswer: 1, // Luka Modrić
+    correctAnswer: 0,
     difficulty: "Easy",
   },
   {
@@ -71,7 +71,7 @@ const mockQuestions = [
     country: "Netherlands",
     question: "Which color does the Dutch national football team wear?",
     options: ["Orange", "Red", "Blue", "White"],
-    correctAnswer: 1, // Orange
+    correctAnswer: 0,
     difficulty: "Easy",
   },
   {
@@ -79,7 +79,7 @@ const mockQuestions = [
     country: "Croatia",
     question: "What is the main color of Croatia's football shirts?",
     options: ["Red and white checks", "Blue", "Green", "Black"],
-    correctAnswer: 1, // Red and white checks
+    correctAnswer: 0,
     difficulty: "Easy",
   },
   {
@@ -87,9 +87,9 @@ const mockQuestions = [
     country: "Netherlands",
     question: "Which Dutch club plays its home games in Rotterdam?",
     options: ["Feyenoord", "Ajax", "PSV Eindhoven", "AZ Alkmaar"],
-    correctAnswer: 1, // Feyenoord
+    correctAnswer: 0,
     difficulty: "Easy",
-  }
+  },
 ]
 
 
