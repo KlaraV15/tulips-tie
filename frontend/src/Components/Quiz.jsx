@@ -182,7 +182,7 @@ export default function Quiz() {
           {difficultyLevels.map((difficulty) => (
             <Card
               key={difficulty.level}
-              className={`bg-white py-0 border-2 sm:border-4 ${difficulty.border} shadow-xl sm:shadow-2xl hover:shadow-2xl sm:hover:shadow-3xl transition-all duration-300 hover:scale-105 card-3d cursor-pointer group`}
+              className={`bg-white py-0 border-2 sm:border-4 ${difficulty.border} shadow-xl sm:shadow-2xl hover:shadow-2xl sm:hover:shadow-3xl transition-all duration-300 hover:scale-105 card-3d group`}
             >
               <CardHeader className={`bg-gradient-to-r ${difficulty.color} text-white rounded-t-lg relative overflow-hidden p-4 sm:p-6`}>
                 {/* Floating decorative elements */}
@@ -216,7 +216,7 @@ export default function Quiz() {
 
                   <Button
                     onClick={() => handleDifficultySelect(difficulty)}
-                    className={`w-full bg-gradient-to-r ${difficulty.color} hover:scale-105 text-white font-black text-sm sm:text-lg py-2 sm:py-4 rounded-lg sm:rounded-xl shadow-lg sm:shadow-xl hover:shadow-xl sm:hover:shadow-2xl transition-all duration-300 transform border-2 border-white/50`}
+                    className={`w-full bg-gradient-to-r ${difficulty.color} hover:scale-105 text-white font-black text-sm sm:text-lg py-2 sm:py-4 rounded-lg sm:rounded-xl shadow-lg sm:shadow-xl hover:shadow-xl sm:hover:shadow-2xl transition-all duration-300 transform border-2 border-white/50 cursor-pointer`}
                   >
                     🚀 Start {difficulty.level.charAt(0).toUpperCase() + difficulty.level.slice(1)}
                   </Button>
