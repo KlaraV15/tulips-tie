@@ -12,8 +12,6 @@ import illustration6 from '../assets/illustration6.png'
 import illustration7 from '../assets/illustration7.png'
 import illustration8 from '../assets/illustration8.png'
 import illustration9 from '../assets/illustration9.png'
-import illustration10 from '../assets/illustration10.png'
-
 
 export default function HomePage() {
   const illustrations = [
@@ -24,8 +22,7 @@ export default function HomePage() {
     { src: illustration6, alt: 'Quiz Challenge Illustration 6' },
     { src: illustration7, alt: 'Quiz Challenge Illustration 7' },
     { src: illustration8, alt: 'Quiz Challenge Illustration 8' },
-    { src: illustration9, alt: 'Quiz Challenge Illustration 9' },
-    { src: illustration10, alt: 'Quiz Challenge Illustration 10' }
+    { src: illustration9, alt: 'Quiz Challenge Illustration 9' }
   ]
 
   return (
@@ -125,40 +122,48 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Image Transition Gallery */}
+          {/* Illustration Gallery - Fixed Animation */}
           <div className="relative h-64 sm:h-80 md:h-96 lg:h-[500px] rounded-xl sm:rounded-3xl overflow-hidden shadow-xl sm:shadow-2xl border-2 sm:border-4 border-white mt-8 lg:mt-0">
-            {images.map((image, index) => (
+            {illustrations.map((illustration, index) => (
               <div
                 key={index}
-                className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === 0 ? 'opacity-100' : 'opacity-0'
-                  }`}
+                className="absolute inset-0"
                 style={{
-                  animation: `slideInOut 8s infinite ${index * 2}s`
+                  animation: `imageCycle ${illustrations.length * 3}s infinite ${index * 3}s`
                 }}
               >
                 <img
-                  src={image.src}
-                  alt={image.alt}
-                  className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
+                  src={illustration.src}
+                  alt={illustration.alt}
+                  className="w-full h-full object-cover"
                 />
-                <div className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4">
-                  <Badge className={
-                    image.country === 'nl'
-                      ? 'bg-gradient-to-r from-red-600 to-orange-500 text-white shadow-lg font-bold text-xs sm:text-sm'
-                      : 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg font-bold text-xs sm:text-sm'
-                  }>
-                    {image.country === 'nl' ? '🇳🇱 Netherlands' : '🇭🇷 Croatia'}
-                  </Badge>
-                </div>
               </div>
             ))}
           </div>
         </div>
 
         <style jsx>{`
-          @keyframes slideInOut {
-            0%, 100% { opacity: 0; transform: scale(1.1); }
-            10%, 90% { opacity: 1; transform: scale(1); }
+          @keyframes imageCycle {
+            0% {
+              opacity: 0;
+              transform: scale(1.1);
+            }
+            5% {
+              opacity: 1;
+              transform: scale(1);
+            }
+            15% {
+              opacity: 1;
+              transform: scale(1);
+            }
+            20% {
+              opacity: 0;
+              transform: scale(1.1);
+            }
+            100% {
+              opacity: 0;
+              transform: scale(1.1);
+            }
           }
           @keyframes slowpulse {
             0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(220, 38, 38, 0.5); }
@@ -170,6 +175,7 @@ export default function HomePage() {
         `}</style>
       </section>
 
+      {/* Rest of your component remains the same */}
       {/* Features Grid - Fixed container */}
       <section className="container mx-auto px-3 sm:px-4 py-12 sm:py-20">
         <div className="text-center mb-12 sm:mb-16">
@@ -406,12 +412,7 @@ export default function HomePage() {
       <footer className="mt-6 sm:mt-8 border-t border-red-200 bg-white/80 backdrop-blur-sm">
         <div className="container mx-auto px-3 sm:px-4 py-6 sm:py-8">
           <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="flex items-center space-x-2 sm:space-x-3 mb-3 md:mb-0">
-              <img src={logo} className="h-6 w-4 sm:h-8 sm:w-6" />
-              <span className="text-sm sm:text-xl font-bold bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent">
-                Tulips & Ties
-              </span>
-            </div>
+
             <p className="text-gray-600 text-xs sm:text-sm font-medium text-center md:text-right">
               © 2025 Tulips & Ties • The Ultimate Croatia vs Netherlands Quiz Battle!
             </p>
