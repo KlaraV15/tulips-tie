@@ -10,86 +10,86 @@ import { Heart, Clock, Trophy, ArrowLeft, Flag, Zap } from "lucide-react"
 
 // Mock quiz data
 const mockQuestions = [
-  {
+ {
     id: 1,
     country: "Croatia",
-    question: "Which Croatian basketball player was drafted 3rd overall in the 1993 NBA Draft?",
-    options: ["Dražen Petrović", "Toni Kukoč", "Dino Rađa", "Žan Tabak"],
-    correctAnswer: 2, // Dino Rađa
+    question: "Which Croatian city hosted the 1987 Summer Universiade?",
+    options: ["Zagreb", "Split", "Dubrovnik", "Zadar"],
+    correctAnswer: 0,
     difficulty: "Hard",
   },
   {
     id: 2,
     country: "Netherlands",
-    question: "Which Dutch club was the first to win the European Cup (now Champions League) three times in a row?",
-    options: ["Ajax", "PSV Eindhoven", "Feyenoord", "AZ Alkmaar"],
-    correctAnswer: 1, // Ajax
+    question: "Which Dutch speed skater won 11 Olympic medals between 2006 and 2022?",
+    options: ["Ireen Wüst", "Sven Kramer", "Ard Schenk", "Antoinette de Jong"],
+    correctAnswer: 0,
     difficulty: "Hard",
   },
   {
     id: 3,
     country: "Croatia",
-    question: "Which Croatian handball club has won multiple EHF Champions League titles?",
-    options: ["RK Zagreb", "RK Split", "RK Rijeka", "RK Osijek"],
-    correctAnswer: 1, // RK Zagreb
+    question: "Which Croatian high jumper won Olympic silver in 2008 and gold in 2016?",
+    options: ["Blanka Vlašić", "Sandra Perković", "Ana Šimić", "Sara Kolak"],
+    correctAnswer: 0,
     difficulty: "Hard",
   },
   {
     id: 4,
     country: "Netherlands",
-    question: "Which Dutch speed skater won gold in the 5000m at the 2014 Sochi Winter Olympics?",
-    options: ["Sven Kramer", "Ireen Wüst", "Koen Verweij", "Jorrit Bergsma"],
-    correctAnswer: 1, // Sven Kramer
+    question: "Which Dutch football manager led Barcelona in the 1990s?",
+    options: ["Louis van Gaal", "Guus Hiddink", "Frank Rijkaard", "Johan Cruyff"],
+    correctAnswer: 3,
     difficulty: "Hard",
   },
   {
     id: 5,
     country: "Croatia",
-    question: "Which Croatian city hosted the 2009 World Men's Handball Championship final?",
-    options: ["Zagreb", "Split", "Dubrovnik", "Rijeka"],
-    correctAnswer: 1, // Zagreb
+    question: "Which Croatian discus thrower won Olympic gold in 2012 and 2016?",
+    options: ["Sandra Perković", "Blanka Vlašić", "Sara Kolak", "Ivana Brkljačić"],
+    correctAnswer: 0,
     difficulty: "Hard",
   },
   {
     id: 6,
     country: "Netherlands",
-    question: "Which Dutch footballer scored the winning goal in the Euro 1988 final?",
-    options: ["Ruud Gullit", "Frank Rijkaard", "Marco van Basten", "Ronald Koeman"],
-    correctAnswer: 3, // Marco van Basten
+    question: "Which Dutch cyclist won the Tour de France in 1968 and 1970?",
+    options: ["Jan Janssen", "Joop Zoetemelk", "Tom Dumoulin", "Laurens ten Dam"],
+    correctAnswer: 0,
     difficulty: "Hard",
   },
   {
     id: 7,
     country: "Croatia",
-    question: "Which Croatian water polo club has won the LEN Champions League multiple times?",
-    options: ["HAVK Mladost", "VK Jug Dubrovnik", "VK Primorje", "VK Šibenik"],
-    correctAnswer: 2, // VK Jug Dubrovnik
+    question: "Which Croatian athlete won Olympic gold in javelin at Rio 2016?",
+    options: ["Sara Kolak", "Blanka Vlašić", "Sandra Perković", "Marija Šestak"],
+    correctAnswer: 0,
     difficulty: "Hard",
   },
   {
     id: 8,
     country: "Netherlands",
-    question: "Which Dutch cyclist won the Tour de France in 1968 and 1970?",
-    options: ["Joop Zoetemelk", "Jan Janssen", "Hennie Kuiper", "Steven Rooks"],
-    correctAnswer: 2, // Jan Janssen
+    question: "Which Dutch swimmer won four Olympic gold medals in 2000?",
+    options: ["Inge de Bruijn", "Ranomi Kromowidjojo", "Sharon van Rouwendaal", "Pieter van den Hoogenband"],
+    correctAnswer: 0,
     difficulty: "Hard",
   },
   {
     id: 9,
     country: "Croatia",
-    question: "Which Croatian football club was originally founded as 'Građanski Zagreb'?",
-    options: ["Dinamo Zagreb", "Hajduk Split", "NK Osijek", "Rijeka"],
-    correctAnswer: 1, // Dinamo Zagreb
+    question: "Which Croatian football club is nicknamed 'Bili' (The Whites)?",
+    options: ["Hajduk Split", "Dinamo Zagreb", "Rijeka", "Osijek"],
+    correctAnswer: 0,
     difficulty: "Hard",
   },
   {
     id: 10,
     country: "Netherlands",
-    question: "Which Dutch manager led Barcelona before Pep Guardiola and is known for total football?",
-    options: ["Louis van Gaal", "Johan Cruyff", "Frank Rijkaard", "Ronald Koeman"],
-    correctAnswer: 2, // Frank Rijkaard
+    question: "Which Dutch football club is nicknamed 'de Boeren' (the Farmers)?",
+    options: ["PSV Eindhoven", "Ajax", "Feyenoord", "AZ Alkmaar"],
+    correctAnswer: 0,
     difficulty: "Hard",
-  }
+  },
 ]
 
 

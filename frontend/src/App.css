@@ -144,3 +144,9 @@
         @apply bg-background text-foreground;
     }
 }
+
+@media only screen and (max-width:500px) {
+    .hidden-mobile {
+        display: none;
+    }
+}

@@ -29,16 +29,16 @@ const mockQuestions = [
   {
     id: 3,
     country: "Netherlands",
-    question: "What do Dutch people traditionally wear on King’s Day?",
-    options: ["Orange clothes", "Blue jeans", "Red suits", "Green hats"],
+    question: "What color do Dutch people traditionally wear on King’s Day?",
+    options: ["Orange", "Blue", "Red", "Green"],
     correctAnswer: 0,
     difficulty: "Easy",
   },
   {
     id: 4,
     country: "Croatia",
-    question: "Which shape do Croatian tiles on the coast often resemble?",
-    options: ["Red roofs", "Glass domes", "Blue circles", "Golden triangles"],
+    question: "What is the capital city of Croatia?",
+    options: ["Zagreb", "Split", "Dubrovnik", "Rijeka"],
     correctAnswer: 0,
     difficulty: "Easy",
   },
@@ -53,8 +53,8 @@ const mockQuestions = [
   {
     id: 6,
     country: "Croatia",
-    question: "Which board game pattern comes from Croatia?",
-    options: ["Checkerboard", "Chessboard", "Dominoes", "Snakes & Ladders"],
+    question: "Which sea borders Croatia?",
+    options: ["Adriatic Sea", "North Sea", "Baltic Sea", "Caspian Sea"],
     correctAnswer: 0,
     difficulty: "Easy",
   },
@@ -62,23 +62,23 @@ const mockQuestions = [
     id: 7,
     country: "Netherlands",
     question: "What snack is very popular in Dutch fries shops?",
-    options: ["Frikandel", "Sushi", "Burger", "Hotdog"],
+    options: ["Frikandel", "Burger", "Pizza", "Hotdog"],
     correctAnswer: 0,
     difficulty: "Easy",
   },
   {
     id: 8,
     country: "Croatia",
-    question: "What is the color of Croatia’s national football team shirts?",
-    options: ["Red and white checks", "Blue", "Black", "Yellow"],
+    question: "What is the main color pattern of Croatia’s football shirts?",
+    options: ["Red and white checks", "Blue", "Green", "Yellow"],
     correctAnswer: 0,
     difficulty: "Easy",
   },
   {
     id: 9,
     country: "Netherlands",
-    question: "What kind of houses is Amsterdam famous for?",
-    options: ["Canal houses", "Tree houses", "Igloos", "Palaces"],
+    question: "Which famous Dutch festival involves wearing orange?",
+    options: ["King's Day", "Carnival", "Christmas", "New Year"],
     correctAnswer: 0,
     difficulty: "Easy",
   },
@@ -89,8 +89,10 @@ const mockQuestions = [
     options: ["Oysters", "Sharks", "Whales", "Seals"],
     correctAnswer: 0,
     difficulty: "Easy",
-  }
+  },
 ]
+
+
 
 
 
