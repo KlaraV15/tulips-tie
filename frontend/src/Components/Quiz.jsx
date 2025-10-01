@@ -202,7 +202,7 @@ export default function Quiz() {
               <div className="flex justify-center mb-4 sm:mb-6">
                 <Award className="h-12 w-12 sm:h-20 sm:w-20 text-yellow-500 animate-spin" />
               </div>
-              <h3 className="text-xl sm:text-3xl lg:text-4xl font-black mb-4 sm:mb-6 bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent">
+              <h3 className="text-xl sm:text-3xl lg:text-4xl font-black mb-4 sm:mb-6 py-3  bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent">
                 🏆 Ready to Earn Your Badges?
               </h3>
               <p className="text-sm sm:text-xl font-bold text-gray-700 mb-6 sm:mb-8 max-w-2xl mx-auto px-2">
