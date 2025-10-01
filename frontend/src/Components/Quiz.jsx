@@ -1,13 +1,25 @@
-import { useState } from "react"
-import { Link } from "react-router-dom"
+import { useState, useEffect } from "react"
+import { Link, useSearchParams } from "react-router-dom"
 import { Button } from "../Components/ui/Button"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "../Components/ui/Card"
 import { Trophy, Crown, Medal, Award, ArrowLeft, Star, Zap, Target } from "lucide-react"
 import logo from "../assets/logo-rose.png"
 
 export default function Quiz() {
+  const [searchParams] = useSearchParams()
+  const selectedCategory = searchParams.get('category')
   const [transitioning, setTransitioning] = useState(false)
   const [selectedDifficulty, setSelectedDifficulty] = useState(null)
+
+  // Category mapping for display
+  const categoryMap = {
+    culture: { name: "Culture", emoji: "🎨" },
+    geography: { name: "Geography", emoji: "🌍" },
+    history: { name: "History", emoji: "📜" },
+    politics: { name: "Politics", emoji: "🏛️" }
+  }
+
+  const currentCategory = categoryMap[selectedCategory] || { name: "General", emoji: "🌟" }
 
   const difficultyLevels = [
     {
@@ -19,7 +31,7 @@ export default function Quiz() {
       bg: "from-green-50 to-green-100",
       icon: <Medal className="h-6 w-6 sm:h-8 sm:w-8 text-green-500" />,
       points: "1x Points",
-      questions: "10 points",
+      questions: "10 questions",
       time: "Unlimited time"
     },
     {
@@ -31,7 +43,7 @@ export default function Quiz() {
       bg: "from-yellow-50 to-yellow-100",
       icon: <Target className="h-6 w-6 sm:h-8 sm:w-8 text-yellow-500" />,
       points: "2x Points",
-      questions: "15 points",
+      questions: "15 questions",
       time: "30s per question"
     },
     {
@@ -43,7 +55,7 @@ export default function Quiz() {
       bg: "from-red-50 to-red-100",
       icon: <Crown className="h-6 w-6 sm:h-8 sm:w-8 text-red-500" />,
       points: "3x Points",
-      questions: "20 points",
+      questions: "20 questions",
       time: "15s per question"
     }
   ]
@@ -52,11 +64,18 @@ export default function Quiz() {
     setSelectedDifficulty(difficulty)
     setTransitioning(true)
 
-    // Navigate to the quiz page after a brief transition animation
     setTimeout(() => {
-      window.location.href = `/${difficulty.level}`
-    }, 800) // Match this duration with CSS transition
+      // Use dynamic routing instead of hardcoded routes
+      window.location.href = `/quiz/${selectedCategory}/${difficulty.level}`
+    }, 800)
   }
+
+  // Redirect if no category is selected
+  useEffect(() => {
+    if (!selectedCategory) {
+      window.location.href = "/categories"
+    }
+  }, [selectedCategory])
 
   if (transitioning) {
     return (
@@ -69,7 +88,7 @@ export default function Quiz() {
               Starting {selectedDifficulty?.title}...
             </h2>
             <p className="text-sm sm:text-xl text-white/80 font-bold">
-              Get ready for the challenge! 🚀
+              Get ready for {currentCategory.name} challenge! 🚀
             </p>
           </div>
         </div>
@@ -94,10 +113,10 @@ export default function Quiz() {
       <nav className="border-b-4 border-red-200 bg-white/90 backdrop-blur-sm sticky top-0 z-50 shadow-xl">
         <div className="container mx-auto px-3 sm:px-4 py-3 flex items-center justify-between">
           <Link
-            to="/"
+            to="/categories"
             className="inline-flex items-center text-red-600 hover:text-red-800 transition-all duration-300 font-bold text-sm sm:text-lg hover:scale-105 bg-red-50 px-3 sm:px-4 py-1 sm:py-2 rounded-full border-2 border-red-200 hover:border-red-400 whitespace-nowrap"
           >
-            <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2 animate-bounce" />🏠 Back
+            <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2 animate-bounce" />📚 Categories
           </Link>
           <div className="flex items-center space-x-2">
             <div className="relative">
@@ -131,14 +150,31 @@ export default function Quiz() {
             🎯 CHOOSE YOUR CHALLENGE
           </div>
           <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-black mb-4 sm:mb-6 text-balance leading-tight">
-            Quiz{" "}
+            {currentCategory.emoji} {currentCategory.name}{" "}
             <span className="bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent animate-pulse">
-              Battle Arena
+              Challenge
             </span>
           </h1>
           <p className="text-base sm:text-xl lg:text-2xl font-bold text-gray-700 max-w-3xl mx-auto text-pretty leading-relaxed px-2">
-            🚀 Test your knowledge across different difficulty levels and climb the global leaderboard! 🌍
+            🚀 Test your {currentCategory.name.toLowerCase()} knowledge across different difficulty levels and climb the global leaderboard! 🌍
           </p>
+
+          {/* Category Info Card */}
+          <div className="max-w-md mx-auto mt-6 sm:mt-8">
+            <Card className="bg-gradient-to-r from-purple-100 to-pink-100 border-2 border-purple-300 shadow-lg">
+              <CardContent className="p-4 text-center">
+                <div className="flex items-center justify-center space-x-3">
+                  <span className="text-2xl">{currentCategory.emoji}</span>
+                  <div>
+                    <h3 className="font-black text-lg text-purple-700">Category: {currentCategory.name}</h3>
+                    <p className="text-sm text-purple-600 font-bold">
+                      Croatia vs Netherlands 🇭🇷🇳🇱
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
 
         {/* Difficulty Selection Cards */}
@@ -202,11 +238,11 @@ export default function Quiz() {
               <div className="flex justify-center mb-4 sm:mb-6">
                 <Award className="h-12 w-12 sm:h-20 sm:w-20 text-yellow-500 animate-spin" />
               </div>
-              <h3 className="text-xl sm:text-3xl lg:text-4xl font-black mb-4 sm:mb-6 py-3  bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent">
+              <h3 className="text-xl sm:text-3xl lg:text-4xl font-black mb-4 sm:mb-6 py-3 bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent">
                 🏆 Ready to Earn Your Badges?
               </h3>
               <p className="text-sm sm:text-xl font-bold text-gray-700 mb-6 sm:mb-8 max-w-2xl mx-auto px-2">
-                Complete quizzes, earn points, and unlock exclusive achievements! Compete with players worldwide and show off your ranking!
+                Complete {currentCategory.name.toLowerCase()} quizzes, earn points, and unlock exclusive achievements! Compete with players worldwide and show off your {currentCategory.name.toLowerCase()} expertise!
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 justify-center">
                 <Link to="/leaderboard">
@@ -214,12 +250,12 @@ export default function Quiz() {
                     👑 View Leaderboard
                   </Button>
                 </Link>
-                <Link to="/register">
+                <Link to="/categories">
                   <Button
                     variant="outline"
                     className="border-2 sm:border-4 border-green-500 text-green-600 hover:bg-green-50 hover:text-green-700 hover:border-green-600 text-base sm:text-xl font-black px-6 sm:px-10 py-3 sm:py-6 rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl hover:shadow-xl sm:hover:shadow-2xl transition-all duration-300 transform hover:scale-105 bg-transparent"
                   >
-                    🌟 Create Account
+                    📚 Change Category
                   </Button>
                 </Link>
               </div>
@@ -231,7 +267,6 @@ export default function Quiz() {
       <footer className="mt-6 sm:mt-8 border-t border-red-200 bg-white/80 backdrop-blur-sm">
         <div className="container mx-auto px-3 sm:px-4 py-6 sm:py-8">
           <div className="flex flex-col md:flex-row items-center justify-between">
-
             <p className="text-gray-600 text-xs sm:text-sm font-medium text-center md:text-right">
               © 2025 Tulips & Ties • The Ultimate Croatia vs Netherlands Quiz Battle!
             </p>
