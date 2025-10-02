@@ -16,10 +16,10 @@ export default function CategorySelection({ onSelectCategory, onBack }) {
             id: "culture",
             name: "Culture",
             description: "Explore traditions, arts, and cultural heritage of both nations",
-            icon: <Globe className="h-6 w-6 sm:h-8 sm:w-8 text-purple-500" />,
+            icon: <Globe className="h-6 w-6 sm:h-8 sm:w-8 text-white-500" />,
             color: "from-purple-400 to-purple-600",
             border: "border-purple-300",
-            bg: "from-purple-50 to-purple-100",
+            bg: "from-purple-80 to-purple-400",
             points: "Cultural Insights",
             questions: "10 questions",
             time: "Adaptive timing"
@@ -28,10 +28,10 @@ export default function CategorySelection({ onSelectCategory, onBack }) {
             id: "geography",
             name: "Geography",
             description: "Explore the diverse landscapes, regions, and natural wonders of Croatia and the Netherlands",
-            icon: <Map className="h-6 w-6 sm:h-8 sm:w-8 text-green-500" />,
+            icon: <Map className="h-6 w-6 sm:h-8 sm:w-8 text-white-500" />,
             color: "from-green-400 to-green-600",
             border: "border-green-300",
-            bg: "from-green-50 to-green-100",
+            bg: "from-green-80 to-green-400",
             points: "World Explorer",
             questions: "10 questions",
             time: "Adaptive timing"
@@ -40,10 +40,10 @@ export default function CategorySelection({ onSelectCategory, onBack }) {
             id: "history",
             name: "History",
             description: "Journey through time and explore historical events and figures",
-            icon: <BookOpen className="h-6 w-6 sm:h-8 sm:w-8 text-amber-500" />,
+            icon: <BookOpen className="h-6 w-6 sm:h-8 sm:w-8 text-white-500" />,
             color: "from-amber-400 to-amber-600",
             border: "border-amber-300",
-            bg: "from-amber-50 to-amber-100",
+            bg: "from-amber-80 to-amber-400",
             points: "Historical Facts",
             questions: "10 questions",
             time: "Adaptive timing"
@@ -52,10 +52,10 @@ export default function CategorySelection({ onSelectCategory, onBack }) {
             id: "politics",
             name: "Politics",
             description: "Test your knowledge of political systems, laws and governance     ",
-            icon: <Landmark className="h-6 w-6 sm:h-8 sm:w-8 text-red-500" />,
+            icon: <Landmark className="h-6 w-6 sm:h-8 sm:w-8 text-white-500" />,
             color: "from-red-400 to-red-600",
             border: "border-red-300",
-            bg: "from-red-50 to-red-100",
+            bg: "from-red-80 to-red-400",
             points: "Political Systems",
             questions: "10 questions",
             time: "Adaptive timing"
@@ -64,10 +64,10 @@ export default function CategorySelection({ onSelectCategory, onBack }) {
             id: "funFacts",
             name: "Fun Facts",
             description: "Discover surprising and entertaining facts about both countries",
-            icon: <Award className="h-6 w-6 sm:h-8 sm:w-8 text-pink-500" />,
+            icon: <Award className="h-6 w-6 sm:h-8 sm:w-8 text-white-500" />,
             color: "from-pink-400 to-pink-600",
             border: "border-pink-300",
-            bg: "from-pink-50 to-pink-100",
+            bg: "from-pink-80 to-pink-400",
             points: "Surprising Trivia",
             questions: "10 questions",
             time: "Adaptive timing"
@@ -76,10 +76,10 @@ export default function CategorySelection({ onSelectCategory, onBack }) {
             id: "natureWildlife",
             name: "Nature & Wildlife",
             description: "Explore national parks, wildlife, and popular natural wonders",
-            icon: <Leaf className="h-6 w-6 sm:h-8 sm:w-8 text-emerald-500" />,
+            icon: <Leaf className="h-6 w-6 sm:h-8 sm:w-8 text-white-500" />,
             color: "from-emerald-400 to-emerald-600",
             border: "border-emerald-300",
-            bg: "from-emerald-50 to-emerald-100",
+            bg: "from-emerald-80 to-emerald-400",
             points: "Natural Wonders",
             questions: "10 questions",
             time: "Adaptive timing"
@@ -88,10 +88,10 @@ export default function CategorySelection({ onSelectCategory, onBack }) {
             id: "economy",
             name: "Economy & Innovation",
             description: "Learn about economic systems, industries, and innovations",
-            icon: <TrendingUp className="h-6 w-6 sm:h-8 sm:w-8 text-blue-500" />,
+            icon: <TrendingUp className="h-6 w-6 sm:h-8 sm:w-8 text-white-500" />,
             color: "from-blue-400 to-blue-600",
             border: "border-blue-300",
-            bg: "from-blue-50 to-blue-100",
+            bg: "from-blue-80 to-blue-400",
             points: "Economic Insights",
             questions: "10 questions",
             time: "Adaptive timing"
@@ -100,10 +100,10 @@ export default function CategorySelection({ onSelectCategory, onBack }) {
             id: "sports",
             name: "Sports",
             description: "Test your knowledge of sports achievements and traditions",
-            icon: <Volleyball className="h-6 w-6 sm:h-8 sm:w-8 text-orange-500" />,
+            icon: <Volleyball className="h-6 w-6 sm:h-8 sm:w-8 text-white-500" />,
             color: "from-orange-400 to-orange-600",
             border: "border-orange-300",
-            bg: "from-orange-50 to-orange-100",
+            bg: "from-orange-80 to-orange-400",
             points: "Sports Excellence",
             questions: "10 questions",
             time: "Adaptive timing"
@@ -247,7 +247,7 @@ export default function CategorySelection({ onSelectCategory, onBack }) {
                             </CardHeader>
                             <CardContent className={`p-4 sm:p-6 bg-gradient-to-br ${category.bg}`}>
                                 <div className="text-center space-y-3 sm:space-y-4">
-                                    <p className="text-gray-700 font-bold text-sm sm:text-lg leading-relaxed">
+                                    <p className="text-gray-800 font-bold text-sm sm:text-lg leading-relaxed">
                                         {category.description}
                                     </p>
 
