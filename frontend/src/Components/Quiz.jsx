@@ -1,393 +1,276 @@
-"use client"
-
-import { useState } from "react"
-import { Link } from "react-router-dom"
-import { Button } from "../components/ui/Button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/Card"
-import { Progress } from "../components/ui/Progress"
-import { Badge } from "../components/ui/Badge"
-import { Heart, Clock, Trophy, ArrowLeft, Flag } from "lucide-react"
-
-// Mock quiz data
-const mockQuestions = [
-  {
-    id: 1,
-    country: "Croatia",
-    question: "What is the capital city of Croatia?",
-    options: ["Zagreb", "Split", "Dubrovnik", "Rijeka"],
-    correctAnswer: 0,
-    difficulty: "Easy",
-  },
-  {
-    id: 2,
-    country: "Netherlands",
-    question: "What is the capital city of Netherlands?",
-    options: ["Rotterdam", "The Hague", "Amsterdam", "Utrecht"],
-    correctAnswer: 2,
-    difficulty: "Easy",
-  },
-  {
-    id: 3,
-    country: "Croatia",
-    question: "Witch sea borders the Croatian coastline?",
-    options: ["Mediterranean Sea", "Adriatic Sea", "Baltic Sea", "Black Sea"],
-    correctAnswer: 1,
-    difficulty: "Easy",
-  },
-  {
-    id: 4,
-    country: "Netherlands",
-    question: "Which flower is a symbol of the Netherlands and is strongly associated with the country?",
-    options: ["Lily", "Rose", "Sunflower", "Tulip"],
-    correctAnswer: 3,
-    difficulty: "Easy",
-  },
-  {
-    id: 5,
-    country: "Croatia",
-    question: "Which currency has been used in Croatia since 2023?",
-    options: ["Dollar", "Kuna", "Euro", "Pound"],
-    correctAnswer: 2,
-    difficulty: "Easy",
-  },
-  {
-    id: 6,
-    country: "Netherlands",
-    question: "What is the name of the famous Dutch cheese that comes in round wheels, often covered in red wax?",
-    options: ["Edam", "Feta", "Brie", "Cheddar"],
-    correctAnswer: 0,
-    difficulty: "Easy",
-  },
-  {
-    id: 7,
-    country: "Croatia",
-    question: "Which sport is the most popular in Croatia?",
-    options: ["Handball", "Water polo", "Footbal", "Basketball"],
-    correctAnswer: 2,
-    difficulty: "Easy",
-  },
-  {
-    id: 8,
-    country: "Netherlands",
-    question: "What type of building is famous in the Netherlands and uses wind to generate power?",
-    options: ["Castle", "Windmill", "Tower", "Manor house"],
-    correctAnswer: 1,
-    difficulty: "Easy",
-  },
-  {
-    id: 9,
-    country: "Croatia",
-    question: "Which is the largest island in Croatia?",
-    options: ["Krk", "Hvar", "Pag", "Brač"],
-    correctAnswer: 0,
-    difficulty: "Easy",
-  },
-  {
-    id: 10,
-    country: "Netherlands",
-    question: "Which major river flows through the Netherlands and empties into the North Sea?",
-    options: ["Sava", "Volga", "Danube", "Rhine"],
-    correctAnswer: 3,
-    difficulty: "Easy",
-  },
-  {
-    id: 11,
-    country: "Netherlands",
-    question: "Which Dutch city is famous for its canals and is often called the 'Venice of the North'?",
-    options: ["Rotterdam", "The Hague", "Amsterdam", "Utrecht"],
-    correctAnswer: 2,
-    difficulty: "Medium",
-  },
-]
+import { useState, useEffect } from "react"
+import { Link, useSearchParams } from "react-router-dom"
+import { Button } from "../Components/ui/Button"
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "../Components/ui/Card"
+import { Trophy, Crown, Medal, Award, ArrowLeft, Star, Zap, Target } from "lucide-react"
+import logo from "../assets/logo-rose.png"
 
 export default function Quiz() {
-  const [currentQuestion, setCurrentQuestion] = useState(0)
-  const [selectedAnswer, setSelectedAnswer] = useState(null)
-  const [lives, setLives] = useState(3)
-  const [score, setScore] = useState(0)
-  const [timeLeft, setTimeLeft] = useState(30)
-  const [quizStarted, setQuizStarted] = useState(false)
-  const [showResult, setShowResult] = useState(false)
+  const [searchParams] = useSearchParams()
+  const selectedCategory = searchParams.get('category')
+  const [transitioning, setTransitioning] = useState(false)
+  const [selectedDifficulty, setSelectedDifficulty] = useState(null)
 
-  const question = mockQuestions[currentQuestion]
-  const progress = ((currentQuestion + 1) / 10) * 100
-
-  const handleStartQuiz = () => {
-    setQuizStarted(true)
+  // Category mapping for display
+  const categoryMap = {
+    culture: { name: "Culture", emoji: "🎨" },
+    geography: { name: "Geography", emoji: "🌍" },
+    history: { name: "History", emoji: "📜" },
+    politics: { name: "Politics", emoji: "🏛️" },
+    natureWildlife: { name: "Nature & Wildlife", emoji: "🌱" },
+    funFacts: { name: "Fun Facts", emoji: "✨" },
+    sports: { name: "Sports", emoji: "⚽" },
+    economy: { name: "Economy", emoji: "💰" }
   }
 
-  const handleAnswerSelect = (answerIndex) => {
-    setSelectedAnswer(answerIndex)
-  }
+  const currentCategory = categoryMap[selectedCategory] || { name: "General", emoji: "🌟" }
 
-  const handleNextQuestion = () => {
-    if (selectedAnswer === question.correctAnswer) {
-      setScore(score + 10)
-    } else {
-      setLives(lives - 1)
+  const difficultyLevels = [
+    {
+      level: "easy",
+      title: "🌱 Easy Mode",
+      description: "Perfect for beginners! Gentle questions to build your confidence.",
+      color: "from-green-400 to-green-600",
+      border: "border-green-300",
+      bg: "from-green-80 to-green-400",
+      icon: <Medal className="h-6 w-6 sm:h-8 sm:w-8 text-green-500" />,
+      questions: "10 questions",
+      time: "Unlimited time"
+    },
+    {
+      level: "medium",
+      title: "⚡ Medium Mode",
+      description: "Challenge yourself with balanced questions that test your knowledge!",
+      color: "from-yellow-400 to-yellow-600",
+      border: "border-yellow-300",
+      bg: "from-yellow-80 to-yellow-400",
+      icon: <Target className="h-6 w-6 sm:h-8 sm:w-8 text-yellow-500" />,
+      questions: "15 questions",
+      time: "30s per question"
+    },
+    {
+      level: "hard",
+      title: "🔥 Hard Mode",
+      description: "Face the toughest questions and prove your mastery!",
+      color: "from-red-400 to-red-600",
+      border: "border-red-400",
+      bg: "from-red-80 to-red-400",
+      icon: <Crown className="h-6 w-6 sm:h-8 sm:w-8 text-red-500" />,
+      questions: "20 questions",
+      time: "15s per question"
     }
+  ]
 
-    setSelectedAnswer(null)
-    if (currentQuestion < 9) {
-      setCurrentQuestion(currentQuestion + 1)
-    } else {
-      setShowResult(true)
+  const handleDifficultySelect = (difficulty) => {
+    setSelectedDifficulty(difficulty)
+    setTransitioning(true)
+
+    setTimeout(() => {
+      // Use dynamic routing instead of hardcoded routes
+      window.location.href = `/quiz/${selectedCategory}/${difficulty.level}`
+    }, 800)
+  }
+
+  // Redirect if no category is selected
+  useEffect(() => {
+    if (!selectedCategory) {
+      window.location.href = "/categories"
     }
-  }
+  }, [selectedCategory])
 
-  if (!quizStarted) {
+  if (transitioning) {
     return (
-      <div className="min-h-screen bg-background">
-        <nav className="border-b border-border bg-card/50 backdrop-blur-sm">
-          <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-            <Link
-              to="/"
-              className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Home
-            </Link>
-            <div className="flex items-center space-x-2">
-              <Flag className="h-6 w-6 text-primary" />
-              <span className="font-bold gradient-text">Tulips & Ties</span>
-            </div>
+      <div className="min-h-screen bg-gradient-to-br from-cyan-300 via-red-300 to-red-300 flex items-center justify-center">
+        {/* Transition Overlay */}
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-16 w-16 sm:h-32 sm:w-32 border-b-4 border-white mx-auto mb-4 sm:mb-8"></div>
+            <h2 className="text-xl sm:text-4xl font-black text-white mb-2 sm:mb-4">
+              Starting {selectedDifficulty?.title}...
+            </h2>
+            <p className="text-sm sm:text-xl text-white/80 font-bold">
+              Get ready for {currentCategory.name} challenge! 🚀
+            </p>
           </div>
-        </nav>
-
-        <div className="container mx-auto px-4 py-20 flex items-center justify-center">
-          <Card className="max-w-2xl w-full bg-card border-border glow-effect">
-            <CardHeader className="text-center">
-              <div className="flex items-center justify-center mb-4">
-                <div className="flex space-x-2">
-                  <div className="w-8 h-5 bg-red-500 rounded-sm"></div>
-                  <div className="w-1 h-5 bg-white rounded-sm"></div>
-                  <div className="w-8 h-5 bg-blue-500 rounded-sm"></div>
-                </div>
-                <span className="mx-4 text-2xl">🇭🇷</span>
-                <div className="flex space-x-2">
-                  <div className="w-8 h-5 bg-red-500 rounded-sm"></div>
-                  <div className="w-8 h-5 bg-white rounded-sm"></div>
-                  <div className="w-8 h-5 bg-blue-500 rounded-sm"></div>
-                </div>
-                <span className="mx-4 text-2xl">🇳🇱</span>
-              </div>
-              <CardTitle className="text-3xl font-bold mb-4">Ready to Start?</CardTitle>
-              <CardDescription className="text-lg">
-                Test your knowledge about Croatia and the Netherlands with 10 challenging questions
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="grid md:grid-cols-3 gap-4">
-                <div className="text-center p-4 bg-primary/10 rounded-lg border border-primary/20">
-                  <Heart className="h-8 w-8 text-primary mx-auto mb-2" />
-                  <p className="font-semibold">3 Lives</p>
-                  <p className="text-sm text-muted-foreground">Lose one per wrong answer</p>
-                </div>
-                <div className="text-center p-4 bg-accent/10 rounded-lg border border-accent/20">
-                  <Trophy className="h-8 w-8 text-accent mx-auto mb-2" />
-                  <p className="font-semibold">10 Points</p>
-                  <p className="text-sm text-muted-foreground">Per correct answer</p>
-                </div>
-                <div className="text-center p-4 bg-chart-3/10 rounded-lg border border-chart-3/20">
-                  <Clock className="h-8 w-8 text-chart-3 mx-auto mb-2" />
-                  <p className="font-semibold">30 Seconds</p>
-                  <p className="text-sm text-muted-foreground">Per question</p>
-                </div>
-              </div>
-
-              <Button onClick={handleStartQuiz} className="w-full glow-effect text-lg py-6">
-                Start Quiz
-              </Button>
-            </CardContent>
-          </Card>
         </div>
-      </div>
-    )
-  }
 
-  if (showResult) {
-    return (
-      <div className="min-h-screen bg-background">
-        <nav className="border-b border-border bg-card/50 backdrop-blur-sm">
-          <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-            <Link
-              to="/"
-              className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Home
-            </Link>
-            <div className="flex items-center space-x-2">
-              <Flag className="h-6 w-6 text-primary" />
-              <span className="font-bold gradient-text">Tulips & Ties</span>
-            </div>
-          </div>
-        </nav>
-
-        <div className="container mx-auto px-4 py-20 flex items-center justify-center">
-          <Card className="max-w-2xl w-full bg-card border-border glow-effect">
-            <CardHeader className="text-center">
-              <div className="flex items-center justify-center mb-4">
-                <Trophy className="h-12 w-12 text-chart-3" />
-              </div>
-              <CardTitle className="text-3xl font-bold mb-4">Quiz Complete!</CardTitle>
-              <CardDescription className="text-lg">Here are your results</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="grid md:grid-cols-3 gap-4">
-                <div className="text-center p-6 bg-primary/10 rounded-lg border border-primary/20">
-                  <p className="text-3xl font-bold text-primary mb-2">{score}</p>
-                  <p className="font-semibold">Total Score</p>
-                </div>
-                <div className="text-center p-6 bg-accent/10 rounded-lg border border-accent/20">
-                  <p className="text-3xl font-bold text-accent mb-2">{score / 10}</p>
-                  <p className="font-semibold">Correct Answers</p>
-                </div>
-                <div className="text-center p-6 bg-chart-3/10 rounded-lg border border-chart-3/20">
-                  <div className="flex justify-center space-x-1 mb-2">
-                    {[...Array(3)].map((_, i) => (
-                      <Heart
-                        key={i}
-                        className={`h-6 w-6 ${i < lives ? "text-chart-3 fill-current" : "text-muted-foreground"}`}
-                      />
-                    ))}
-                  </div>
-                  <p className="font-semibold">Lives Remaining</p>
-                </div>
-              </div>
-
-              <div className="text-center space-y-4">
-                <p className="text-muted-foreground">
-                  {score >= 80
-                    ? "Excellent work! You're a geography expert!"
-                    : score >= 60
-                      ? "Good job! You know your countries well."
-                      : score >= 40
-                        ? "Not bad! Keep studying to improve."
-                        : "Keep practicing! You'll get better with time."}
-                </p>
-
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Link to="/quiz">
-                    <Button className="glow-effect">Play Again</Button>
-                  </Link>
-                  <Link to="/leaderboard">
-                    <Button variant="outline">View Leaderboard</Button>
-                  </Link>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        {/* Animated background elements during transition */}
+        <div className="fixed top-10 sm:top-20 left-4 sm:left-10 w-10 h-10 sm:w-20 sm:h-20 bg-yellow-300 rounded-full opacity-20 animate-ping"></div>
+        <div className="fixed bottom-16 sm:bottom-32 right-8 sm:right-20 w-8 h-8 sm:w-16 sm:h-16 bg-green-300 rounded-full opacity-20 animate-bounce"></div>
+        <div className="fixed top-20 sm:top-40 right-16 sm:right-32 w-6 h-6 sm:w-12 sm:h-12 bg-purple-300 rounded-full opacity-20 animate-pulse"></div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header with progress and stats */}
-      <nav className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between mb-4">
-            <Link
-              to="/"
-              className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Exit Quiz
-            </Link>
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <Clock className="h-4 w-4 text-chart-3" />
-                <span className="font-mono text-lg font-bold text-chart-3">{timeLeft}s</span>
-              </div>
-              <div className="flex items-center space-x-1">
-                {[...Array(3)].map((_, i) => (
-                  <Heart
-                    key={i}
-                    className={`h-5 w-5 ${i < lives ? "text-destructive fill-current" : "text-muted-foreground"}`}
-                  />
-                ))}
-              </div>
-              <div className="flex items-center space-x-2">
-                <Trophy className="h-4 w-4 text-primary" />
-                <span className="font-bold text-primary">{score}</span>
-              </div>
+    <div className="min-h-screen bg-gradient-to-br from-cyan-300 via-red-300 to-red-300">
+      {/* Floating decorative elements */}
+      <div className="fixed top-10 sm:top-20 left-4 sm:left-10 w-10 h-10 sm:w-20 sm:h-20 bg-yellow-300 rounded-full opacity-20 animate-float"></div>
+      <div className="fixed bottom-16 sm:bottom-32 right-8 sm:right-20 w-8 h-8 sm:w-16 sm:h-16 bg-green-300 rounded-full opacity-20 animate-pulse"></div>
+      <div className="fixed top-20 sm:top-40 right-16 sm:right-32 w-6 h-6 sm:w-12 sm:h-12 bg-purple-300 rounded-full opacity-20 animate-ping"></div>
+      <div className="fixed bottom-10 sm:bottom-20 left-16 sm:left-32 w-7 h-7 sm:w-14 sm:h-14 bg-pink-300 rounded-full opacity-20 animate-bounce"></div>
+
+      {/* Navigation */}
+      <nav className="border-b-4 border-red-200 bg-white/90 backdrop-blur-sm sticky top-0 z-50 shadow-xl">
+        <div className="container mx-auto px-3 sm:px-4 py-3 flex items-center justify-between">
+          <Link
+            to="/categories"
+            className="inline-flex items-center text-red-600 hover:text-red-800 transition-all duration-300 font-bold text-sm sm:text-lg hover:scale-105 bg-red-50 px-3 sm:px-4 py-1 sm:py-2 rounded-full border-2 border-red-200 hover:border-red-400 whitespace-nowrap"
+          >
+            <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2 animate-bounce" />📚 Categories
+          </Link>
+          <div className="flex items-center space-x-2">
+            <div className="relative">
+              <img src={logo || "/placeholder.svg"} className="h-8 w-6 sm:h-12 sm:w-8 text-red-600" />
+              <div className="absolute -top-1 -right-1 w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full animate-pulse"></div>
             </div>
+            <span className="text-lg sm:text-2xl font-black bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent">
+              Tulips & Ties
+            </span>
           </div>
-          <div className="space-y-2">
-            <div className="flex justify-between text-sm text-muted-foreground">
-              <span>Question {currentQuestion + 1} of 10</span>
-              <span>{Math.round(progress)}% Complete</span>
-            </div>
-            <Progress value={progress} className="h-2" />
+          <div className="flex items-center space-x-2">
+            <Link to="/leaderboard">
+              <Button className="bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-bold px-3 sm:px-6 py-1 sm:py-3 rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-2 border-blue-400 text-xs sm:text-base whitespace-nowrap">
+                🏆 <div className="hidden-mobile">Leaders</div>
+              </Button>
+            </Link>
           </div>
         </div>
       </nav>
 
-      {/* Quiz Content */}
-      <div className="container mx-auto px-4 py-8">
-        <div className="max-w-4xl mx-auto">
-          <Card className="bg-card border-border glow-effect">
-            <CardHeader>
-              <div className="flex items-center justify-between">
-                <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20">
-                  {question.country}
-                </Badge>
-                <Badge
-                  variant="outline"
-                  className={`
-                  ${
-                    question.difficulty === "Easy"
-                      ? "bg-chart-3/10 text-chart-3 border-chart-3/20"
-                      : question.difficulty === "Medium"
-                        ? "bg-chart-2/10 text-chart-2 border-chart-2/20"
-                        : "bg-destructive/10 text-destructive border-destructive/20"
-                  }
-                `}
-                >
-                  {question.difficulty}
-                </Badge>
-              </div>
-              <CardTitle className="text-2xl font-bold text-balance mt-4">{question.question}</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid gap-3">
-                {question.options.map((option, index) => (
-                  <Button
-                    key={index}
-                    variant={selectedAnswer === index ? "default" : "outline"}
-                    className={`
-                      h-auto p-4 text-left justify-start text-wrap
-                      ${selectedAnswer === index ? "glow-effect" : "hover:border-primary/50"}
-                    `}
-                    onClick={() => handleAnswerSelect(index)}
-                  >
-                    <div className="flex items-center space-x-3">
-                      <div
-                        className={`
-                        w-8 h-8 rounded-full border-2 flex items-center justify-center font-bold
-                        ${selectedAnswer === index ? "bg-primary-foreground text-primary border-primary" : "border-muted-foreground"}
-                      `}
-                      >
-                        {String.fromCharCode(65 + index)}
-                      </div>
-                      <span className="text-base">{option}</span>
-                    </div>
-                  </Button>
-                ))}
-              </div>
+      {/* Header Section */}
+      <section className="container mx-auto px-3 sm:px-4 py-8 sm:py-16">
+        <div className="text-center mb-8 sm:mb-12">
+          <div className="flex items-center justify-center mb-4 sm:mb-6">
+            <div className="relative">
+              <Trophy className="h-12 w-12 sm:h-20 sm:w-20 text-yellow-500 animate-bounce" />
+              {/* <div className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 w-4 h-4 sm:w-6 sm:h-6 bg-red-500 rounded-full animate-ping"></div> */}
+            </div>
+          </div>
+          <div className="bg-gradient-to-r from-red-500 to-blue-500 text-white border-0 text-sm sm:text-lg font-bold py-2 sm:py-3 px-4 sm:px-6 rounded-full inline-block mb-4 sm:mb-6 animate-bounce shadow-xl whitespace-nowrap overflow-hidden">
+            🎯 CHOOSE YOUR CHALLENGE
+          </div>
+          <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-black mb-4 sm:mb-6 text-balance leading-tight">
+            {currentCategory.emoji} {currentCategory.name}{" "}
+            <span className="bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent animate-pulse">
+              Challenge
+            </span>
+          </h1>
+          <p className="text-base sm:text-xl lg:text-2xl font-bold text-gray-700 max-w-3xl mx-auto text-pretty leading-relaxed px-2">
+            🚀 Test your {currentCategory.name.toLowerCase()} knowledge across different difficulty levels and climb the global leaderboard! 🌍
+          </p>
 
-              <div className="flex justify-between items-center pt-6">
-                <p className="text-sm text-muted-foreground">Select an answer to continue</p>
-                <Button onClick={handleNextQuestion} disabled={selectedAnswer === null} className="glow-effect">
-                  {currentQuestion === 9 ? "Finish Quiz" : "Next Question"}
-                </Button>
+          {/* Category Info Card */}
+          <div className="max-w-md mx-auto mt-6 sm:mt-8">
+            <Card className="bg-gradient-to-r from-purple-100 to-pink-100 border-2 border-purple-300 shadow-lg">
+              <CardContent className="p-4 text-center">
+                <div className="flex items-center justify-center space-x-3">
+                  <span className="text-2xl">{currentCategory.emoji}</span>
+                  <div>
+                    <h3 className="font-black text-lg text-purple-700">Category: {currentCategory.name}</h3>
+                    <p className="text-sm text-purple-600 font-bold">
+                      Croatia vs Netherlands 🇭🇷🇳🇱
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
+        {/* Difficulty Selection Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-6xl mx-auto">
+          {difficultyLevels.map((difficulty) => (
+            <Card
+              key={difficulty.level}
+              className={`bg-white py-0 border-2 sm:border-4 ${difficulty.border} shadow-xl sm:shadow-2xl hover:shadow-2xl sm:hover:shadow-3xl transition-all duration-300 hover:scale-105 card-3d group`}
+            >
+              <CardHeader className={`bg-gradient-to-r ${difficulty.color} text-white rounded-t-lg relative overflow-hidden p-4 sm:p-6`}>
+                {/* Floating decorative elements */}
+                <div className="absolute top-1 sm:top-2 right-2 sm:right-4 w-3 h-3 sm:w-4 sm:h-4 bg-white rounded-full opacity-40 animate-bounce"></div>
+                <div className="absolute bottom-1 sm:bottom-2 left-3 sm:left-6 w-2 h-2 sm:w-3 sm:h-3 bg-white rounded-full opacity-40 animate-pulse"></div>
+
+                <CardTitle className="flex items-center justify-center space-x-2 sm:space-x-3 text-lg sm:text-2xl font-black text-center">
+                  {difficulty.icon}
+                  <span className="text-white drop-shadow-lg text-sm sm:text-xl">{difficulty.title}</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className={`p-4 sm:p-6 bg-gradient-to-br ${difficulty.bg}`}>
+                <div className="text-center space-y-3 sm:space-y-4">
+                  <p className="text-gray-700 font-bold text-sm sm:text-lg leading-relaxed">
+                    {difficulty.description}
+                  </p>
+
+                  <div className="space-y-2 sm:space-y-3 mt-4 sm:mt-6">
+                    <div className="flex items-center justify-center space-x-2 sm:space-x-3 bg-white/80 px-3 sm:px-4 py-1 sm:py-2 rounded-lg sm:rounded-xl border-2 border-white">
+                      <Star className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-500" />
+                      <span className="font-black text-gray-800 text-xs sm:text-base">{difficulty.questions}</span>
+                    </div>
+                    <div className="flex items-center justify-center space-x-2 sm:space-x-3 bg-white/80 px-3 sm:px-4 py-1 sm:py-2 rounded-lg sm:rounded-xl border-2 border-white">
+                      <Zap className="h-4 w-4 sm:h-5 sm:w-5 text-blue-500" />
+                      <span className="font-black text-gray-800 text-xs sm:text-base">{difficulty.time}</span>
+                    </div>
+                  </div>
+
+                  <Button
+                    onClick={() => handleDifficultySelect(difficulty)}
+                    className={`w-full bg-gradient-to-r ${difficulty.color} hover:scale-105 text-white font-black text-sm sm:text-lg py-2 sm:py-4 rounded-lg sm:rounded-xl shadow-lg sm:shadow-xl hover:shadow-xl sm:hover:shadow-2xl transition-all duration-300 transform border-2 border-white/50 cursor-pointer`}
+                  >
+                    🚀 Start {difficulty.level.charAt(0).toUpperCase() + difficulty.level.slice(1)}
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* CTA Section */}
+        <div className="mt-12 sm:mt-20 text-center">
+          <Card className="bg-gradient-to-r from-red-100 to-blue-100 border-2 sm:border-4 border-gradient-to-r from-red-400 to-blue-400 max-w-4xl mx-auto shadow-xl sm:shadow-3xl hover:shadow-2xl sm:hover:shadow-4xl transition-all duration-300 hover:scale-105 card-3d relative overflow-hidden">
+            {/* Floating decorative elements */}
+            <div className="absolute top-2 sm:top-4 left-4 sm:left-8 w-4 h-4 sm:w-6 sm:h-6 bg-yellow-300 rounded-full opacity-60 animate-bounce"></div>
+            <div className="absolute bottom-3 sm:bottom-6 right-6 sm:right-10 w-3 h-3 sm:w-4 sm:h-4 bg-green-300 rounded-full opacity-60 animate-pulse"></div>
+            <div className="absolute top-4 sm:top-8 right-8 sm:right-16 w-3 h-3 sm:w-5 sm:h-5 bg-purple-300 rounded-full opacity-60 animate-ping"></div>
+
+            <CardContent className="pt-8 sm:pt-12 pb-8 sm:pb-12 relative z-10">
+              <div className="flex justify-center mb-4 sm:mb-6">
+                <Award className="h-12 w-12 sm:h-20 sm:w-20 text-yellow-500 animate-spin" />
+              </div>
+              <h3 className="text-xl sm:text-3xl lg:text-4xl font-black mb-4 sm:mb-6 py-3 bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent">
+                🏆 Ready to Earn Your Badges?
+              </h3>
+              <p className="text-sm sm:text-xl font-bold text-gray-700 mb-6 sm:mb-8 max-w-2xl mx-auto px-2">
+                Complete {currentCategory.name.toLowerCase()} quizzes and earn points! Compete with players worldwide and show off your {currentCategory.name.toLowerCase()} expertise!
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 justify-center">
+                <Link to="/leaderboard">
+                  <Button className="bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white text-base sm:text-xl font-black px-6 sm:px-10 py-3 sm:py-6 rounded-xl sm:rounded-2xl shadow-xl sm:shadow-2xl hover:shadow-2xl sm:hover:shadow-3xl transition-all duration-300 transform hover:scale-105 border-2 sm:border-4 border-blue-400">
+                    👑 View Leaderboard
+                  </Button>
+                </Link>
+                <Link to="/categories">
+                  <Button
+                    variant="outline"
+                    className="border-2 sm:border-4 border-green-500 text-green-600 hover:bg-green-50 hover:text-green-700 hover:border-green-600 text-base sm:text-xl font-black px-6 sm:px-10 py-3 sm:py-6 rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl hover:shadow-xl sm:hover:shadow-2xl transition-all duration-300 transform hover:scale-105 bg-transparent"
+                  >
+                    📚 Change Category
+                  </Button>
+                </Link>
               </div>
             </CardContent>
           </Card>
         </div>
-      </div>
+      </section>
+
+      <footer className="mt-6 sm:mt-8 border-t border-red-200 bg-white/80 backdrop-blur-sm">
+        <div className="container mx-auto px-3 sm:px-4 py-6 sm:py-8">
+          <div className="flex flex-col md:flex-row items-center justify-between">
+            <p className="text-gray-600 text-xs sm:text-sm font-medium text-center md:text-right">
+              © 2025 Tulips & Ties • The Ultimate Croatia vs Netherlands Quiz Battle!
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
