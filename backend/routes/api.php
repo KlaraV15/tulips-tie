@@ -20,34 +20,31 @@ Route::post('login', [AuthController::class, 'login']);
 // ---------------------------
 // PROTECTED ROUTES (AUTH REQUIRED)
 // ---------------------------
-//Route::middleware('auth:sanctum')->group(function () {
-
+Route::middleware('auth:sanctum')->group(function () {
     // User profile
     Route::get('user', [UserController::class, 'profile']);
     Route::post('logout', [UserController::class, 'logout']);
     Route::post('resetpassword', [AuthController::class, 'resetPassword']);
-
-
-
-
+});
 
 // Fetch user results
 Route::get('users/{user}/results', [ResultController::class, 'userResults']);
 
-
-    Route::apiResource('quizzes', QuizController::class);
-
-
-    //questions CRUD actions
-    Route::apiResource('questions', QuestionsController::class);
-
-    //store results
-    Route::apiResource('results', ResultController::class)->only(['store'/*,'index','show'*/]);
+// Random quiz route
+Route::get('quizzes/random', [QuizController::class, 'getRandomQuiz']);
+Route::apiResource('quizzes', QuizController::class);
 
 
-    Route::apiResource('categories', CategoryController::class)->only(['index']);
-    Route::apiResource('countries', CountryController::class)->only(['index']);
-    Route::apiResource('difficulties', DifficultyController::class)->only(['index']);
+//questions CRUD actions
+Route::apiResource('questions', QuestionsController::class);
+
+//store results
+Route::apiResource('results', ResultController::class)->only(['store'/*,'index','show'*/]);
+
+
+Route::apiResource('categories', CategoryController::class)->only(['index']);
+Route::apiResource('countries', CountryController::class)->only(['index']);
+Route::apiResource('difficulties', DifficultyController::class)->only(['index']);
 
 
 
@@ -62,7 +59,3 @@ Route::get('users/{user}/results', [ResultController::class, 'userResults']);
 
 
 // Lookup tables (categories, countries, difficulties)
-
-
-
-

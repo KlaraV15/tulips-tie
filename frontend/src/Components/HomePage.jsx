@@ -1,21 +1,55 @@
-import { Link } from "react-router-dom"
-import { Button } from "../Components/ui/Button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../Components/ui/Card"
-import { Badge } from "../Components/ui/Badge"
-import { Trophy, Users, Brain, Shield, Globe, Star, Zap, Heart, Award } from "lucide-react"
-import logo from '../assets/logo-rose.png'
-import illustration1 from '../assets/illustration1.png'
-import illustration3 from '../assets/illustration3.png'
-import illustration4 from '../assets/illustration4.png'
-import illustration5 from '../assets/illustration5.png'
-import illustration6 from '../assets/illustration6.png'
-import illustration7 from '../assets/illustration7.png'
-import illustration8 from '../assets/illustration8.png'
-import illustration9 from '../assets/illustration9.png'
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Button } from '../Components/ui/Button';
+import { useAuth } from '../contexts/AuthContext';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../Components/ui/Card';
+import { Badge } from '../Components/ui/Badge';
+import { Trophy, Users, Brain, Shield, Globe, Star, Zap, Heart, Award } from 'lucide-react';
+import HttpClient from '../../helpers/HttpClient.js';
+import logo from '../assets/logo-rose.png';
+import illustration1 from '../assets/illustration1.png';
+import illustration3 from '../assets/illustration3.png';
+import illustration4 from '../assets/illustration4.png';
+import illustration5 from '../assets/illustration5.png';
+import illustration6 from '../assets/illustration6.png';
+import illustration7 from '../assets/illustration7.png';
+import illustration8 from '../assets/illustration8.png';
+import illustration9 from '../assets/illustration9.png';
+
+const client = new HttpClient();
+
+// Function to get a random quiz
+async function getRandomQuiz() {
+  try {
+    const response = await client.newRequest('/quizzes/random');
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching random quiz:', error);
+    throw error;
+  }
+}
 
 export default function HomePage() {
+  const [isLoadingRandomQuiz, setIsLoadingRandomQuiz] = useState(false);
+  const { user, logout, isAuthenticated } = useAuth();
+
   const handleClick = () => {
     window.scrollTo(0, 0); // scrolls to top
+  };
+
+  // Handle random quiz start
+  const handleRandomQuizClick = async () => {
+    try {
+      setIsLoadingRandomQuiz(true);
+      const randomQuiz = await getRandomQuiz();
+      // Navigate to the random quiz
+      window.location.href = `/quiz/${randomQuiz.id}`;
+    } catch (error) {
+      console.error('Failed to get random quiz:', error);
+      setIsLoadingRandomQuiz(false);
+      // Fallback to categories page
+      window.location.href = '/categories';
+    }
   };
   const illustrations = [
     { src: illustration1, alt: 'Quiz Challenge Illustration 1' },
@@ -25,8 +59,8 @@ export default function HomePage() {
     { src: illustration6, alt: 'Quiz Challenge Illustration 6' },
     { src: illustration7, alt: 'Quiz Challenge Illustration 7' },
     { src: illustration8, alt: 'Quiz Challenge Illustration 8' },
-    { src: illustration9, alt: 'Quiz Challenge Illustration 9' }
-  ]
+    { src: illustration9, alt: 'Quiz Challenge Illustration 9' },
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-300 via-red-300 to-red-300">
@@ -35,7 +69,10 @@ export default function HomePage() {
         <div className="container mx-auto px-3 sm:px-4 py-3 flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <div className="relative">
-              <img src={logo} className="h-8 w-6 sm:h-12 sm:w-8 text-red-600" />
+              <img
+                src={logo}
+                className="h-8 w-6 sm:h-12 sm:w-8 text-red-600"
+              />
               <div className="absolute -top-1 -right-1 w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full animate-pulse"></div>
             </div>
             <span className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent">
@@ -43,32 +80,54 @@ export default function HomePage() {
             </span>
           </div>
           <div className="flex items-center gap-2">
-            <Link to="/login">
-              <Button
-                variant="outline"
-                className="px-2 sm:px-7 py-1 sm:py-4 text-xs sm:text-lg text-red-600 border-2 border-red-400 
+            {isAuthenticated ? (
+              <>
+                <div className="flex items-center space-x-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-xl">
+                  <div className="w-8 h-8 bg-gradient-to-r from-red-600 to-blue-600 rounded-full flex items-center justify-center">
+                    <span className="text-white font-bold text-sm">
+                      {user?.username?.charAt(0).toUpperCase()}
+                    </span>
+                  </div>
+                  <span className="font-medium text-gray-800">Hello, {user?.username}!</span>
+                </div>
+                <Button
+                  onClick={logout}
+                  variant="outline"
+                  className="px-2 sm:px-7 py-1 sm:py-4 text-xs sm:text-lg text-red-600 border-2 border-red-400
                  hover:bg-red-50 hover:text-red-700 hover:border-red-500 
                  font-semibold rounded-lg sm:rounded-2xl transition-all duration-300 ease-out
-                 shadow-sm hover:shadow-md whitespace-nowrap cursor-pointer"
-              >
-                Login
-              </Button>
-            </Link>
-            <Link to="/register">
-              <Button
-                className="px-3 sm:px-10 py-1 sm:py-4 text-xs sm:text-lg font-semibold text-white 
+                 shadow-sm hover:shadow-md whitespace-nowrap cursor-pointer">
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <>
+                <Link to="/login">
+                  <Button
+                    variant="outline"
+                    className="px-2 sm:px-7 py-1 sm:py-4 text-xs sm:text-lg text-red-600 border-2 border-red-400
+                 hover:bg-red-50 hover:text-red-700 hover:border-red-500 
+                 font-semibold rounded-lg sm:rounded-2xl transition-all duration-300 ease-out
+                 shadow-sm hover:shadow-md whitespace-nowrap cursor-pointer">
+                    Login
+                  </Button>
+                </Link>
+                <Link to="/register">
+                  <Button
+                    className="px-3 sm:px-10 py-1 sm:py-4 text-xs sm:text-lg font-semibold text-white
              bg-gradient-to-r from-rose-600 via-rose-500 to-rose-600
              hover:from-rose-700 hover:via-rose-600 hover:to-rose-700
              rounded-lg sm:rounded-2xl shadow-sm sm:shadow-xl hover:shadow-2xl
              border border-rose-500
              transition-all duration-300 ease-out
              transform  hover:brightness-110
-             focus:ring-2 sm:focus:ring-4 focus:ring-rose-400 whitespace-nowrap cursor-pointer"
-              >
-                <span className="sm:hidden">🌸</span>
-                <span className="hidden sm:inline">🌸 Play Now!</span>
-              </Button>
-            </Link>
+             focus:ring-2 sm:focus:ring-4 focus:ring-rose-400 whitespace-nowrap cursor-pointer">
+                    <span className="sm:hidden">🌸</span>
+                    <span className="hidden sm:inline">🌸 Play Now!</span>
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </nav>
@@ -82,10 +141,15 @@ export default function HomePage() {
               🎯 LIVE QUIZ • 🇭🇷 CROATIA vs NETHERLANDS 🇳🇱
             </Badge>
             <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-4 sm:mb-6 text-balance leading-tight">
-              Can You Master <span className="bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent">Both Nations?</span>
+              Can You Master{' '}
+              <span className="bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent">
+                Both Nations?
+              </span>
             </h1>
             <p className="text-sm sm:text-lg text-gray-700 mb-6 sm:mb-8 text-pretty leading-relaxed">
-              🚀 Challenge your knowledge in this exciting quiz battle! Earn points, unlock achievements, and prove you're the ultimate geography champion!
+              🚀 Challenge your knowledge in this exciting quiz battle! Start with a random quiz or
+              choose your topic. Earn points, unlock achievements, and prove you're the ultimate
+              geography champion!
             </p>
 
             {/* Quick Stats */}
@@ -101,24 +165,44 @@ export default function HomePage() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
-              <Link to="/categories" className="w-full sm:w-auto">
+              <Button
+                size="lg"
+                onClick={handleRandomQuizClick}
+                disabled={isLoadingRandomQuiz}
+                className="w-full sm:w-auto bg-gradient-to-r from-red-600 to-red-500
+                 text-white text-sm sm:text-lg px-4 sm:px-8 py-3 sm:py-6 
+                 shadow-xl border-2 border-red-400 rounded-xl sm:rounded-2xl font-bold
+                 transition-all duration-500 transform
+                 animate-slowpulse cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed">
+                {isLoadingRandomQuiz ? (
+                  <>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                    Loading Random Quiz...
+                  </>
+                ) : (
+                  '🎲 Start Random Quiz Challenge'
+                )}
+              </Button>
+              <Link
+                to="/quizzes"
+                className="w-full sm:w-auto">
                 <Button
                   size="lg"
-                  className="w-full sm:w-auto bg-gradient-to-r from-red-600 to-red-500 
+                  className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-blue-500
                    text-white text-sm sm:text-lg px-4 sm:px-8 py-3 sm:py-6 
-                   shadow-xl border-2 border-red-400 rounded-xl sm:rounded-2xl font-bold
+                   shadow-xl border-2 border-blue-400 rounded-xl sm:rounded-2xl font-bold
                    transition-all duration-500 transform
-                   animate-slowpulse cursor-pointer"
-                >
-                  🎮 Start Quiz Challenge
+                   animate-slowpulse cursor-pointer">
+                  📚 Browse All Quizzes
                 </Button>
               </Link>
-              <Link to="/leaderboard" className="w-full sm:w-auto">
+              <Link
+                to="/leaderboard"
+                className="w-full sm:w-auto">
                 <Button
                   size="lg"
                   variant="outline"
-                  className="w-full sm:w-auto text-red-600 border-red-300 hover:bg-red-50 hover:text-red-700 hover:border-red-400 text-sm sm:text-lg px-4 sm:px-8 py-3 sm:py-6 font-bold rounded-xl sm:rounded-2xl transition-all duration-200 shadow-md cursor-pointer"
-                >
+                  className="w-full sm:w-auto text-red-600 border-red-300 hover:bg-red-50 hover:text-red-700 hover:border-red-400 text-sm sm:text-lg px-4 sm:px-8 py-3 sm:py-6 font-bold rounded-xl sm:rounded-2xl transition-all duration-200 shadow-md cursor-pointer">
                   🏆 View Champions
                 </Button>
               </Link>
@@ -132,9 +216,8 @@ export default function HomePage() {
                 key={index}
                 className="absolute inset-0"
                 style={{
-                  animation: `imageCycle ${illustrations.length * 3}s infinite ${index * 3}s`
-                }}
-              >
+                  animation: `imageCycle ${illustrations.length * 3}s infinite ${index * 3}s`,
+                }}>
                 <img
                   src={illustration.src}
                   alt={illustration.alt}
@@ -145,37 +228,46 @@ export default function HomePage() {
           </div>
         </div>
 
-        <style jsx>{`
-          @keyframes imageCycle {
-            0% {
-              opacity: 0;
-              transform: scale(1.1);
-            }
-            5% {
-              opacity: 1;
-              transform: scale(1);
-            }
-            15% {
-              opacity: 1;
-              transform: scale(1);
-            }
-            20% {
-              opacity: 0;
-              transform: scale(1.1);
-            }
-            100% {
-              opacity: 0;
-              transform: scale(1.1);
-            }
-          }
-          @keyframes slowpulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(220, 38, 38, 0.5); }
-            50% { transform: scale(1.05); box-shadow: 0 0 35px rgba(220, 38, 38, 0.7); }
-          }
-          .animate-slowpulse {
-            animation: slowpulse 4s ease-in-out infinite;
-          }
-        `}</style>
+        <style>{`
+           @keyframes imageCycle {
+             0% {
+               opacity: 0;
+               transform: scale(1.1);
+             }
+             5% {
+               opacity: 1;
+               transform: scale(1);
+             }
+             15% {
+               opacity: 1;
+               transform: scale(1);
+             }
+             20% {
+               opacity: 0;
+               transform: scale(1.1);
+             }
+             100% {
+               opacity: 0;
+               transform: scale(1.1);
+             }
+           }
+
+           @keyframes slowpulse {
+             0%,
+             100% {
+               transform: scale(1);
+               box-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
+             }
+             50% {
+               transform: scale(1.05);
+               box-shadow: 0 0 35px rgba(220, 38, 38, 0.7);
+             }
+           }
+
+           .animate-slowpulse {
+             animation: slowpulse 4s ease-in-out infinite;
+           }
+         `}</style>
       </section>
 
       {/* Rest of your component remains the same */}
@@ -249,7 +341,9 @@ export default function HomePage() {
               <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-100 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 mx-auto">
                 <Users className="h-6 w-6 sm:h-8 sm:w-8 text-green-600" />
               </div>
-              <CardTitle className="text-gray-800 text-lg sm:text-xl">📊 Progress Tracking</CardTitle>
+              <CardTitle className="text-gray-800 text-lg sm:text-xl">
+                📊 Progress Tracking
+              </CardTitle>
               <CardDescription className="text-gray-600 font-medium text-sm sm:text-base">
                 Track stats, achievements, and improvement over time!
               </CardDescription>
@@ -283,7 +377,9 @@ export default function HomePage() {
             <h2 className="text-2xl sm:text-4xl md:text-5xl font-black mb-3 sm:mb-4 px-1 py-2 bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent">
               How To Play
             </h2>
-            <p className="text-gray-700 text-sm sm:text-lg font-medium">Simple rules, maximum excitement!</p>
+            <p className="text-gray-700 text-sm sm:text-lg font-medium">
+              Simple rules, maximum excitement!
+            </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
@@ -293,7 +389,10 @@ export default function HomePage() {
                 {/* Animated heart icon */}
                 <div className="absolute -top-4 sm:-top-6 left-1/2 transform -translate-x-1/2">
                   <div className="w-8 h-8 sm:w-12 sm:h-12 bg-red-500 rounded-full flex items-center justify-center shadow-lg animate-pulse">
-                    <Heart className="h-4 w-4 sm:h-6 sm:w-6 text-white" fill="white" />
+                    <Heart
+                      className="h-4 w-4 sm:h-6 sm:w-6 text-white"
+                      fill="white"
+                    />
                   </div>
                 </div>
                 <CardTitle className="text-white text-lg sm:text-2xl flex items-center justify-center pt-4 sm:pt-6">
@@ -302,13 +401,15 @@ export default function HomePage() {
               </CardHeader>
               <CardContent className="space-y-3 sm:space-y-4 p-4 sm:p-6">
                 {[
-                  { text: "🎯 Each player starts with 3 lives", icon: "❤️❤️❤️" },
-                  { text: "💥 Wrong answer = lose 1 life", icon: "💔" },
-                  { text: "💀 Game ends at 0 lives", icon: "☠️" },
-                  { text: "🔀 10 random questions per game", icon: "🎲" },
-                  { text: "⏱️ Answer quickly for bonus points!", icon: "⚡" }
+                  { text: '🎯 Each player starts with 3 lives', icon: '❤️❤️❤️' },
+                  { text: '💥 Wrong answer = lose 1 life', icon: '💔' },
+                  { text: '💀 Game ends at 0 lives', icon: '☠️' },
+                  { text: '🔀 10 random questions per game', icon: '🎲' },
+                  { text: '⏱️ Answer quickly for bonus points!', icon: '⚡' },
                 ].map((rule, index) => (
-                  <div key={index} className="flex items-start space-x-2 sm:space-x-3 group hover:bg-red-50 p-2 rounded-lg transition-all duration-200">
+                  <div
+                    key={index}
+                    className="flex items-start space-x-2 sm:space-x-3 group hover:bg-red-50 p-2 rounded-lg transition-all duration-200">
                     <div className="w-6 h-6 sm:w-8 sm:h-8 bg-red-100 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold text-red-600 mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform duration-200 border border-red-200">
                       {index + 1}
                     </div>
@@ -336,19 +437,23 @@ export default function HomePage() {
               </CardHeader>
               <CardContent className="space-y-3 sm:space-y-4 p-4 sm:p-6">
                 {[
-                  { text: "✅ +10 points per correct answer", points: "💎 +10" },
-                  { text: "⚡ +2 bonus for quick answers", points: "🚀 +2" },
-                  { text: "🏆 Top scores on global leaderboard", points: "👑 #1" },
-                  { text: "📈 Track your progress over time", points: "📊 Stats" },
-                  { text: "🎖️ Unlock achievements and badges!", points: "🛡️ Badges" }
+                  { text: '✅ +10 points per correct answer', points: '💎 +10' },
+                  { text: '⚡ +2 bonus for quick answers', points: '🚀 +2' },
+                  { text: '🏆 Top scores on global leaderboard', points: '👑 #1' },
+                  { text: '📈 Track your progress over time', points: '📊 Stats' },
+                  { text: '🎖️ Unlock achievements and badges!', points: '🛡️ Badges' },
                 ].map((rule, index) => (
-                  <div key={index} className="flex items-start space-x-2 sm:space-x-3 group hover:bg-blue-50 p-2 rounded-lg transition-all duration-200">
+                  <div
+                    key={index}
+                    className="flex items-start space-x-2 sm:space-x-3 group hover:bg-blue-50 p-2 rounded-lg transition-all duration-200">
                     <div className="w-6 h-6 sm:w-8 sm:h-8 bg-blue-100 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold text-blue-600 mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform duration-200 border border-blue-200">
                       {index + 1}
                     </div>
                     <div className="flex-1">
                       <p className="text-gray-700 font-medium text-sm sm:text-base">{rule.text}</p>
-                      <p className="text-xs sm:text-sm font-bold text-blue-600 mt-1">{rule.points}</p>
+                      <p className="text-xs sm:text-sm font-bold text-blue-600 mt-1">
+                        {rule.points}
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -359,21 +464,28 @@ export default function HomePage() {
           {/* Fun Progress Bar Illustration - Fixed text */}
           <div className="mt-8 sm:mt-12 bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 border-2 border-yellow-200 shadow-lg">
             <div className="text-center mb-3 sm:mb-4">
-              <h3 className="text-base sm:text-xl font-bold text-gray-800 mb-1 sm:mb-2">🎯 Your Progress Journey</h3>
+              <h3 className="text-base sm:text-xl font-bold text-gray-800 mb-1 sm:mb-2">
+                🎯 Your Progress Journey
+              </h3>
               <p className="text-gray-600 text-xs sm:text-base">From beginner to quiz master!</p>
             </div>
             <div className="flex items-center justify-between mb-2">
               <div className="text-[10px] sm:text-sm font-medium text-gray-600">🥚 Beginner</div>
-              <div className="text-[10px] sm:text-sm font-medium text-gray-600">🐣 Intermediate</div>
+              <div className="text-[10px] sm:text-sm font-medium text-gray-600">
+                🐣 Intermediate
+              </div>
               <div className="text-[10px] sm:text-sm font-medium text-gray-600">🐥 Advanced</div>
-              <div className="text-[10px] sm:text-sm font-medium text-gray-600 hidden sm:block">🐔 Expert</div>
-              <div className="text-[10px] sm:text-sm font-medium text-gray-600 hidden sm:block">🦅 Master</div>
+              <div className="text-[10px] sm:text-sm font-medium text-gray-600 hidden sm:block">
+                🐔 Expert
+              </div>
+              <div className="text-[10px] sm:text-sm font-medium text-gray-600 hidden sm:block">
+                🦅 Master
+              </div>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-3 sm:h-4 mb-3 sm:mb-4">
               <div
                 className="bg-gradient-to-r from-green-400 to-yellow-500 h-3 sm:h-4 rounded-full animate-pulse"
-                style={{ width: '65%' }}
-              ></div>
+                style={{ width: '65%' }}></div>
             </div>
             <div className="flex justify-center">
               <div className="bg-yellow-100 border border-yellow-300 rounded-full px-3 sm:px-4 py-1 sm:py-2 text-yellow-800 font-bold text-[10px] sm:text-sm animate-bounce text-center">
@@ -385,27 +497,40 @@ export default function HomePage() {
           {/* Fun Stats Row */}
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-6 sm:mt-8">
-            <Link to="/leaderboard" className="w-full sm:w-auto " onClick={handleClick} >
+            <Link
+              to="/leaderboard"
+              className="w-full sm:w-auto "
+              onClick={handleClick}>
               <div className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 text-center border-2 border-green-200 shadow-md hover:shadow-lg transition-all duration-200">
                 <div className="text-xl sm:text-2xl mb-1 sm:mb-2">🎯</div>
                 <div className="font-bold text-gray-800 text-sm sm:text-base">90%</div>
                 <div className="text-xs sm:text-sm text-gray-600">Accuracy</div>
               </div>
             </Link>
-            <Link to="/leaderboard" className="w-full sm:w-auto" onClick={handleClick}>
+            <Link
+              to="/leaderboard"
+              className="w-full sm:w-auto"
+              onClick={handleClick}>
               <div className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 text-center border-2 border-blue-200 shadow-md hover:shadow-lg transition-all duration-200">
                 <div className="text-xl sm:text-2xl mb-1 sm:mb-2">⚡</div>
                 <div className="font-bold text-gray-800 text-sm sm:text-base">2.3s</div>
                 <div className="text-xs sm:text-sm text-gray-600">Avg. Speed</div>
-              </div></Link>
-            <Link to="/leaderboard" className="w-full sm:w-auto" onClick={handleClick}>
+              </div>
+            </Link>
+            <Link
+              to="/leaderboard"
+              className="w-full sm:w-auto"
+              onClick={handleClick}>
               <div className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 text-center border-2 border-purple-200 shadow-md hover:shadow-lg transition-all duration-200">
                 <div className="text-xl sm:text-2xl mb-1 sm:mb-2">🏆</div>
                 <div className="font-bold text-gray-800 text-sm sm:text-base">#42</div>
                 <div className="text-xs sm:text-sm text-gray-600">Rank</div>
               </div>
             </Link>
-            <Link to="/leaderboard" className="w-full sm:w-auto" onClick={handleClick}>
+            <Link
+              to="/leaderboard"
+              className="w-full sm:w-auto"
+              onClick={handleClick}>
               <div className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 text-center border-2 border-red-200 shadow-md hover:shadow-lg transition-all duration-200">
                 <div className="text-xl sm:text-2xl mb-1 sm:mb-2">🎮</div>
                 <div className="font-bold text-gray-800 text-sm sm:text-base">156</div>
@@ -423,7 +548,6 @@ export default function HomePage() {
       <footer className="mt-6 sm:mt-8 border-t border-red-200 bg-white/80 backdrop-blur-sm">
         <div className="container mx-auto px-3 sm:px-4 py-6 sm:py-8">
           <div className="flex flex-col md:flex-row items-center justify-between">
-
             <p className="text-gray-600 text-xs sm:text-sm font-medium text-center md:text-right">
               © 2025 Tulips & Ties • The Ultimate Croatia vs Netherlands Quiz Battle!
             </p>
@@ -431,5 +555,5 @@ export default function HomePage() {
         </div>
       </footer>
     </div>
-  )
+  );
 }
