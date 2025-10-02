@@ -14,6 +14,9 @@ import illustration8 from '../assets/illustration8.png'
 import illustration9 from '../assets/illustration9.png'
 
 export default function HomePage() {
+  const handleClick = () => {
+    window.scrollTo(0, 0); // scrolls to top
+  };
   const illustrations = [
     { src: illustration1, alt: 'Quiz Challenge Illustration 1' },
     { src: illustration3, alt: 'Quiz Challenge Illustration 3' },
@@ -380,27 +383,35 @@ export default function HomePage() {
           </div>
 
           {/* Fun Stats Row */}
+
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-6 sm:mt-8">
-            <div className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 text-center border-2 border-green-200 shadow-md hover:shadow-lg transition-all duration-200">
-              <div className="text-xl sm:text-2xl mb-1 sm:mb-2">🎯</div>
-              <div className="font-bold text-gray-800 text-sm sm:text-base">90%</div>
-              <div className="text-xs sm:text-sm text-gray-600">Accuracy</div>
-            </div>
-            <div className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 text-center border-2 border-blue-200 shadow-md hover:shadow-lg transition-all duration-200">
-              <div className="text-xl sm:text-2xl mb-1 sm:mb-2">⚡</div>
-              <div className="font-bold text-gray-800 text-sm sm:text-base">2.3s</div>
-              <div className="text-xs sm:text-sm text-gray-600">Avg. Speed</div>
-            </div>
-            <div className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 text-center border-2 border-purple-200 shadow-md hover:shadow-lg transition-all duration-200">
-              <div className="text-xl sm:text-2xl mb-1 sm:mb-2">🏆</div>
-              <div className="font-bold text-gray-800 text-sm sm:text-base">#42</div>
-              <div className="text-xs sm:text-sm text-gray-600">Rank</div>
-            </div>
-            <div className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 text-center border-2 border-red-200 shadow-md hover:shadow-lg transition-all duration-200">
-              <div className="text-xl sm:text-2xl mb-1 sm:mb-2">🎮</div>
-              <div className="font-bold text-gray-800 text-sm sm:text-base">156</div>
-              <div className="text-xs sm:text-sm text-gray-600">Games</div>
-            </div>
+            <Link to="/leaderboard" className="w-full sm:w-auto " onClick={handleClick} >
+              <div className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 text-center border-2 border-green-200 shadow-md hover:shadow-lg transition-all duration-200">
+                <div className="text-xl sm:text-2xl mb-1 sm:mb-2">🎯</div>
+                <div className="font-bold text-gray-800 text-sm sm:text-base">90%</div>
+                <div className="text-xs sm:text-sm text-gray-600">Accuracy</div>
+              </div>
+            </Link>
+            <Link to="/leaderboard" className="w-full sm:w-auto" onClick={handleClick}>
+              <div className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 text-center border-2 border-blue-200 shadow-md hover:shadow-lg transition-all duration-200">
+                <div className="text-xl sm:text-2xl mb-1 sm:mb-2">⚡</div>
+                <div className="font-bold text-gray-800 text-sm sm:text-base">2.3s</div>
+                <div className="text-xs sm:text-sm text-gray-600">Avg. Speed</div>
+              </div></Link>
+            <Link to="/leaderboard" className="w-full sm:w-auto" onClick={handleClick}>
+              <div className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 text-center border-2 border-purple-200 shadow-md hover:shadow-lg transition-all duration-200">
+                <div className="text-xl sm:text-2xl mb-1 sm:mb-2">🏆</div>
+                <div className="font-bold text-gray-800 text-sm sm:text-base">#42</div>
+                <div className="text-xs sm:text-sm text-gray-600">Rank</div>
+              </div>
+            </Link>
+            <Link to="/leaderboard" className="w-full sm:w-auto" onClick={handleClick}>
+              <div className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 text-center border-2 border-red-200 shadow-md hover:shadow-lg transition-all duration-200">
+                <div className="text-xl sm:text-2xl mb-1 sm:mb-2">🎮</div>
+                <div className="font-bold text-gray-800 text-sm sm:text-base">156</div>
+                <div className="text-xs sm:text-sm text-gray-600">Games</div>
+              </div>
+            </Link>
           </div>
         </div>
 

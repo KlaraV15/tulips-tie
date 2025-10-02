@@ -32,7 +32,7 @@ export default function Quiz() {
       description: "Perfect for beginners! Gentle questions to build your confidence.",
       color: "from-green-400 to-green-600",
       border: "border-green-300",
-      bg: "from-green-50 to-green-100",
+      bg: "from-green-80 to-green-400",
       icon: <Medal className="h-6 w-6 sm:h-8 sm:w-8 text-green-500" />,
       questions: "10 questions",
       time: "Unlimited time"
@@ -43,7 +43,7 @@ export default function Quiz() {
       description: "Challenge yourself with balanced questions that test your knowledge!",
       color: "from-yellow-400 to-yellow-600",
       border: "border-yellow-300",
-      bg: "from-yellow-50 to-yellow-100",
+      bg: "from-yellow-80 to-yellow-400",
       icon: <Target className="h-6 w-6 sm:h-8 sm:w-8 text-yellow-500" />,
       questions: "15 questions",
       time: "30s per question"
@@ -54,7 +54,7 @@ export default function Quiz() {
       description: "Face the toughest questions and prove your mastery!",
       color: "from-red-400 to-red-600",
       border: "border-red-400",
-      bg: "from-red-50 to-red-100",
+      bg: "from-red-80 to-red-400",
       icon: <Crown className="h-6 w-6 sm:h-8 sm:w-8 text-red-500" />,
       questions: "20 questions",
       time: "15s per question"
