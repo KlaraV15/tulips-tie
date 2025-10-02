@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import { Button } from "../components/ui/button"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "../components/ui/card"
-import { Globe, Code, BookOpen, Landmark, ArrowLeft, Trophy, Award, Star, Zap, Map } from "lucide-react"
+import { Globe, Code, BookOpen, Landmark, ArrowLeft, Trophy, Award, Star, Zap, Map, Leaf, PawPrint, TrendingUp, Volleyball } from "lucide-react"
 import logo from "../assets/logo-rose.png"
 
 export default function CategorySelection({ onSelectCategory, onBack }) {
@@ -27,7 +27,7 @@ export default function CategorySelection({ onSelectCategory, onBack }) {
         {
             id: "geography",
             name: "Geography",
-            description: "Explore the diverse landscapes, regions, and natural wonders of Croatia and the Netherlands.",
+            description: "Explore the diverse landscapes, regions, and natural wonders of Croatia and the Netherlands",
             icon: <Map className="h-6 w-6 sm:h-8 sm:w-8 text-green-500" />,
             color: "from-green-400 to-green-600",
             border: "border-green-300",
@@ -36,7 +36,6 @@ export default function CategorySelection({ onSelectCategory, onBack }) {
             questions: "10 questions",
             time: "Adaptive timing"
         },
-
         {
             id: "history",
             name: "History",
@@ -52,7 +51,7 @@ export default function CategorySelection({ onSelectCategory, onBack }) {
         {
             id: "politics",
             name: "Politics",
-            description: "Test your knowledge of political systems and governance",
+            description: "Test your knowledge of political systems, laws and governance     ",
             icon: <Landmark className="h-6 w-6 sm:h-8 sm:w-8 text-red-500" />,
             color: "from-red-400 to-red-600",
             border: "border-red-300",
@@ -61,6 +60,54 @@ export default function CategorySelection({ onSelectCategory, onBack }) {
             questions: "10 questions",
             time: "Adaptive timing"
         },
+        {
+            id: "funFacts",
+            name: "Fun Facts",
+            description: "Discover surprising and entertaining facts about both countries",
+            icon: <Award className="h-6 w-6 sm:h-8 sm:w-8 text-pink-500" />,
+            color: "from-pink-400 to-pink-600",
+            border: "border-pink-300",
+            bg: "from-pink-50 to-pink-100",
+            points: "Surprising Trivia",
+            questions: "10 questions",
+            time: "Adaptive timing"
+        },
+        {
+            id: "natureWildlife",
+            name: "Nature & Wildlife",
+            description: "Explore national parks, wildlife, and popular natural wonders",
+            icon: <Leaf className="h-6 w-6 sm:h-8 sm:w-8 text-emerald-500" />,
+            color: "from-emerald-400 to-emerald-600",
+            border: "border-emerald-300",
+            bg: "from-emerald-50 to-emerald-100",
+            points: "Natural Wonders",
+            questions: "10 questions",
+            time: "Adaptive timing"
+        },
+        {
+            id: "economy",
+            name: "Economy & Innovation",
+            description: "Learn about economic systems, industries, and innovations",
+            icon: <TrendingUp className="h-6 w-6 sm:h-8 sm:w-8 text-blue-500" />,
+            color: "from-blue-400 to-blue-600",
+            border: "border-blue-300",
+            bg: "from-blue-50 to-blue-100",
+            points: "Economic Insights",
+            questions: "10 questions",
+            time: "Adaptive timing"
+        },
+        {
+            id: "sports",
+            name: "Sports",
+            description: "Test your knowledge of sports achievements and traditions",
+            icon: <Volleyball className="h-6 w-6 sm:h-8 sm:w-8 text-orange-500" />,
+            color: "from-orange-400 to-orange-600",
+            border: "border-orange-300",
+            bg: "from-orange-50 to-orange-100",
+            points: "Sports Excellence",
+            questions: "10 questions",
+            time: "Adaptive timing"
+        }
     ]
 
     const handleCategorySelect = (category) => {
@@ -69,11 +116,7 @@ export default function CategorySelection({ onSelectCategory, onBack }) {
 
         // Store the selected category and navigate to quiz page
         setTimeout(() => {
-            // You can use your preferred navigation method here
-            // For example, using react-router:
             window.location.href = `/quiz?category=${category.id}`
-            // Or if you're using state management:
-            // onSelectCategory(category.id)
         }, 800)
     }
 
@@ -88,7 +131,7 @@ export default function CategorySelection({ onSelectCategory, onBack }) {
                             Loading {selectedCategory?.name}...
                         </h2>
                         <p className="text-sm sm:text-xl text-white/80 font-bold">
-                            Get ready for cultural discovery! 🌍
+                            Get ready for {selectedCategory?.name.toLowerCase()} discovery! 🌍
                         </p>
                     </div>
                 </div>
@@ -108,6 +151,8 @@ export default function CategorySelection({ onSelectCategory, onBack }) {
             <div className="fixed bottom-16 sm:bottom-32 right-8 sm:right-20 w-8 h-8 sm:w-16 sm:h-16 bg-green-300 rounded-full opacity-20 animate-pulse"></div>
             <div className="fixed top-20 sm:top-40 right-16 sm:right-32 w-6 h-6 sm:w-12 sm:h-12 bg-purple-300 rounded-full opacity-20 animate-ping"></div>
             <div className="fixed bottom-10 sm:bottom-20 left-16 sm:left-32 w-7 h-7 sm:w-14 sm:h-14 bg-pink-300 rounded-full opacity-20 animate-bounce"></div>
+            <div className="fixed top-32 sm:top-64 left-20 sm:left-40 w-5 h-5 sm:w-10 sm:h-10 bg-blue-300 rounded-full opacity-20 animate-pulse"></div>
+            <div className="fixed bottom-40 sm:bottom-80 right-24 sm:right-48 w-6 h-6 sm:w-12 sm:h-12 bg-orange-300 rounded-full opacity-20 animate-bounce"></div>
 
             {/* Navigation */}
             <nav className="border-b-4 border-red-200 bg-white/90 backdrop-blur-sm sticky top-0 z-50 shadow-xl">
@@ -143,7 +188,6 @@ export default function CategorySelection({ onSelectCategory, onBack }) {
                     <div className="flex items-center justify-center mb-4 sm:mb-6">
                         <div className="relative">
                             <Trophy className="h-12 w-12 sm:h-20 sm:w-20 text-yellow-500 animate-bounce" />
-                            {/* <div className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 w-4 h-4 sm:w-6 sm:h-6 bg-red-500 rounded-full animate-ping"></div> */}
                         </div>
                     </div>
                     <div className="bg-gradient-to-r from-red-500 to-blue-500 text-white border-0 text-sm sm:text-lg font-bold py-2 sm:py-3 px-4 sm:px-6 rounded-full inline-block mb-4 sm:mb-6 animate-bounce shadow-xl whitespace-nowrap overflow-hidden">
@@ -156,11 +200,31 @@ export default function CategorySelection({ onSelectCategory, onBack }) {
                         </span>
                     </h1>
                     <p className="text-base sm:text-xl lg:text-2xl font-bold text-gray-700 max-w-3xl mx-auto text-pretty leading-relaxed px-2">
-                        🌍 Explore Croatia vs Netherlands across different topics! Choose your category and test your knowledge! 🇭🇷🇳🇱
+                        🌍 Explore Croatia vs Netherlands across 8 exciting topics! Choose your category and test your knowledge! 🇭🇷🇳🇱
                     </p>
                 </div>
 
-                {/* Category Selection Cards */}
+                {/* Quick Stats Section */}
+                <div className="mt-12 mb-5 sm:mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 max-w-4xl mx-auto">
+                    <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-4 sm:p-6 text-center border-2 border-yellow-200 shadow-lg">
+                        <div className="text-2xl sm:text-4xl font-black text-yellow-600 mb-2">8</div>
+                        <div className="text-sm sm:text-lg font-bold text-gray-700">Categories</div>
+                    </div>
+                    <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-4 sm:p-6 text-center border-2 border-green-200 shadow-lg">
+                        <div className="text-2xl sm:text-4xl font-black text-green-600 mb-2">80+</div>
+                        <div className="text-sm sm:text-lg font-bold text-gray-700">Questions</div>
+                    </div>
+                    <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-4 sm:p-6 text-center border-2 border-blue-200 shadow-lg">
+                        <div className="text-2xl sm:text-4xl font-black text-blue-600 mb-2">3</div>
+                        <div className="text-sm sm:text-lg font-bold text-gray-700">Difficulties</div>
+                    </div>
+                    <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-4 sm:p-6 text-center border-2 border-purple-200 shadow-lg">
+                        <div className="text-2xl sm:text-4xl font-black text-purple-600 mb-2">2</div>
+                        <div className="text-sm sm:text-lg font-bold text-gray-700">Countries</div>
+                    </div>
+                </div>
+
+                {/* Category Selection Cards - ORIGINAL RESPONSIVE LAYOUT */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 max-w-6xl mx-auto">
                     {categories.map((category) => (
                         <Card
@@ -210,7 +274,7 @@ export default function CategorySelection({ onSelectCategory, onBack }) {
                     ))}
                 </div>
 
-
+                
             </section>
 
             <footer className="mt-6 sm:mt-8 border-t border-red-200 bg-white/80 backdrop-blur-sm">

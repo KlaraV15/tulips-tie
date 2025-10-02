@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
-import { Button } from "../components/ui/Button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/Card"
-import { Progress } from "../components/ui/Progress"
-import { Badge } from "../components/ui/Badge"
+import { Button } from "../ui/Button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/Card"
+import { Progress } from "../ui/Progress"
+import { Badge } from "../ui/Badge"
 import { Heart, Clock, Trophy, ArrowLeft, Flag, Zap, Check, X, Star, Users, Award } from "lucide-react"
 
 // Mock quiz data

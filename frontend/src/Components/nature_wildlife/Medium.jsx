@@ -2,97 +2,95 @@
 
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
-import { Button } from "../components/ui/Button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/Card"
-import { Progress } from "../components/ui/Progress"
-import { Badge } from "../components/ui/Badge"
+import { Button } from "../ui/Button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/Card"
+import { Progress } from "../ui/Progress"
+import { Badge } from "../ui/Badge"
 import { Heart, Clock, Trophy, ArrowLeft, Flag, Zap, Check, X, Star, Users, Award } from "lucide-react"
 
 // Mock quiz data
 const mockQuestions = [
-{
+  {
     id: 1,
-    country: "Netherlands",
-    question: "Which Dutch national park is famous for heathlands and red deer?",
-    options: ["Hoge Veluwe", "Biesbosch", "Kinderdijk", "Texel"],
+    country: "Croatia",
+    question: "Which Croatian basketball player was an NBA star in the 1990s?",
+    options: ["Dražen Petrović", "Toni Kukoč", "Bojan Bogdanović", "Ivica Zubac"],
     correctAnswer: 0,
     difficulty: "Medium",
   },
   {
     id: 2,
-    country: "Croatia",
-    question: "Which Croatian park is a UNESCO World Heritage Site?",
-    options: ["Plitvice Lakes", "Paklenica", "Biokovo", "Mljet"],
+    country: "Netherlands",
+    question: "Which Dutch football club is based in Eindhoven?",
+    options: ["PSV", "Ajax", "Feyenoord", "AZ"],
     correctAnswer: 0,
     difficulty: "Medium",
   },
   {
     id: 3,
-    country: "Netherlands",
-    question: "Which bird is often associated with Dutch wetlands?",
-    options: ["Heron", "Ostrich", "Falcon", "Hummingbird"],
+    country: "Croatia",
+    question: "Which city hosted the 2009 World Handball Championship won by Croatia?",
+    options: ["Zagreb", "Split", "Rijeka", "Osijek"],
     correctAnswer: 0,
     difficulty: "Medium",
   },
   {
     id: 4,
-    country: "Croatia",
-    question: "What type of dolphin can often be spotted in the Adriatic Sea?",
-    options: ["Bottlenose dolphin", "Orca", "Pink river dolphin", "Beluga"],
+    country: "Netherlands",
+    question: "Which Dutch driver became the first Formula 1 World Champion from the Netherlands?",
+    options: ["Max Verstappen", "Jos Verstappen", "Nyck de Vries", "Jan Lammers"],
     correctAnswer: 0,
     difficulty: "Medium",
   },
   {
     id: 5,
-    country: "Netherlands",
-    question: "What is the largest national park in the Netherlands?",
-    options: ["De Hoge Veluwe", "De Biesbosch", "Veluwezoom", "Drents-Friese Wold"],
+    country: "Croatia",
+    question: "In which sport did Janica Kostelić win four Olympic gold medals?",
+    options: ["Alpine skiing", "Tennis", "Rowing", "Handball"],
     correctAnswer: 0,
     difficulty: "Medium",
   },
   {
     id: 6,
-    country: "Croatia",
-    question: "Which predator lives in the forests of Croatia?",
-    options: ["Brown bear", "Tiger", "Cheetah", "Hyena"],
+    country: "Netherlands",
+    question: "Which Dutch footballer scored a famous diving header at the 2014 World Cup?",
+    options: ["Robin van Persie", "Arjen Robben", "Memphis Depay", "Klaas-Jan Huntelaar"],
     correctAnswer: 0,
     difficulty: "Medium",
   },
   {
     id: 7,
-    country: "Netherlands",
-    question: "Which sea borders the Netherlands?",
-    options: ["North Sea", "Baltic Sea", "Mediterranean Sea", "Adriatic Sea"],
+    country: "Croatia",
+    question: "Which Croatian water polo team is one of the most successful in Europe?",
+    options: ["Jug Dubrovnik", "Mladost Zagreb", "Primorje Rijeka", "HAVK Split"],
     correctAnswer: 0,
     difficulty: "Medium",
   },
   {
     id: 8,
-    country: "Croatia",
-    question: "Which mountain range stretches along Croatia’s coast?",
-    options: ["Dinaric Alps", "Carpathians", "Alps", "Pyrenees"],
+    country: "Netherlands",
+    question: "Which Dutch city hosted the 1928 Summer Olympics?",
+    options: ["Amsterdam", "Rotterdam", "The Hague", "Utrecht"],
     correctAnswer: 0,
     difficulty: "Medium",
   },
   {
     id: 9,
-    country: "Netherlands",
-    question: "Which national park is known for its waterways and otters?",
-    options: ["Weerribben-Wieden", "Veluwezoom", "Oosterschelde", "Marker Wadden"],
+    country: "Croatia",
+    question: "Which Croatian football club plays at Maksimir Stadium?",
+    options: ["Dinamo Zagreb", "Hajduk Split", "Rijeka", "Osijek"],
     correctAnswer: 0,
     difficulty: "Medium",
   },
   {
     id: 10,
-    country: "Croatia",
-    question: "Which bird is a symbol of the Kopački Rit wetlands?",
-    options: ["White stork", "Pelican", "Eagle", "Flamingo"],
+    country: "Netherlands",
+    question: "Which sport is Epke Zonderland famous for?",
+    options: ["Gymnastics", "Cycling", "Speed skating", "Swimming"],
     correctAnswer: 0,
     difficulty: "Medium",
   },
 ]
-
-
 
 export default function Medium() {
   const [currentQuestion, setCurrentQuestion] = useState(0)

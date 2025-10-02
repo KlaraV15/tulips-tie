@@ -2,97 +2,95 @@
 
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
-import { Button } from "../components/ui/Button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/Card"
-import { Progress } from "../components/ui/Progress"
-import { Badge } from "../components/ui/Badge"
+import { Button } from "../ui/Button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/Card"
+import { Progress } from "../ui/Progress"
+import { Badge } from "../ui/Badge"
 import { Heart, Clock, Trophy, ArrowLeft, Flag, Zap, Check, X, Star, Users, Award } from "lucide-react"
 
 // Mock quiz data
 const mockQuestions = [
-{
+  {
     id: 1,
-    country: "Croatia",
-    question: "What is the name of the red-and-white pattern on the Croatian coat of arms?",
-    options: ["Checkerboard", "Cross", "Stripes", "Waves"],
+    country: "Netherlands",
+    question: "Which Dutch national park is famous for heathlands and red deer?",
+    options: ["Hoge Veluwe", "Biesbosch", "Kinderdijk", "Texel"],
     correctAnswer: 0,
     difficulty: "Medium",
   },
   {
     id: 2,
-    country: "Netherlands",
-    question: "Which Dutch city is famous for its cheese market?",
-    options: ["Alkmaar", "Rotterdam", "The Hague", "Utrecht"],
+    country: "Croatia",
+    question: "Which Croatian park is a UNESCO World Heritage Site?",
+    options: ["Plitvice Lakes", "Paklenica", "Biokovo", "Mljet"],
     correctAnswer: 0,
     difficulty: "Medium",
   },
   {
     id: 3,
-    country: "Croatia",
-    question: "Which traditional Croatian tie inspired the modern necktie?",
-    options: ["Cravat", "Ascot", "Bow tie", "Scarf"],
+    country: "Netherlands",
+    question: "Which bird is often associated with Dutch wetlands?",
+    options: ["Heron", "Ostrich", "Falcon", "Hummingbird"],
     correctAnswer: 0,
     difficulty: "Medium",
   },
   {
     id: 4,
-    country: "Netherlands",
-    question: "Which Dutch artist painted 'The Night Watch'?",
-    options: ["Rembrandt", "Van Gogh", "Mondrian", "Vermeer"],
+    country: "Croatia",
+    question: "What type of dolphin can often be spotted in the Adriatic Sea?",
+    options: ["Bottlenose dolphin", "Orca", "Pink river dolphin", "Beluga"],
     correctAnswer: 0,
     difficulty: "Medium",
   },
   {
     id: 5,
-    country: "Croatia",
-    question: "Which city is called the 'Pearl of the Adriatic'?",
-    options: ["Dubrovnik", "Split", "Zadar", "Rovinj"],
+    country: "Netherlands",
+    question: "What is the largest national park in the Netherlands?",
+    options: ["De Hoge Veluwe", "De Biesbosch", "Veluwezoom", "Drents-Friese Wold"],
     correctAnswer: 0,
     difficulty: "Medium",
   },
   {
     id: 6,
-    country: "Netherlands",
-    question: "What do Dutch people famously skate on when canals freeze?",
-    options: ["Ice skates", "Roller skates", "Snowboards", "Sleds"],
+    country: "Croatia",
+    question: "Which predator lives in the forests of Croatia?",
+    options: ["Brown bear", "Tiger", "Cheetah", "Hyena"],
     correctAnswer: 0,
     difficulty: "Medium",
   },
   {
     id: 7,
-    country: "Croatia",
-    question: "Which famous inventor of the electric motor was born in Croatia?",
-    options: ["Nikola Tesla", "Edison", "Bell", "Marconi"],
+    country: "Netherlands",
+    question: "Which sea borders the Netherlands?",
+    options: ["North Sea", "Baltic Sea", "Mediterranean Sea", "Adriatic Sea"],
     correctAnswer: 0,
     difficulty: "Medium",
   },
   {
     id: 8,
-    country: "Netherlands",
-    question: "Which Dutch children’s book character was created by Dick Bruna?",
-    options: ["Miffy", "Peppa Pig", "Paddington", "Winnie the Pooh"],
+    country: "Croatia",
+    question: "Which mountain range stretches along Croatia's coast?",
+    options: ["Dinaric Alps", "Carpathians", "Alps", "Pyrenees"],
     correctAnswer: 0,
     difficulty: "Medium",
   },
   {
     id: 9,
-    country: "Croatia",
-    question: "Which Croatian city has a Roman amphitheater still in use?",
-    options: ["Pula", "Zadar", "Split", "Šibenik"],
+    country: "Netherlands",
+    question: "Which national park is known for its waterways and otters?",
+    options: ["Weerribben-Wieden", "Veluwezoom", "Oosterschelde", "Marker Wadden"],
     correctAnswer: 0,
     difficulty: "Medium",
   },
   {
     id: 10,
-    country: "Netherlands",
-    question: "Which Dutch city is home to the International Court of Justice?",
-    options: ["The Hague", "Amsterdam", "Rotterdam", "Utrecht"],
+    country: "Croatia",
+    question: "Which bird is a symbol of the Kopački Rit wetlands?",
+    options: ["White stork", "Pelican", "Eagle", "Flamingo"],
     correctAnswer: 0,
     difficulty: "Medium",
   },
 ]
-
-
 
 export default function Medium() {
   const [currentQuestion, setCurrentQuestion] = useState(0)

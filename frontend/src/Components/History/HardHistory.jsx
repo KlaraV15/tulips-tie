@@ -13,86 +13,86 @@ const mockQuestions = [
   {
     id: 1,
     country: "Croatia",
-    question: "Which Croatian national park is a UNESCO World Heritage Site known for lakes and waterfalls?",
-    options: ["Plitvice Lakes", "Kornati", "Paklenica", "Krka"],
+    question: "Which Croatian noble family ruled over Dubrovnik during the late Middle Ages?",
+    options: ["Frankopan", "Šubić", "Racic", "Gučetić"],
     correctAnswer: 0,
     difficulty: "Hard",
   },
   {
     id: 2,
     country: "Netherlands",
-    question: "Which is the lowest point in the Netherlands, located near Rotterdam?",
-    options: ["Zaanstreek", "IJsselmeer polder", "Zuidplaspolder", "Noordoostpolder"],
+    question: "Which treaty ended the Eighty Years' War and recognized Dutch independence?",
+    options: ["Treaty of Utrecht", "Treaty of Westphalia", "Treaty of Münster", "Treaty of Breda"],
     correctAnswer: 2,
     difficulty: "Hard",
   },
   {
     id: 3,
     country: "Croatia",
-    question: "The Pelješac Bridge, opened in 2022, connects which two parts of Croatia?",
-    options: ["Rijeka and Istria", "Mainland Croatia with southern Dalmatia", "Zagreb and Slavonia", "Split and Brač"],
-    correctAnswer: 1,
+    question: "During the Habsburg Monarchy, which Croatian region was ruled by the Military Frontier?",
+    options: ["Dalmatia", "Istria", "Slavonia", "Kvarner"],
+    correctAnswer: 2,
     difficulty: "Hard",
   },
   {
     id: 4,
     country: "Netherlands",
-    question: "The Dutch Wadden Sea islands (Wadden Islands) stretch from the Netherlands into which neighboring country?",
-    options: ["France", "Denmark", "Belgium", "Germany"],
-    correctAnswer: 3,
+    question: "Which Dutch admiral defeated the Spanish Armada in 1588 alongside the English fleet?",
+    options: ["Michiel de Ruyter", "Maarten Tromp", "Cornelis de Witt", "Admiral Lodewijk van Heiden"],
+    correctAnswer: 1,
     difficulty: "Hard",
   },
   {
     id: 5,
     country: "Croatia",
-    question: "What is the southernmost inhabited island of Croatia?",
-    options: ["Mljet", "Lastovo", "Korčula", "Vis"],
-    correctAnswer: 1,
+    question: "Which 16th-century Croatian humanist wrote 'De Institutione Bene Vivendi'?",
+    options: ["Marko Marulić", "Ivan Gundulić", "Franjo Petrić", "Šime Budinić"],
+    correctAnswer: 0,
     difficulty: "Hard",
   },
   {
     id: 6,
     country: "Netherlands",
-    question: "What is the longest river that flows entirely within the Netherlands?",
-    options: ["Meuse", "Scheldt", "IJssel", "Rhine"],
-    correctAnswer: 2,
+    question: "What was the main economic activity of the Dutch Golden Age in the 17th century?",
+    options: ["Shipbuilding and trade", "Agriculture", "Mining", "Textile manufacturing"],
+    correctAnswer: 0,
     difficulty: "Hard",
   },
   {
     id: 7,
     country: "Croatia",
-    question: "Which karst river in Croatia is famous for its emerald color and source in a cave near Knin?",
-    options: ["Krka", "Cetina", "Zrmanja", "Una"],
-    correctAnswer: 0,
+    question: "Which Croatian city was besieged during the Ottoman wars in the 16th century?",
+    options: ["Zagreb", "Sisak", "Dubrovnik", "Rijeka"],
+    correctAnswer: 1,
     difficulty: "Hard",
   },
   {
     id: 8,
     country: "Netherlands",
-    question: "The Delta Works is a massive flood protection system in which Dutch province?",
-    options: ["Gelderland", "North Holland", "Zeeland", "Friesland"],
-    correctAnswer: 2,
+    question: "Who was the leading philosopher of the Dutch Golden Age, author of 'Ethics'?",
+    options: ["Spinoza", "Erasmus", "Grotius", "Hugo de Groot"],
+    correctAnswer: 0,
     difficulty: "Hard",
   },
   {
     id: 9,
     country: "Croatia",
-    question: "Croatia's Velebit mountain range is part of which larger mountain system?",
-    options: ["Dinaric Alps", "Alps", "Carpathians", "Balkan Mountains"],
-    correctAnswer: 0,
+    question: "Which Croatian king was assassinated in 1089, leading to a succession crisis?",
+    options: ["Tomislav", "Petar Krešimir IV", "Zvonimir", "Stjepan Držislav"],
+    correctAnswer: 2,
     difficulty: "Hard",
   },
   {
     id: 10,
     country: "Netherlands",
-    question: "The Marker Wadden are artificial islands created in which Dutch lake?",
-    options: ["Veluwemeer", "Markermeer", "Grevelingenmeer", "IJsselmeer"],
-    correctAnswer: 3,
+    question: "Which war (1672–1678) is known in Dutch history as the Franco-Dutch War?",
+    options: ["Eighty Years' War", "Franco-Dutch War", "War of Spanish Succession", "Anglo-Dutch Wars"],
+    correctAnswer: 1,
     difficulty: "Hard",
   }
 ]
 
-export default function HardGeography() {
+export default function HardHistory() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [selectedAnswer, setSelectedAnswer] = useState(null)
   const [lives, setLives] = useState(3)
@@ -182,8 +182,8 @@ export default function HardGeography() {
           <div className="animate-bounce mb-8">
             <Zap className="h-24 w-24 mx-auto" />
           </div>
-          <h1 className="text-5xl font-black mb-4">Starting Geography Quiz!</h1>
-          <p className="text-xl font-bold">Brace yourself for the ultimate geographical challenge! 🔥</p>
+          <h1 className="text-5xl font-black mb-4">Starting History Quiz!</h1>
+          <p className="text-xl font-bold">Brace yourself for the ultimate historical challenge! 🔥</p>
         </div>
       </div>
     )
@@ -224,7 +224,7 @@ export default function HardGeography() {
                 Quiz Complete!
               </CardTitle>
               <CardDescription className="text-lg text-gray-600 font-medium">
-                Here are your results from the Geography Quiz
+                Here are your results from the History Quiz
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6 p-8">
@@ -255,12 +255,12 @@ export default function HardGeography() {
               <div className="text-center space-y-4">
                 <p className="text-gray-700 text-lg font-medium bg-white/50 p-4 rounded-xl border border-gray-200">
                   {score >= 160
-                    ? "🏆 Legendary! You're a geographical expert!"
+                    ? "🏆 Legendary! You're a historical expert!"
                     : score >= 120
-                      ? "🎯 Incredible! You've mastered geographical features!"
+                      ? "🎯 Incredible! You've mastered historical events!"
                       : score >= 80
-                        ? "💪 Impressive! You handled the geographical challenge well!"
-                        : "🌟 Tough geographical questions! Keep learning and try again!"}
+                        ? "💪 Impressive! You handled the historical challenge well!"
+                        : "🌟 Tough historical questions! Keep learning and try again!"}
                 </p>
 
                 {/* Action Buttons */}

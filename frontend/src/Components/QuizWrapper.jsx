@@ -11,6 +11,18 @@ import HardPolitics from './Politics/HardPolitics'
 import EasyHistory from './History/EasyHistory'
 import MediumHistory from './History/MediumHistory'
 import HardHistory from './History/HardHistory'
+import EasyEconomy from './economy/Easy'
+import MediumEconomy from './economy/Medium'
+import HardEconomy from './economy/Hard'
+import EasyFacts from './fun_facts/Easy'
+import MediumFacts from './fun_facts/Medium'
+import HardFacts from './fun_facts/Hard'
+import EasyNature from './nature_wildlife/Easy'
+import MediumNature from './nature_wildlife/Medium'
+import HardNature from './nature_wildlife/Hard'
+import EasySports from './sports/Easy'
+import MediumSports from './sports/Medium'
+import HardSports from './sports/Hard'
 
 export default function QuizWrapper() {
   const { category, difficulty } = useParams()
@@ -28,7 +40,19 @@ export default function QuizWrapper() {
     'politics-hard' : HardPolitics,
     'history-easy' : EasyHistory,
     'history-medium' : MediumHistory,
-    'history-hard' : HardHistory
+    'history-hard' : HardHistory,
+    'economy-easy' : EasyEconomy,
+    'economy-medium' : MediumEconomy,
+    'economy-hard' : HardEconomy,
+    'funFacts-easy' : EasyFacts,
+    'funFacts-medium' : MediumFacts,
+    'funFacts-hard' : HardFacts,
+    'natureWildlife-easy' : EasyNature,
+    'natureWildlife-medium' : MediumNature,
+    'natureWildlife-hard' : HardNature,
+    'sports-easy' : EasySports,
+    'sports-medium' : MediumSports,
+    'sports-hard' : HardSports,
   }
 
   const Component = componentMap[`${category}-${difficulty}`]

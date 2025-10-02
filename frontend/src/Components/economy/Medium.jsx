@@ -2,15 +2,15 @@
 
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
-import { Button } from "../components/ui/Button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/Card"
-import { Progress } from "../components/ui/Progress"
-import { Badge } from "../components/ui/Badge"
+import { Button } from "../ui/Button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/Card"
+import { Progress } from "../ui/Progress"
+import { Badge } from "../ui/Badge"
 import { Heart, Clock, Trophy, ArrowLeft, Flag, Zap, Check, X, Star, Users, Award } from "lucide-react"
 
 // Mock quiz data
 const mockQuestions = [
-{
+  {
     id: 1,
     country: "Netherlands",
     question: "Which Dutch company is one of the biggest electronics producers in the world?",
@@ -21,7 +21,7 @@ const mockQuestions = [
   {
     id: 2,
     country: "Croatia",
-    question: "What percentage of Croatia’s GDP comes from tourism (approx.)?",
+    question: "What percentage of Croatia's GDP comes from tourism (approx.)?",
     options: ["20%", "5%", "40%", "10%"],
     correctAnswer: 0,
     difficulty: "Medium",
@@ -53,7 +53,7 @@ const mockQuestions = [
   {
     id: 6,
     country: "Croatia",
-    question: "Which natural resource contributes to Croatia’s energy sector?",
+    question: "Which natural resource contributes to Croatia's energy sector?",
     options: ["Oil & gas", "Coal", "Uranium", "Gold"],
     correctAnswer: 0,
     difficulty: "Medium",

@@ -16,7 +16,11 @@ export default function Quiz() {
     culture: { name: "Culture", emoji: "🎨" },
     geography: { name: "Geography", emoji: "🌍" },
     history: { name: "History", emoji: "📜" },
-    politics: { name: "Politics", emoji: "🏛️" }
+    politics: { name: "Politics", emoji: "🏛️" },
+    natureWildlife: { name: "Nature & Wildlife", emoji: "🌱" },
+    funFacts: { name: "Fun Facts", emoji: "✨" },
+    sports: { name: "Sports", emoji: "⚽" },
+    economy: { name: "Economy", emoji: "💰" }
   }
 
   const currentCategory = categoryMap[selectedCategory] || { name: "General", emoji: "🌟" }
@@ -30,7 +34,6 @@ export default function Quiz() {
       border: "border-green-300",
       bg: "from-green-50 to-green-100",
       icon: <Medal className="h-6 w-6 sm:h-8 sm:w-8 text-green-500" />,
-      points: "1x Points",
       questions: "10 questions",
       time: "Unlimited time"
     },
@@ -42,7 +45,6 @@ export default function Quiz() {
       border: "border-yellow-300",
       bg: "from-yellow-50 to-yellow-100",
       icon: <Target className="h-6 w-6 sm:h-8 sm:w-8 text-yellow-500" />,
-      points: "2x Points",
       questions: "15 questions",
       time: "30s per question"
     },
@@ -54,7 +56,6 @@ export default function Quiz() {
       border: "border-red-400",
       bg: "from-red-50 to-red-100",
       icon: <Crown className="h-6 w-6 sm:h-8 sm:w-8 text-red-500" />,
-      points: "3x Points",
       questions: "20 questions",
       time: "15s per question"
     }
@@ -193,9 +194,6 @@ export default function Quiz() {
                   {difficulty.icon}
                   <span className="text-white drop-shadow-lg text-sm sm:text-xl">{difficulty.title}</span>
                 </CardTitle>
-                <CardDescription className="text-center text-white/90 font-bold text-sm sm:text-lg mt-1 sm:mt-2">
-                  {difficulty.points}
-                </CardDescription>
               </CardHeader>
               <CardContent className={`p-4 sm:p-6 bg-gradient-to-br ${difficulty.bg}`}>
                 <div className="text-center space-y-3 sm:space-y-4">
@@ -242,7 +240,7 @@ export default function Quiz() {
                 🏆 Ready to Earn Your Badges?
               </h3>
               <p className="text-sm sm:text-xl font-bold text-gray-700 mb-6 sm:mb-8 max-w-2xl mx-auto px-2">
-                Complete {currentCategory.name.toLowerCase()} quizzes, earn points, and unlock exclusive achievements! Compete with players worldwide and show off your {currentCategory.name.toLowerCase()} expertise!
+                Complete {currentCategory.name.toLowerCase()} quizzes and earn points! Compete with players worldwide and show off your {currentCategory.name.toLowerCase()} expertise!
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 justify-center">
                 <Link to="/leaderboard">
