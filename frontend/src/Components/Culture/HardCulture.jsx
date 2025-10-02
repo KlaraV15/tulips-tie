@@ -138,7 +138,7 @@ export default function HardCulture() {
 
   useEffect(() => {
     if (!quizStarted || showResult) return
-    if (showAnswerFeedback) return 
+    if (showAnswerFeedback) return
 
     if (timeLeft === 0) {
       if (lives <= 1 || currentQuestion === mockQuestions.length - 1) {
@@ -155,6 +155,12 @@ export default function HardCulture() {
     const timer = setInterval(() => setTimeLeft(prev => prev - 1), 1000)
     return () => clearInterval(timer)
   }, [timeLeft, quizStarted, showResult, currentQuestion, lives, showAnswerFeedback])
+
+  useEffect(() => {
+    if (lives <= 0) {
+      setShowResult(true);
+    }
+  }, [lives]);
 
   if (isTransitioning) {
     return (

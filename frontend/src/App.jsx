@@ -12,7 +12,7 @@ import ForgotPassword from "./Components/ForgotPassword"
 import CategorySelection from './Components/CategorySelection'
 import QuizWrapper from './Components/QuizWrapper' // New component
 import Terms from './Components/TermsPage'
-
+import NotFound from './Components/NotFound'
 function App() {
 
   return (
@@ -32,6 +32,7 @@ function App() {
           <Route path="/quiz/:category/:difficulty" element={<QuizWrapper />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/terms" element={<Terms />} />
+          <Route path='/*' element={<NotFound/>} />
       </Routes>
     </Router>
     </>

@@ -156,6 +156,12 @@ export default function Hard() {
     return () => clearInterval(timer)
   }, [timeLeft, quizStarted, showResult, currentQuestion, lives, showAnswerFeedback])
 
+  useEffect(() => {
+    if (lives <= 0) {
+      setShowResult(true);
+    }
+  }, [lives]);
+  
   // Show transition screen - UPDATED DESIGN
   if (isTransitioning) {
     return (
