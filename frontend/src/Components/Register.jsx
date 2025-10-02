@@ -185,7 +185,7 @@ export default function Register() {
                       Terms of Service
                     </Link>{" "}
                     and{" "}
-                    <Link to="/terms#toc" className="text-red-600 font-semibold hover:underline">
+                    <Link to="/privacy" className="text-red-600 font-semibold hover:underline">
                       Privacy Policy
                     </Link>
                   </Label>

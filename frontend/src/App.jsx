@@ -11,7 +11,6 @@ import Hard from './Components/Hard'
 import ForgotPassword from "./Components/ForgotPassword"
 import CategorySelection from './Components/CategorySelection'
 import QuizWrapper from './Components/QuizWrapper' // New component
-import Terms from './Components/TermsPage'
 
 function App() {
 
@@ -31,7 +30,6 @@ function App() {
           {/* Dynamic route for all category quizzes */}
           <Route path="/quiz/:category/:difficulty" element={<QuizWrapper />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/terms" element={<Terms />} />
       </Routes>
     </Router>
     </>

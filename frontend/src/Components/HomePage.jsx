@@ -93,12 +93,12 @@ export default function HomePage() {
               </div>
               <div className="flex items-center space-x-1 sm:space-x-2 bg-white rounded-full px-2 sm:px-4 py-1 sm:py-2 shadow-md border text-xs sm:text-base">
                 <Zap className="h-3 w-3 sm:h-5 sm:w-5 text-red-500" />
-                <span className="font-bold text-gray-800">15-30s Per Question</span>
+                <span className="font-bold text-gray-800">20s Per Question</span>
               </div>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
-              <Link to="/categories" className="w-full sm:w-auto">
+              <Link to="/quiz" className="w-full sm:w-auto">
                 <Button
                   size="lg"
                   className="w-full sm:w-auto bg-gradient-to-r from-red-600 to-red-500 
