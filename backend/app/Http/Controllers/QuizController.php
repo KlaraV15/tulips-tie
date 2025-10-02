@@ -28,6 +28,7 @@ class QuizController extends Controller
         }
 
         // Filter by category
+
         if ($request->has('category_id') && $request->category_id && $request->category_id !== 'all') {
             $query->whereHas('questions.category', function ($q) use ($request) {
                 $q->where('id', $request->category_id);
@@ -45,7 +46,7 @@ class QuizController extends Controller
     // Show single quiz
     public function show(Quiz $quiz)
     {
-        return response()->json($quiz->load('creator', 'questions.options'));
+        return response()->json($quiz->load('creator', 'questions.options', 'questions.difficulty', 'questions.category', 'questions.country'));
     }
 
     // Create a new quiz

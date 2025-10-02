@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }) => {
 
           // Try to get user profile
           const response = await client.newRequest('/user');
-          setUser(response);
+          setUser(response.data);
         } catch (error) {
           console.error('Auth initialization failed:', error);
           // Token is invalid, clear auth data
@@ -53,8 +53,8 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await client.newPostRequest('/login', { email, password });
 
-      if (response.access_token) {
-        const authToken = response.access_token;
+      if (response.data.access_token) {
+        const authToken = response.data.access_token;
 
         // Save token to localStorage
         localStorage.setItem('auth_token', authToken);
@@ -65,7 +65,7 @@ export const AuthProvider = ({ children }) => {
         // Get user profile
         const userResponse = await client.newRequest('/user');
         setToken(authToken);
-        setUser(userResponse);
+        setUser(userResponse.data);
 
         return { success: true, message: 'Login successful' };
       }
@@ -85,7 +85,7 @@ export const AuthProvider = ({ children }) => {
 
       console.log('Registration response:', response);
 
-      if (response.user) {
+      if (response.data.user) {
         return { success: true, message: 'Registration successful! Please login.' };
       }
     } catch (error) {
@@ -132,8 +132,8 @@ export const AuthProvider = ({ children }) => {
         password_confirmation: password,
       });
 
-      if (response.message) {
-        return { success: true, message: response.message };
+      if (response.data.message) {
+        return { success: true, message: response.data.message };
       }
     } catch (error) {
       console.error('Password reset failed:', error);

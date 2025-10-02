@@ -116,6 +116,7 @@ const QuestionsCard = memo(function QuestionsCard({
     const [filterCountry, setFilterCountry] = useState('all'); // Updated default value
     const [filterDifficulty, setFilterDifficulty] = useState('all'); // Updated default value
     const [filterCategory, setFilterCategory] = useState('all');
+    
 
     function resetFilters() {
         setSearchTerm('');

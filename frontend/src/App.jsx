@@ -4,7 +4,7 @@ import HomePage from './Components/HomePage';
 import QuizPage from './Components/Quiz';
 import LoginPage from './Components/Login';
 import RegisterPage from './Components/Register';
-import LeaderboardPage from './Components/Leaderboard';
+import LeaderboardPage from './Components/LeaderboardNew';
 import Easy from './Components/Easy';
 import Medium from './Components/Medium';
 import Hard from './Components/Hard';

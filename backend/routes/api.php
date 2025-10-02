@@ -38,14 +38,24 @@ Route::apiResource('quizzes', QuizController::class);
 //questions CRUD actions
 Route::apiResource('questions', QuestionsController::class);
 
-//store results
-Route::apiResource('results', ResultController::class)->only(['store'/*,'index','show'*/]);
+//store results (requires authentication)
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('results', [ResultController::class, 'store']);
+});
+
+// Leaderboard and statistics endpoints
+Route::get('leaderboard', [ResultController::class, 'leaderboard']);
+Route::get('stats/general', [ResultController::class, 'getGeneralStats']);
+Route::get('stats/user/{user}', [ResultController::class, 'getUserStats']);
+
+// Admin endpoints
+Route::get('admin/users/recent', [UserController::class, 'getRecentUsers']);
 
 
 Route::apiResource('categories', CategoryController::class)->only(['index']);
 Route::apiResource('countries', CountryController::class)->only(['index']);
 Route::apiResource('difficulties', DifficultyController::class)->only(['index']);
-
+Route::apiResource('users', UserController::class)->only(['index']);
 
 
 

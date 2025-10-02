@@ -64,8 +64,9 @@ async function getQuizzes(filters = {}) {
 
   const url = `/quizzes${params.toString() ? `?${params.toString()}` : ''}`;
   const response = await client.newRequest(url);
+  console.log('quizzes response', response);
   console.log('quizzes', response.data);
-  return response?.data ?? [];
+  return response.data ?? [];
 }
 
 export default function Quizzes() {
@@ -354,7 +355,7 @@ export default function Quizzes() {
                             Creator
                           </p>
                           <p className="text-sm font-bold text-gray-800">
-                            {quiz.creator?.name || 'Unknown'}
+                            {quiz?.creator?.username || 'Unknown'}
                           </p>
                         </div>
                       </div>
@@ -372,6 +373,60 @@ export default function Quizzes() {
                           </p>
                         </div>
                       </div>
+                    </div>
+
+                    {/* Quiz Characteristics */}
+                    <div className="mb-6 space-y-3">
+                      {/* Difficulty Section */}
+                      {quiz.predominant_difficulty && (
+                        <div className="flex items-center space-x-3 p-3 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl border border-purple-100">
+                          <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                            <Trophy className="h-4 w-4 text-white" />
+                          </div>
+                          <div>
+                            <p className="text-xs font-bold text-purple-600 uppercase tracking-wide">
+                              Difficulty
+                            </p>
+                            <p className="text-sm font-bold text-gray-800">
+                              {quiz.predominant_difficulty}
+                            </p>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Category Section */}
+                      {quiz.predominant_category && (
+                        <div className="flex items-center space-x-3 p-3 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl border border-blue-100">
+                          <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center">
+                            <BookOpen className="h-4 w-4 text-white" />
+                          </div>
+                          <div>
+                            <p className="text-xs font-bold text-blue-600 uppercase tracking-wide">
+                              Category
+                            </p>
+                            <p className="text-sm font-bold text-gray-800">
+                              {quiz.predominant_category}
+                            </p>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Country Section */}
+                      {quiz.predominant_country && (
+                        <div className="flex items-center space-x-3 p-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border border-green-100">
+                          <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center">
+                            <Flag className="h-4 w-4 text-white" />
+                          </div>
+                          <div>
+                            <p className="text-xs font-bold text-green-600 uppercase tracking-wide">
+                              Country
+                            </p>
+                            <p className="text-sm font-bold text-gray-800">
+                              {quiz.predominant_country}
+                            </p>
+                          </div>
+                        </div>
+                      )}
                     </div>
 
                     {/* Action buttons */}

@@ -1,74 +1,84 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/Card';
 import { Badge } from '../components/ui/Badge';
 import { Heart, Clock, Trophy, ArrowLeft, Flag, Zap, Check, X } from 'lucide-react';
 import HttpClient from '../../helpers/HttpClient.js';
-
-const client = new HttpClient();
-
-// Quiz configuration based on difficulty
-const QUIZ_CONFIG = {
-  1: {
-    // Easy
-    theme: {
-      gradient: 'from-green-400 to-green-600',
-      border: 'border-green-200',
-      cardBorder: 'border-green-200',
-      progressBar: 'from-green-400 to-green-600',
-      badge: 'from-green-400 to-green-600',
-      timerBg: 'from-green-500 to-green-600',
-      timerBorder: 'border-green-300',
-      scoreBg: 'from-green-500 to-green-600',
-      scoreBorder: 'border-green-300',
-    },
-    timeLimit: null, // No timer for easy
-    pointsPerCorrect: 10,
-    difficulty: 'Easy',
-  },
-  2: {
-    // Medium
-    theme: {
-      gradient: 'from-yellow-400 to-yellow-600',
-      border: 'border-yellow-200',
-      cardBorder: 'border-yellow-200',
-      progressBar: 'from-yellow-400 to-yellow-600',
-      badge: 'from-yellow-400 to-yellow-600',
-      timerBg: 'from-green-500 to-green-600',
-      timerBorder: 'border-green-300',
-      scoreBg: 'from-green-500 to-green-600',
-      scoreBorder: 'border-green-300',
-    },
-    timeLimit: 30,
-    pointsPerCorrect: 15,
-    difficulty: 'Medium',
-  },
-  3: {
-    // Hard
-    theme: {
-      gradient: 'from-red-400 to-red-600',
-      border: 'border-red-200',
-      cardBorder: 'border-red-200',
-      progressBar: 'from-red-500 to-red-600',
-      badge: 'from-red-500 to-red-600',
-      timerBg: 'from-green-500 to-green-600',
-      timerBorder: 'border-green-300',
-      scoreBg: 'from-green-500 to-green-600',
-      scoreBorder: 'border-green-300',
-    },
-    timeLimit: 15,
-    pointsPerCorrect: 20,
-    difficulty: 'Hard',
-  },
-};
-
-async function getQuiz(quizId) {
-  const response = await client.newRequest(`/quizzes/${quizId}`);
-  return response?.data ?? null;
-}
+import { useAuth } from '../contexts/AuthContext';
 
 export default function UnifiedQuiz() {
+  const { user, isAuthenticated, token } = useAuth();
+
+  // Create HttpClient instance with token
+  const client = React.useMemo(() => {
+    const httpClient = new HttpClient();
+    if (token) {
+      httpClient.setToken(token);
+    }
+    return httpClient;
+  }, [token]);
+
+  // Quiz configuration based on difficulty
+  const QUIZ_CONFIG = {
+    1: {
+      // Easy
+      theme: {
+        gradient: 'from-green-400 to-green-600',
+        border: 'border-green-200',
+        cardBorder: 'border-green-200',
+        progressBar: 'from-green-400 to-green-600',
+        badge: 'from-green-400 to-green-600',
+        timerBg: 'from-green-500 to-green-600',
+        timerBorder: 'border-green-300',
+        scoreBg: 'from-green-500 to-green-600',
+        scoreBorder: 'border-green-300',
+      },
+      timeLimit: null, // No timer for easy
+      pointsPerCorrect: 10,
+      difficulty: 'Easy',
+    },
+    2: {
+      // Medium
+      theme: {
+        gradient: 'from-yellow-400 to-yellow-600',
+        border: 'border-yellow-200',
+        cardBorder: 'border-yellow-200',
+        progressBar: 'from-yellow-400 to-yellow-600',
+        badge: 'from-yellow-400 to-yellow-600',
+        timerBg: 'from-green-500 to-green-600',
+        timerBorder: 'border-green-300',
+        scoreBg: 'from-green-500 to-green-600',
+        scoreBorder: 'border-green-300',
+      },
+      timeLimit: 30,
+      pointsPerCorrect: 15,
+      difficulty: 'Medium',
+    },
+    3: {
+      // Hard
+      theme: {
+        gradient: 'from-red-400 to-red-600',
+        border: 'border-red-200',
+        cardBorder: 'border-red-200',
+        progressBar: 'from-red-500 to-red-600',
+        badge: 'from-red-500 to-red-600',
+        timerBg: 'from-green-500 to-green-600',
+        timerBorder: 'border-green-300',
+        scoreBg: 'from-green-500 to-green-600',
+        scoreBorder: 'border-green-300',
+      },
+      timeLimit: 15,
+      pointsPerCorrect: 20,
+      difficulty: 'Hard',
+    },
+  };
+
+  async function getQuiz(quizId) {
+    const response = await client.newRequest(`/quizzes/${quizId}`);
+    return response?.data ?? null;
+  }
+
   const [quiz, setQuiz] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -83,6 +93,8 @@ export default function UnifiedQuiz() {
   const [isCorrect, setIsCorrect] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [resultSaved, setResultSaved] = useState(false);
+  const [savingResult, setSavingResult] = useState(false);
 
   // Get quiz ID from URL params
   const quizId = window.location.pathname.split('/').pop();
@@ -134,6 +146,13 @@ export default function UnifiedQuiz() {
     }
   }, [lives]);
 
+  // Save quiz result when quiz is completed
+  useEffect(() => {
+    if (showResult && quiz && isAuthenticated && !resultSaved && !savingResult) {
+      saveQuizResult();
+    }
+  }, [showResult, quiz, isAuthenticated, resultSaved, savingResult]);
+
   useEffect(() => {
     // Auto-start quiz after initial load
     const timer = setTimeout(() => {
@@ -161,6 +180,30 @@ export default function UnifiedQuiz() {
       setError('Failed to load quiz');
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function saveQuizResult() {
+    if (!isAuthenticated || resultSaved || savingResult) {
+      return;
+    }
+
+    try {
+      setSavingResult(true);
+      const response = await client.newPostRequest(`/results`, {
+        score: score,
+        quiz_id: quizId,
+      });
+
+      if (response.data) {
+        setResultSaved(true);
+        console.log('Quiz result saved successfully:', response.data);
+      }
+    } catch (err) {
+      console.error('Error saving quiz result:', err);
+      // Don't show error to user, just log it
+    } finally {
+      setSavingResult(false);
     }
   }
 
@@ -541,7 +584,7 @@ export default function UnifiedQuiz() {
                                                         )} hover:bg-blue-50 text-gray-800`
                                                 }
                                             `}
-                      onClick={() => handleAnswerSelect(currentQuestion, index)}
+                      onClick={() => handleAnswerSelect(currentQuestion, option.id)}
                       disabled={showAnswerFeedback}>
                       <div className="flex items-center space-x-4">
                         <div

@@ -22,9 +22,12 @@ export default class HttpClient {
       'Access-Control-Allow-Origin': '*',
     };
 
+    // Get token from instance or from localStorage
+    const token = this.token || localStorage.getItem('auth_token');
+
     // Add authorization header if token exists
-    if (this.token) {
-      headers['Authorization'] = `Bearer ${this.token}`;
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
     }
 
     return headers;
@@ -45,13 +48,15 @@ export default class HttpClient {
 
     try {
       const response = await axios(requestConfig);
-      return response.data;
+      return response;
     } catch (error) {
       // Handle authentication errors
       if (error.response?.status === 401) {
         // Clear invalid token
         this.token = null;
         localStorage.removeItem('auth_token');
+        // Trigger a storage event so other components can react
+        window.dispatchEvent(new Event('storage'));
         throw new Error('Authentication failed');
       }
       throw error;
@@ -64,13 +69,15 @@ export default class HttpClient {
 
     try {
       const response = await axios.post(url, data, { headers });
-      return response.data;
+      return response;
     } catch (error) {
       // Handle authentication errors
       if (error.response?.status === 401) {
         // Clear invalid token
         this.token = null;
         localStorage.removeItem('auth_token');
+        // Trigger a storage event so other components can react
+        window.dispatchEvent(new Event('storage'));
         throw new Error('Authentication failed');
       }
       throw error;
@@ -82,13 +89,15 @@ export default class HttpClient {
     const headers = this.getHeaders();
     try {
       const response = await axios.put(url, data, { headers });
-      return response.data;
+      return response;
     } catch (error) {
       // Handle authentication errors
       if (error.response?.status === 401) {
         // Clear invalid token
         this.token = null;
         localStorage.removeItem('auth_token');
+        // Trigger a storage event so other components can react
+        window.dispatchEvent(new Event('storage'));
         throw new Error('Authentication failed');
       }
       throw error;
@@ -103,13 +112,15 @@ export default class HttpClient {
         headers,
         data,
       });
-      return response.data;
+      return response;
     } catch (error) {
       // Handle authentication errors
       if (error.response?.status === 401) {
         // Clear invalid token
         this.token = null;
         localStorage.removeItem('auth_token');
+        // Trigger a storage event so other components can react
+        window.dispatchEvent(new Event('storage'));
         throw new Error('Authentication failed');
       }
       throw error;
@@ -121,13 +132,15 @@ export default class HttpClient {
     const headers = this.getHeaders();
     try {
       const response = await axios.patch(url, data, { headers });
-      return response.data;
+      return response;
     } catch (error) {
       // Handle authentication errors
       if (error.response?.status === 401) {
         // Clear invalid token
         this.token = null;
         localStorage.removeItem('auth_token');
+        // Trigger a storage event so other components can react
+        window.dispatchEvent(new Event('storage'));
         throw new Error('Authentication failed');
       }
       throw error;
