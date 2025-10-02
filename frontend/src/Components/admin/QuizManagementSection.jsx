@@ -11,11 +11,11 @@ import { Link } from 'react-router-dom';
 async function getQuizzes() {
   const client = new HttpClient();
 
-  const quizzes = await client.newRequest('/quizzes');
+  const response = await client.newRequest('/quizzes');
 
-  console.log(quizzes.data);
+  console.log(response.data);
 
-  return quizzes.data;
+  return response.data;
 }
 
 export default function QuizManagementSection() {
