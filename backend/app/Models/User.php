@@ -19,6 +19,10 @@ class User extends Authenticatable
         'role',
     ];
 
+    protected $attributes = [
+        'role' => 'user',
+    ];
+
     protected $hidden = [
         'password',
         'remember_token',
@@ -32,5 +36,21 @@ class User extends Authenticatable
     public function results()
     {
         return $this->hasMany(Result::class);
+    }
+
+    /**
+     * Check if user has admin role
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    /**
+     * Check if user has regular user role
+     */
+    public function isUser(): bool
+    {
+        return $this->role === 'user';
     }
 }

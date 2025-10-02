@@ -42,6 +42,11 @@ export default function HomePage() {
     try {
       setIsLoadingRandomQuiz(true);
       const randomQuiz = await getRandomQuiz();
+
+      if (!randomQuiz || !randomQuiz.id) {
+        throw new Error('No random quiz available');
+      }
+
       // Navigate to the random quiz
       window.location.href = `/quiz/${randomQuiz.id}`;
     } catch (error) {
