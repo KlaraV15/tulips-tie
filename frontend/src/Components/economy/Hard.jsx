@@ -14,8 +14,8 @@ const mockQuestions = [
     id: 1,
     country: "Netherlands",
     question: "Which economic organization was founded in The Hague in 1961?",
-    options: ["OECD", "NATO", "IMF", "EU"],
-    correctAnswer: 0,
+    options: ["NATO", "IMF", "OECD", "EU"],
+    correctAnswer: 2,
     difficulty: "Hard",
   },
   {
@@ -30,8 +30,8 @@ const mockQuestions = [
     id: 3,
     country: "Netherlands",
     question: "Which Dutch bank collapsed during the 2008 financial crisis and was later nationalized?",
-    options: ["ABN AMRO", "ING", "Fortis", "Rabobank"],
-    correctAnswer: 2,
+    options: ["ABN AMRO", "Fortis", "ING", "Rabobank"],
+    correctAnswer: 1,
     difficulty: "Hard",
   },
   {
@@ -107,72 +107,54 @@ export default function Hard() {
   const question = mockQuestions[currentQuestion]
   const progress = ((currentQuestion + 1) / 10) * 100
 
-  // Auto-start the quiz with a brief transition
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsTransitioning(false)
-    }, 500)
+    const timer = setTimeout(() => setIsTransitioning(false), 500)
     return () => clearTimeout(timer)
   }, [])
 
   const handleAnswerSelect = (answerIndex) => {
-    if (showAnswerFeedback) return;
+    if (showAnswerFeedback) return
 
     setSelectedAnswer(answerIndex)
     const correct = answerIndex === question.correctAnswer
     setIsCorrect(correct)
     setShowAnswerFeedback(true)
 
-    if (correct) {
-      setScore(score + 20)
-    } else {
-      setLives(lives - 1)
-    }
+    if (correct) setScore(score + 20)
+    else setLives(lives - 1)
   }
 
   const handleNextQuestion = () => {
     setSelectedAnswer(null)
     setShowAnswerFeedback(false)
-
-    if (currentQuestion < 9) {
-      setCurrentQuestion(currentQuestion + 1)
-    } else {
-      setShowResult(true)
-    }
+    if (currentQuestion < 9) setCurrentQuestion(currentQuestion + 1)
+    else setShowResult(true)
   }
 
   useEffect(() => {
-    if (!quizStarted || showResult) return;
-    setTimeLeft(15);
-  }, [currentQuestion, quizStarted, showResult]);
+    if (!quizStarted || showResult) return
+    setTimeLeft(15)
+  }, [currentQuestion, quizStarted, showResult])
 
   useEffect(() => {
-    if (!quizStarted || showResult) return;
+    if (!quizStarted || showResult) return
+    if (showAnswerFeedback) return 
 
     if (timeLeft === 0) {
       if (lives <= 1 || currentQuestion === mockQuestions.length - 1) {
-        setLives(prev => prev - 1);
-        setShowResult(true);
+        setLives(prev => prev - 1)
+        setShowResult(true)
       } else {
-        setLives(prev => prev - 1);
-        setCurrentQuestion(currentQuestion + 1);
-        setTimeLeft(15);
+        setLives(prev => prev - 1)
+        setCurrentQuestion(currentQuestion + 1)
+        setTimeLeft(15)
       }
-      return;
+      return
     }
 
-    const timer = setInterval(() => {
-      setTimeLeft(prev => prev - 1);
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [timeLeft, quizStarted, showResult, currentQuestion, lives]);
-
-  useEffect(() => {
-    if (lives <= 0) {
-      setShowResult(true);
-    }
-  }, [lives]);
+    const timer = setInterval(() => setTimeLeft(prev => prev - 1), 1000)
+    return () => clearInterval(timer)
+  }, [timeLeft, quizStarted, showResult, currentQuestion, lives, showAnswerFeedback])
 
   // Show transition screen - UPDATED DESIGN
   if (isTransitioning) {
