@@ -36,12 +36,12 @@ export default function TermsPage() {
 
           <div className="flex items-center gap-2">
             <Link to="/">
-              <Button variant="outline" className="px-3 py-1 text-sm text-red-600 border-2 border-red-400 rounded-lg">
+              <Button variant="outline" className="px-3 py-1 text-sm text-red-600 border-2 border-red-400 rounded-lg cursor-pointer">
                 Home
               </Button>
             </Link>
             <Link to="/login">
-              <Button className="px-4 py-1 text-sm text-white bg-gradient-to-r from-rose-600 to-rose-500 rounded-lg">
+              <Button className="px-4 py-1 text-sm text-white bg-gradient-to-r from-rose-600 to-rose-500 rounded-lg cursor-pointer">
                 Login
               </Button>
             </Link>
@@ -80,7 +80,7 @@ export default function TermsPage() {
                   <button
                     onClick={() => setTab("terms")}
                     className={`text-left px-3 py-2 rounded-lg transition-colors ${
-                      tab === "terms" ? "bg-rose-50 border border-rose-200 font-semibold" : "hover:bg-gray-50"
+                      tab === "terms" ? "bg-rose-50 border border-rose-200 font-semibold" : "hover:bg-gray-50 cursor-pointer"
                     }`}
                   >
                     Terms of Service
@@ -89,7 +89,7 @@ export default function TermsPage() {
                   <button
                     onClick={() => setTab("privacy")}
                     className={`text-left px-3 py-2 rounded-lg transition-colors ${
-                      tab === "privacy" ? "bg-rose-50 border border-rose-200 font-semibold" : "hover:bg-gray-50"
+                      tab === "privacy" ? "bg-rose-50 border border-rose-200 font-semibold" : "hover:bg-gray-50 cursor-pointer"
                     }`}
                   >
                     Privacy Policy (GDPR)
