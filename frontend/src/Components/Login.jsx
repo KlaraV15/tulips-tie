@@ -223,7 +223,7 @@ export default function Login() {
             {/* Forgot Password Link */}
             <div className="text-center mt-6">
               <Link
-                to="/reset-password"
+                to="/forgot-password"
                 className="text-red-600 hover:text-red-700 font-medium transition-colors duration-200">
                 Forgot your password?
               </Link>

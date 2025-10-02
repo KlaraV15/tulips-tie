@@ -164,46 +164,49 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+            {/* ISPRAVLJENI GUMBI */}
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start flex-wrap">
               <Button
                 size="lg"
                 onClick={handleRandomQuizClick}
                 disabled={isLoadingRandomQuiz}
-                className="w-full sm:w-auto bg-gradient-to-r from-red-600 to-red-500
-                 text-white text-sm sm:text-lg px-4 sm:px-8 py-3 sm:py-6 
-                 shadow-xl border-2 border-red-400 rounded-xl sm:rounded-2xl font-bold
+                className="flex-1 min-w-[200px] sm:min-w-0 sm:w-auto bg-gradient-to-r from-red-600 to-red-500
+                 text-white text-sm sm:text-lg px-4 sm:px-6 py-3 sm:py-4 
+                 shadow-xl border-2 border-red-400 rounded-xl font-bold
                  transition-all duration-500 transform
                  animate-slowpulse cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed">
                 {isLoadingRandomQuiz ? (
                   <>
                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                    Loading Random Quiz...
+                    Loading...
                   </>
                 ) : (
-                  '🎲 Start Random Quiz Challenge'
+                  '🎲 Random Quiz'
                 )}
               </Button>
+              
               <Link
                 to="/quizzes"
-                className="w-full sm:w-auto">
+                className="flex-1 min-w-[200px] sm:min-w-0 sm:w-auto">
                 <Button
                   size="lg"
-                  className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-blue-500
-                   text-white text-sm sm:text-lg px-4 sm:px-8 py-3 sm:py-6 
-                   shadow-xl border-2 border-blue-400 rounded-xl sm:rounded-2xl font-bold
+                  className="w-full bg-gradient-to-r from-blue-600 to-blue-500
+                   text-white text-sm sm:text-lg px-4 sm:px-6 py-3 sm:py-4 
+                   shadow-xl border-2 border-blue-400 rounded-xl font-bold
                    transition-all duration-500 transform
                    animate-slowpulse cursor-pointer">
-                  📚 Browse All Quizzes
+                  📚 All Quizzes
                 </Button>
               </Link>
+              
               <Link
                 to="/leaderboard"
-                className="w-full sm:w-auto">
+                className="flex-1 min-w-[200px] sm:min-w-0 sm:w-auto">
                 <Button
                   size="lg"
                   variant="outline"
-                  className="w-full sm:w-auto text-red-600 border-red-300 hover:bg-red-50 hover:text-red-700 hover:border-red-400 text-sm sm:text-lg px-4 sm:px-8 py-3 sm:py-6 font-bold rounded-xl sm:rounded-2xl transition-all duration-200 shadow-md cursor-pointer">
-                  🏆 View Champions
+                  className="w-full text-red-600 border-red-300 hover:bg-red-50 hover:text-red-700 hover:border-red-400 text-sm sm:text-lg px-4 sm:px-6 py-3 sm:py-4 font-bold rounded-xl transition-all duration-200 shadow-md cursor-pointer">
+                  🏆 Leaders
                 </Button>
               </Link>
             </div>
@@ -270,7 +273,6 @@ export default function HomePage() {
          `}</style>
       </section>
 
-      {/* Rest of your component remains the same */}
       {/* Features Grid - Fixed container */}
       <section className="container mx-auto px-3 sm:px-4 py-12 sm:py-20">
         <div className="text-center mb-12 sm:mb-16">
