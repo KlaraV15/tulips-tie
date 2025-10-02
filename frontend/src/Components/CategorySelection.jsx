@@ -230,7 +230,7 @@ export default function CategorySelection({ onSelectCategory, onBack }) {
                         <Card
                             key={category.id}
                             className={`bg-white py-0 border-2 sm:border-4 ${category.border} shadow-xl sm:shadow-2xl hover:shadow-2xl sm:hover:shadow-3xl transition-all duration-300 hover:scale-105 card-3d group`}
-                            onClick={() => handleCategorySelect(category)}
+
                         >
                             <CardHeader className={`bg-gradient-to-r ${category.color} text-white rounded-t-lg relative overflow-hidden p-4 sm:p-6`}>
                                 {/* Floating decorative elements */}
@@ -274,7 +274,7 @@ export default function CategorySelection({ onSelectCategory, onBack }) {
                     ))}
                 </div>
 
-                
+
             </section>
 
             <footer className="mt-6 sm:mt-8 border-t border-red-200 bg-white/80 backdrop-blur-sm">
