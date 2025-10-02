@@ -14,24 +14,24 @@ const mockQuestions = [
     id: 1,
     country: "Croatia",
     question: "Which famous explorer from Croatia is often linked to Marco Polo?",
-    options: ["Marco Polo", "Magellan", "Cook", "Vespucci"],
-    correctAnswer: 0,
+    options: ["Magellan", "Cook", "Marco Polo", "Vespucci"],
+    correctAnswer: 2,
     difficulty: "Hard",
   },
   {
     id: 2,
     country: "Netherlands",
     question: "Which Dutch painter is known for cutting off part of his ear?",
-    options: ["Vincent van Gogh", "Rembrandt", "Mondrian", "Vermeer"],
-    correctAnswer: 0,
+    options: ["Rembrandt", "Vincent van Gogh", "Mondrian", "Vermeer"],
+    correctAnswer: 1,
     difficulty: "Hard",
   },
   {
     id: 3,
     country: "Croatia",
     question: "The world's smallest town, Hum, is located in which country?",
-    options: ["Croatia", "Slovenia", "Italy", "Austria"],
-    correctAnswer: 0,
+    options: ["Slovenia", "Italy", "Austria", "Croatia"],
+    correctAnswer: 3,
     difficulty: "Hard",
   },
   {
@@ -46,32 +46,32 @@ const mockQuestions = [
     id: 5,
     country: "Croatia",
     question: "Which island in Croatia is famous for producing lavender?",
-    options: ["Hvar", "Korčula", "Krk", "Pag"],
-    correctAnswer: 0,
+    options: ["Korčula", "Krk", "Hvar", "Pag"],
+    correctAnswer: 2,
     difficulty: "Hard",
   },
   {
     id: 6,
     country: "Netherlands",
     question: "Which Dutch physicist discovered superconductivity?",
-    options: ["Heike Kamerlingh Onnes", "Christiaan Huygens", "Antoni van Leeuwenhoek", "Jan Oort"],
-    correctAnswer: 0,
+    options: ["Christiaan Huygens", "Antoni van Leeuwenhoek", "Heike Kamerlingh Onnes", "Jan Oort"],
+    correctAnswer: 2,
     difficulty: "Hard",
   },
   {
     id: 7,
     country: "Croatia",
     question: "Which Croatian city has the nickname 'City of a Hundred Churches'?",
-    options: ["Zadar", "Dubrovnik", "Split", "Rijeka"],
-    correctAnswer: 0,
+    options: ["Dubrovnik", "Zadar", "Split", "Rijeka"],
+    correctAnswer: 1,
     difficulty: "Hard",
   },
   {
     id: 8,
     country: "Netherlands",
     question: "Which Dutch painter is famous for geometric art and De Stijl movement?",
-    options: ["Piet Mondrian", "Rembrandt", "Hieronymus Bosch", "Van Gogh"],
-    correctAnswer: 0,
+    options: ["Rembrandt", "Hieronymus Bosch", "Van Gogh", "Piet Mondrian"],
+    correctAnswer: 3,
     difficulty: "Hard",
   },
   {
@@ -161,7 +161,7 @@ export default function Hard() {
       setShowResult(true);
     }
   }, [lives]);
-  
+
   // Show transition screen - UPDATED DESIGN
   if (isTransitioning) {
     return (

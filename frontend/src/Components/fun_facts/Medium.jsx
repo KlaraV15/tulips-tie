@@ -22,56 +22,56 @@ const mockQuestions = [
     id: 2,
     country: "Croatia",
     question: "Which Croatian park is a UNESCO World Heritage Site?",
-    options: ["Plitvice Lakes", "Paklenica", "Biokovo", "Mljet"],
-    correctAnswer: 0,
+    options: ["Paklenica", "Biokovo", "Plitvice Lakes", "Mljet"],
+    correctAnswer: 2,
     difficulty: "Medium",
   },
   {
     id: 3,
     country: "Netherlands",
     question: "Which bird is often associated with Dutch wetlands?",
-    options: ["Heron", "Ostrich", "Falcon", "Hummingbird"],
-    correctAnswer: 0,
+    options: ["Ostrich", "Heron", "Falcon", "Hummingbird"],
+    correctAnswer: 1,
     difficulty: "Medium",
   },
   {
     id: 4,
     country: "Croatia",
     question: "What type of dolphin can often be spotted in the Adriatic Sea?",
-    options: ["Bottlenose dolphin", "Orca", "Pink river dolphin", "Beluga"],
-    correctAnswer: 0,
+    options: ["Orca", "Pink river dolphin", "Bottlenose dolphin", "Beluga"],
+    correctAnswer: 2,
     difficulty: "Medium",
   },
   {
     id: 5,
     country: "Netherlands",
     question: "What is the largest national park in the Netherlands?",
-    options: ["De Hoge Veluwe", "De Biesbosch", "Veluwezoom", "Drents-Friese Wold"],
-    correctAnswer: 0,
+    options: ["De Biesbosch", "Veluwezoom", "Drents-Friese Wold", "De Hoge Veluwe"],
+    correctAnswer: 3,
     difficulty: "Medium",
   },
   {
     id: 6,
     country: "Croatia",
     question: "Which predator lives in the forests of Croatia?",
-    options: ["Brown bear", "Tiger", "Cheetah", "Hyena"],
-    correctAnswer: 0,
+    options: ["Tiger", "Brown bear", "Cheetah", "Hyena"],
+    correctAnswer: 1,
     difficulty: "Medium",
   },
   {
     id: 7,
     country: "Netherlands",
     question: "Which sea borders the Netherlands?",
-    options: ["North Sea", "Baltic Sea", "Mediterranean Sea", "Adriatic Sea"],
-    correctAnswer: 0,
+    options: ["Baltic Sea", "North Sea", "Mediterranean Sea", "Adriatic Sea"],
+    correctAnswer: 1,
     difficulty: "Medium",
   },
   {
     id: 8,
     country: "Croatia",
     question: "Which mountain range stretches along Croatia's coast?",
-    options: ["Dinaric Alps", "Carpathians", "Alps", "Pyrenees"],
-    correctAnswer: 0,
+    options: ["Carpathians", "Alps", "Pyrenees", "Dinaric Alps"],
+    correctAnswer: 3,
     difficulty: "Medium",
   },
   {
@@ -86,8 +86,8 @@ const mockQuestions = [
     id: 10,
     country: "Croatia",
     question: "Which bird is a symbol of the Kopački Rit wetlands?",
-    options: ["White stork", "Pelican", "Eagle", "Flamingo"],
-    correctAnswer: 0,
+    options: ["Pelican", "Eagle", "White stork", "Flamingo"],
+    correctAnswer: 2,
     difficulty: "Medium",
   },
 ]
@@ -161,7 +161,7 @@ export default function Medium() {
       setShowResult(true);
     }
   }, [lives]);
-  
+
   // Show transition screen - UPDATED DESIGN
   if (isTransitioning) {
     return (

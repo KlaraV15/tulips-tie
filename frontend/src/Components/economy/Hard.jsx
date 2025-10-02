@@ -38,32 +38,32 @@ const mockQuestions = [
     id: 4,
     country: "Croatia",
     question: "In which year did Croatia join the European Union?",
-    options: ["2013", "2009", "2015", "2010"],
-    correctAnswer: 0,
+    options: ["2009", "2015", "2010", "2013"],
+    correctAnswer: 3,
     difficulty: "Hard",
   },
   {
     id: 5,
     country: "Netherlands",
     question: "Which Dutch city is known as Europe's 'Gateway to the World' due to its port?",
-    options: ["Rotterdam", "Amsterdam", "Eindhoven", "Utrecht"],
-    correctAnswer: 0,
+    options: ["Amsterdam", "Rotterdam", "Eindhoven", "Utrecht"],
+    correctAnswer: 1,
     difficulty: "Hard",
   },
   {
     id: 6,
     country: "Croatia",
     question: "Which international financial institution supported Croatia during its independence in the 1990s?",
-    options: ["IMF", "World Bank", "ECB", "WTO"],
-    correctAnswer: 0,
+    options: ["World Bank", "ECB", "IMF", "WTO"],
+    correctAnswer: 2,
     difficulty: "Hard",
   },
   {
     id: 7,
     country: "Netherlands",
     question: "Which Dutch region is known for its high-tech economy and companies like ASML?",
-    options: ["Eindhoven/Brainport", "Rotterdam Port", "Amsterdam Zuidas", "The Hague"],
-    correctAnswer: 0,
+    options: ["Rotterdam Port", "Amsterdam Zuidas", "Eindhoven/Brainport", "The Hague"],
+    correctAnswer: 2,
     difficulty: "Hard",
   },
   {
@@ -78,15 +78,15 @@ const mockQuestions = [
     id: 9,
     country: "Netherlands",
     question: "Which multinational Dutch company is one of the largest beer producers in the world?",
-    options: ["Heineken", "Amstel", "Bavaria", "Grolsch"],
-    correctAnswer: 0,
+    options: ["Amstel", "Heineken", "Bavaria", "Grolsch"],
+    correctAnswer: 1,
     difficulty: "Hard",
   },
   {
     id: 10,
     country: "Croatia",
     question: "Which famous Croatian company produces electric hypercars?",
-    options: ["Rimac Automobili", "Bugatti", "Zagreb Motors", "CroCar"],
+    options: ["Bugatti", "Zagreb Motors", "CroCar", "Rimac Automobili"],
     correctAnswer: 0,
     difficulty: "Hard",
   },
@@ -161,7 +161,7 @@ export default function Hard() {
       setShowResult(true);
     }
   }, [lives]);
-  
+
   // Show transition screen - UPDATED DESIGN
   if (isTransitioning) {
     return (

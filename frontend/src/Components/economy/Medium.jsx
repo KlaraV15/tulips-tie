@@ -14,8 +14,8 @@ const mockQuestions = [
     id: 1,
     country: "Netherlands",
     question: "Which Dutch company is one of the biggest electronics producers in the world?",
-    options: ["Philips", "Siemens", "Sony", "Samsung"],
-    correctAnswer: 0,
+    options: ["Siemens", "Sony", "Samsung", "Philips"],
+    correctAnswer: 3,
     difficulty: "Medium",
   },
   {
@@ -30,8 +30,8 @@ const mockQuestions = [
     id: 3,
     country: "Netherlands",
     question: "Which Dutch city is home to the headquarters of Royal Dutch Shell?",
-    options: ["The Hague", "Amsterdam", "Rotterdam", "Utrecht"],
-    correctAnswer: 0,
+    options: ["Amsterdam", "The Hague", "Rotterdam", "Utrecht"],
+    correctAnswer: 1,
     difficulty: "Medium",
   },
   {
@@ -46,24 +46,24 @@ const mockQuestions = [
     id: 5,
     country: "Netherlands",
     question: "The Netherlands is the second-largest exporter of what globally?",
-    options: ["Food & agricultural products", "Oil", "Steel", "Electronics"],
-    correctAnswer: 0,
+    options: ["Oil", "Steel", "Electronics", "Food & agricultural products"],
+    correctAnswer: 3,
     difficulty: "Medium",
   },
   {
     id: 6,
     country: "Croatia",
     question: "Which natural resource contributes to Croatia's energy sector?",
-    options: ["Oil & gas", "Coal", "Uranium", "Gold"],
-    correctAnswer: 0,
+    options: ["Coal", "Oil & gas", "Uranium", "Gold"],
+    correctAnswer: 1,
     difficulty: "Medium",
   },
   {
     id: 7,
     country: "Netherlands",
     question: "Which Dutch city is known as the financial capital of the country?",
-    options: ["Amsterdam", "Rotterdam", "The Hague", "Eindhoven"],
-    correctAnswer: 0,
+    options: ["Rotterdam", "The Hague", "Amsterdam", "Eindhoven"],
+    correctAnswer: 2,
     difficulty: "Medium",
   },
   {
@@ -78,16 +78,16 @@ const mockQuestions = [
     id: 9,
     country: "Netherlands",
     question: "Which international court is based in the Netherlands?",
-    options: ["The International Court of Justice", "European Court of Justice", "World Bank Court", "UN Tribunal"],
-    correctAnswer: 0,
+    options: ["European Court of Justice", "World Bank Court", "UN Tribunal", "The International Court of Justice"],
+    correctAnswer: 3,
     difficulty: "Medium",
   },
   {
     id: 10,
     country: "Croatia",
     question: "Which car company has a factory in Croatia known for electric hypercars?",
-    options: ["Rimac", "Ferrari", "Tesla", "Porsche"],
-    correctAnswer: 0,
+    options: ["Ferrari", "Rimac", "Tesla", "Porsche"],
+    correctAnswer: 1,
     difficulty: "Medium",
   },
 ]
@@ -161,7 +161,7 @@ export default function Medium() {
       setShowResult(true);
     }
   }, [lives]);
-  
+
   // Show transition screen - UPDATED DESIGN
   if (isTransitioning) {
     return (

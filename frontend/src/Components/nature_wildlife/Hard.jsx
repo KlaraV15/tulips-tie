@@ -14,8 +14,8 @@ const mockQuestions = [
     id: 1,
     country: "Netherlands",
     question: "Which rare species of seal breeds in the Wadden Sea?",
-    options: ["Harbor seal", "Monk seal", "Leopard seal", "Grey seal"],
-    correctAnswer: 0,
+    options: ["Monk seal", "Harbor seal", "Leopard seal", "Grey seal"],
+    correctAnswer: 1,
     difficulty: "Hard",
   },
   {
@@ -38,24 +38,24 @@ const mockQuestions = [
     id: 4,
     country: "Croatia",
     question: "Which rare carnivore is slowly returning to Croatian forests?",
-    options: ["Lynx", "Wolf", "Jackal", "Cheetah"],
-    correctAnswer: 0,
+    options: ["Wolf", "Jackal", "Lynx", "Cheetah"],
+    correctAnswer: 2,
     difficulty: "Hard",
   },
   {
     id: 5,
     country: "Netherlands",
     question: "Which national park is home to the endangered European bison?",
-    options: ["Kraansvlak", "Hoge Veluwe", "Biesbosch", "Drenthe"],
-    correctAnswer: 0,
+    options: ["Hoge Veluwe", "Kraansvlak", "Biesbosch", "Drenthe"],
+    correctAnswer: 1,
     difficulty: "Hard",
   },
   {
     id: 6,
     country: "Croatia",
     question: "Which island is a nesting site for the endangered griffon vulture?",
-    options: ["Cres", "Hvar", "Korčula", "Pag"],
-    correctAnswer: 0,
+    options: ["Hvar", "Korčula", "Pag", "Cres"],
+    correctAnswer: 3,
     difficulty: "Hard",
   },
   {
@@ -70,16 +70,16 @@ const mockQuestions = [
     id: 8,
     country: "Croatia",
     question: "Which national park protects the longest canyon in Croatia?",
-    options: ["Paklenica", "Krka", "Biokovo", "Risnjak"],
-    correctAnswer: 0,
+    options: ["Krka", "Biokovo", "Paklenica", "Risnjak"],
+    correctAnswer: 2,
     difficulty: "Hard",
   },
   {
     id: 9,
     country: "Netherlands",
     question: "Which butterfly species is rare but can be found in Dutch heathlands?",
-    options: ["Heath fritillary", "Monarch", "Swallowtail", "Blue morpho"],
-    correctAnswer: 0,
+    options: ["Monarch", "Swallowtail", "Heath fritillary", "Blue morpho"],
+    correctAnswer: 2,
     difficulty: "Hard",
   },
   {
@@ -161,7 +161,7 @@ export default function Hard() {
       setShowResult(true);
     }
   }, [lives]);
-  
+
   // Show transition screen - UPDATED DESIGN
   if (isTransitioning) {
     return (

@@ -14,8 +14,8 @@ const mockQuestions = [
     id: 1,
     country: "Croatia",
     question: "Which Croatian city hosted the 1987 Summer Universiade?",
-    options: ["Zagreb", "Split", "Dubrovnik", "Zadar"],
-    correctAnswer: 0,
+    options: ["Split", "Dubrovnik", "Zagreb", "Zadar"],
+    correctAnswer: 2,
     difficulty: "Hard",
   },
   {
@@ -46,40 +46,40 @@ const mockQuestions = [
     id: 5,
     country: "Croatia",
     question: "Which Croatian discus thrower won Olympic gold in 2012 and 2016?",
-    options: ["Sandra Perković", "Blanka Vlašić", "Sara Kolak", "Ivana Brkljačić"],
-    correctAnswer: 0,
+    options: ["Blanka Vlašić", "Sara Kolak", "Sandra Perković", "Ivana Brkljačić"],
+    correctAnswer: 2,
     difficulty: "Hard",
   },
   {
     id: 6,
     country: "Netherlands",
     question: "Which Dutch cyclist won the Tour de France in 1968 and 1970?",
-    options: ["Jan Janssen", "Joop Zoetemelk", "Tom Dumoulin", "Laurens ten Dam"],
-    correctAnswer: 0,
+    options: ["Joop Zoetemelk", "Jan Janssen", "Tom Dumoulin", "Laurens ten Dam"],
+    correctAnswer: 1,
     difficulty: "Hard",
   },
   {
     id: 7,
     country: "Croatia",
     question: "Which Croatian athlete won Olympic gold in javelin at Rio 2016?",
-    options: ["Sara Kolak", "Blanka Vlašić", "Sandra Perković", "Marija Šestak"],
-    correctAnswer: 0,
+    options: ["Blanka Vlašić", "Sandra Perković", "Marija Šestak", "Sara Kolak"],
+    correctAnswer: 3,
     difficulty: "Hard",
   },
   {
     id: 8,
     country: "Netherlands",
     question: "Which Dutch swimmer won four Olympic gold medals in 2000?",
-    options: ["Inge de Bruijn", "Ranomi Kromowidjojo", "Sharon van Rouwendaal", "Pieter van den Hoogenband"],
-    correctAnswer: 0,
+    options: ["Ranomi Kromowidjojo", "Inge de Bruijn", "Sharon van Rouwendaal", "Pieter van den Hoogenband"],
+    correctAnswer: 1,
     difficulty: "Hard",
   },
   {
     id: 9,
     country: "Croatia",
     question: "Which Croatian football club is nicknamed 'Bili' (The Whites)?",
-    options: ["Hajduk Split", "Dinamo Zagreb", "Rijeka", "Osijek"],
-    correctAnswer: 0,
+    options: ["Dinamo Zagreb", "Rijeka", "Osijek", "Hajduk Split"],
+    correctAnswer: 3,
     difficulty: "Hard",
   },
   {
@@ -161,7 +161,7 @@ export default function Hard() {
       setShowResult(true);
     }
   }, [lives]);
-  
+
   // Show transition screen - UPDATED DESIGN
   if (isTransitioning) {
     return (
