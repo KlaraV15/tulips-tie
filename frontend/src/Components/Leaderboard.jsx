@@ -287,8 +287,9 @@ export default function LeaderboardPage() {
                     <div className="flex items-center space-x-2">
                         <Link to="/quiz">
                             <Button className="bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-white font-bold px-3 sm:px-6 py-1 sm:py-3 rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-2 border-red-400 text-xs sm:text-base whitespace-nowrap">
-                                🎮 Start Quiz!
+                                🎮 <span className="hidden sm:inline">Start Quiz!</span>
                             </Button>
+
                         </Link>
                     </div>
                 </div>
