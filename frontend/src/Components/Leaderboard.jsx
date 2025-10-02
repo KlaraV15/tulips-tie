@@ -120,11 +120,11 @@ const globalLeaderboard = Leaderboard;
 function getRankIcon(rank) {
     switch (rank) {
         case 1:
-            return <Crown className="h-4 w-4 sm:h-6 sm:w-6 text-yellow-500 animate-bounce" />
+            return <Crown className="h-4 w-4 sm:h-6 sm:w-6 text-yellow-500 animate-pulse" />
         case 2:
             return <Medal className="h-4 w-4 sm:h-6 sm:w-6 text-gray-400 animate-pulse" />
         case 3:
-            return <Award className="h-4 w-4 sm:h-6 sm:w-6 text-amber-600 animate-spin" />
+            return <Award className="h-4 w-4 sm:h-6 sm:w-6 text-amber-600 animate-pulse" />
         default:
             return (
                 <span className="text-white font-bold bg-gradient-to-r from-purple-500 to-pink-500 rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center text-xs sm:text-sm">
@@ -194,7 +194,7 @@ function LeaderboardTable({ data, title }) {
                 <div className="absolute bottom-1 sm:bottom-2 left-3 sm:left-6 w-2 h-2 sm:w-3 sm:h-3 bg-green-300 rounded-full opacity-60 animate-pulse"></div>
 
                 <CardTitle className="flex items-center justify-center space-x-2 sm:space-x-3 text-lg sm:text-xl lg:text-2xl font-black">
-                    <Trophy className="h-5 w-5 sm:h-7 sm:w-7 lg:h-8 lg:w-8 text-yellow-300 animate-spin" />
+                    <Trophy className="h-5 w-5 sm:h-7 sm:w-7 lg:h-8 lg:w-8 text-yellow-300 animate-pulse" />
                     <span className="gradient-text-primary text-sm sm:text-xl">{title}</span>
                 </CardTitle>
                 <CardDescription className="text-center text-white/90 font-bold text-xs sm:text-base lg:text-lg">
@@ -340,7 +340,7 @@ export default function LeaderboardPage() {
                         <CardHeader className="pb-2 sm:pb-3 bg-gradient-to-r from-blue-400 to-blue-500 rounded-t-lg p-3 sm:p-4">
                             <div className="flex items-center justify-between">
                                 <CardTitle className="text-sm sm:text-lg font-black">🎮 Quizzes Completed</CardTitle>
-                                <Calendar className="h-4 w-4 sm:h-6 sm:w-6 text-white animate-spin" />
+                                <Calendar className="h-4 w-4 sm:h-6 sm:w-6 text-white animate-bounce" />
                             </div>
                         </CardHeader>
                         <CardContent className="p-4 sm:p-6 bg-gradient-to-br from-blue-50 to-blue-100">
@@ -357,7 +357,7 @@ export default function LeaderboardPage() {
                         <CardHeader className="pb-2 sm:pb-3 bg-gradient-to-r from-purple-400 to-purple-500 rounded-t-lg p-3 sm:p-4">
                             <div className="flex items-center justify-between">
                                 <CardTitle className="text-sm sm:text-lg font-black">⭐ Average Score</CardTitle>
-                                <Trophy className="h-4 w-4 sm:h-6 sm:w-6 text-white animate-pulse" />
+                                <Trophy className="h-4 w-4 sm:h-6 sm:w-6 text-white animate-bounce" />
                             </div>
                         </CardHeader>
                         <CardContent className="p-4 sm:p-6 bg-gradient-to-br from-purple-50 to-purple-100">
@@ -513,7 +513,7 @@ export default function LeaderboardPage() {
 
                         <CardContent className="pt-8 sm:pt-12 pb-8 sm:pb-12 relative z-10">
                             <div className="flex justify-center mb-4 sm:mb-6">
-                                <Trophy className="h-12 w-12 sm:h-20 sm:w-20 text-yellow-500 animate-spin" />
+                                <Trophy className="h-12 w-12 sm:h-20 sm:w-20 text-yellow-500" />
                             </div>
                             <h3 className="text-xl sm:text-3xl lg:text-4xl font-black mb-4 sm:mb-6  py-3  bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent">
                                 🚀 Ready to Climb the Ranks?
