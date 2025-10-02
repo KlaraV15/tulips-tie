@@ -97,7 +97,7 @@ export default function MediumCulture() {
   const [selectedAnswer, setSelectedAnswer] = useState(null)
   const [lives, setLives] = useState(3)
   const [score, setScore] = useState(0)
-  const [timeLeft, setTimeLeft] = useState(30)
+  const [timeLeft, setTimeLeft] = useState(15)
   const [quizStarted, setQuizStarted] = useState(true)
   const [showResult, setShowResult] = useState(false)
   const [isTransitioning, setIsTransitioning] = useState(true)
@@ -107,72 +107,54 @@ export default function MediumCulture() {
   const question = mockQuestions[currentQuestion]
   const progress = ((currentQuestion + 1) / 10) * 100
 
-  // Auto-start the quiz with a brief transition
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsTransitioning(false)
-    }, 500)
+    const timer = setTimeout(() => setIsTransitioning(false), 500)
     return () => clearTimeout(timer)
   }, [])
 
   const handleAnswerSelect = (answerIndex) => {
-    if (showAnswerFeedback) return;
+    if (showAnswerFeedback) return
 
     setSelectedAnswer(answerIndex)
     const correct = answerIndex === question.correctAnswer
     setIsCorrect(correct)
     setShowAnswerFeedback(true)
 
-    if (correct) {
-      setScore(score + 15)
-    } else {
-      setLives(lives - 1)
-    }
+    if (correct) setScore(score + 15)
+    else setLives(lives - 1)
   }
 
   const handleNextQuestion = () => {
     setSelectedAnswer(null)
     setShowAnswerFeedback(false)
-
-    if (currentQuestion < 9) {
-      setCurrentQuestion(currentQuestion + 1)
-    } else {
-      setShowResult(true)
-    }
+    if (currentQuestion < 9) setCurrentQuestion(currentQuestion + 1)
+    else setShowResult(true)
   }
 
   useEffect(() => {
-    if (!quizStarted || showResult) return;
-    setTimeLeft(30);
-  }, [currentQuestion, quizStarted, showResult]);
+    if (!quizStarted || showResult) return
+    setTimeLeft(30)
+  }, [currentQuestion, quizStarted, showResult])
 
   useEffect(() => {
-    if (!quizStarted || showResult) return;
+    if (!quizStarted || showResult) return
+    if (showAnswerFeedback) return 
 
     if (timeLeft === 0) {
       if (lives <= 1 || currentQuestion === mockQuestions.length - 1) {
-        setLives(prev => prev - 1);
-        setShowResult(true);
+        setLives(prev => prev - 1)
+        setShowResult(true)
       } else {
-        setLives(prev => prev - 1);
-        setCurrentQuestion(currentQuestion + 1);
-        setTimeLeft(30);
+        setLives(prev => prev - 1)
+        setCurrentQuestion(currentQuestion + 1)
+        setTimeLeft(30)
       }
-      return;
+      return
     }
 
-    const timer = setInterval(() => {
-      setTimeLeft(prev => prev - 1);
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [timeLeft, quizStarted, showResult, currentQuestion, lives]);
-
-  useEffect(() => {
-    if (lives <= 0) {
-      setShowResult(true);
-    }
-  }, [lives]);
+    const timer = setInterval(() => setTimeLeft(prev => prev - 1), 1000)
+    return () => clearInterval(timer)
+  }, [timeLeft, quizStarted, showResult, currentQuestion, lives, showAnswerFeedback])
 
   // Show transition screen - UPDATED DESIGN
   if (isTransitioning) {
