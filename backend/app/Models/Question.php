@@ -10,17 +10,18 @@ class Question extends Model
     use HasFactory;
 
     protected $fillable = [
-        'quiz_id',
+        
         'text',
         'country_id',
         'category_id',
         'difficulty_id',
     ];
 
-    public function quiz()
+    public function quizzes()
     {
-        return $this->belongsTo(Quiz::class);
+        return $this->belongsToMany(Quiz::class)->withTimestamps();
     }
+
 
     public function country()
     {
