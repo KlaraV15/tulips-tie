@@ -104,9 +104,9 @@ class QuizController extends Controller
     {
         $quiz = Quiz::inRandomOrder()->first();
 
-        /* if (!$quiz) {
-             return response()->json(['message' => 'No quizzes available'], 404);
-         }*/
+        if (!$quiz) {
+            return response()->json(['message' => 'No quizzes available'], 404);
+        }
 
         return response()->json($quiz);
     }

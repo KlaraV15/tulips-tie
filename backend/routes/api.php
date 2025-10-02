@@ -25,6 +25,16 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('user', [UserController::class, 'profile']);
     Route::post('logout', [UserController::class, 'logout']);
     Route::post('resetpassword', [AuthController::class, 'resetPassword']);
+
+    // Regular user routes
+    Route::middleware('role:user')->group(function () {
+        Route::apiResource('categories', CategoryController::class)->only(['store', 'update', 'destroy']);
+        Route::apiResource('countries', CountryController::class)->only(['store', 'update', 'destroy']);
+        Route::apiResource('difficulties', DifficultyController::class)->only(['store', 'update', 'destroy']);
+        Route::apiResource('quizzes', QuizController::class)->except(['index', 'show']);
+        Route::apiResource('questions', QuestionsController::class)->except(['index', 'show']);
+        Route::apiResource('users', UserController::class)->except(['index', 'show']);
+    });
 });
 
 // Fetch user results
@@ -48,10 +58,14 @@ Route::get('leaderboard', [ResultController::class, 'leaderboard']);
 Route::get('stats/general', [ResultController::class, 'getGeneralStats']);
 Route::get('stats/user/{user}', [ResultController::class, 'getUserStats']);
 
-// Admin endpoints
-Route::get('admin/users/recent', [UserController::class, 'getRecentUsers']);
+// Admin endpoints - protected with admin middleware
+Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+    Route::get('admin/users/recent', [UserController::class, 'getRecentUsers']);
+    // Add more admin-only routes here
+});
 
 
+// Public routes (read-only access)
 Route::apiResource('categories', CategoryController::class)->only(['index']);
 Route::apiResource('countries', CountryController::class)->only(['index']);
 Route::apiResource('difficulties', DifficultyController::class)->only(['index']);
